@@ -139,8 +139,9 @@
     sprite: Clothing/OuterClothing/Suits/spaceninja.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Suits/spaceninja.rsi
+    # SS220 - changed max visibility to be equal to min so that ninja will be actually invisible, not just blur effect everyone sees immediately.
   - type: StealthClothing
-    visibility: 1.1
+    visibility: -1
     toggleAction: ActionTogglePhaseCloak
   - type: PressureProtection
     highPressureMultiplier: 0.6
