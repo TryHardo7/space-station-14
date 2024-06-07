@@ -57,7 +57,6 @@ public sealed partial class StealthComponent : Component
 
     /// <summary>
     /// Minimum visibility. Note that the visual effect caps out at -1, but this value is allowed to be larger or smaller.
-    /// SS220 - changed maximum visibility to be equal to minimum so that ninja will be actually invisible, not just blur effect everyone sees immediately.
     /// </summary>
     [DataField("minVisibility")]
     public float MinVisibility = -1f;
