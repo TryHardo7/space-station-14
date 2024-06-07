@@ -140,7 +140,6 @@
   - type: Clothing
     sprite: Clothing/OuterClothing/Suits/spaceninja.rsi
     # SS220 - real stealth.
-    toggleAction: ActionTogglePhaseCloak
   - type: PressureProtection
     highPressureMultiplier: 0.6
     lowPressureMultiplier: 1000
