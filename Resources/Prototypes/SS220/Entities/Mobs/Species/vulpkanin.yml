@@ -15,7 +15,24 @@
   - type: Body
     prototype: Vulpkanin
     requiredLegs: 2
+    #акцент и эмоуты
+  - type: VulpkaninAccent
+  - type: Speech
+    allowedEmotes: ['Howl', 'Growl', 'Bark']
+  - type: Vocal
+    sounds:
+      Male: MaleVulpkanin
+      Female: FemaleVulpkanin
+      Unsexed: MaleVulpkanin
+    # голодает быстрее на ~30%, но вмещает на 30% больше еды
   - type: Hunger
+    HungerThreshold:
+     Overfed: 300
+     Okay: 250
+     Peckish: 200
+     Starving: 100
+     Dead: 0
+    baseDecayRate: 0.021
   - type: Thirst
   - type: Perishable
   - type: Butcherable

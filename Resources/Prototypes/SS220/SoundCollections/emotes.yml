@@ -242,3 +242,20 @@
   id: FemaleGiggle
   files:
     - /Audio/SS220/Emotes/giggles/femalegiggle.ogg
+
+- type: soundCollection
+  id: Growl
+  files:
+  - /Audio/SS220/Emotes/Vulpin/growl1.ogg
+  - /Audio/SS220/Emotes/Vulpin/growl2.ogg
+  - /Audio/SS220/Emotes/Vulpin/growl3.ogg
+
+- type: soundCollection
+  id: Howl
+  files:
+  - /Audio/SS220/Emotes/Vulpin/howl.ogg
+
+- type: soundCollection
+  id: Bark
+  files:
+  - /Audio/SS220/Emotes/Vulpin/bark.ogg
