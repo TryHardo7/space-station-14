@@ -173,3 +173,11 @@ ghost-role-information-artifact-name = Разумный артефакт
 ghost-role-information-artifact-description =
     Осуществляйте свои инопланетные прихоти.
     Принудительно активируйте свои узлы во благо или во зло.
+
+ghost-role-information-Lxeno-name = Сестра улья
+ghost-role-information-Lxeno-description = ПОДЧИНЯЙСЯ КОРОЛЕВЕ, защищай сестёр, убей всё, что не часть твоего улья.
+ghost-role-information-Lxeno-rules = Ты антагонист, руби, кусай, ломай. Связь улья = .я
+
+ghost-role-information-LxenoQueen-name = Королева улья
+ghost-role-information-LxenoQueen-description = Веди улей к процветанию, раздавай указания сёстрам. Единственная форма жизни, которой позволено существовать - ты и твои сёстры. 
+ghost-role-information-LxenoQueen-rules = Ты антагонист, руби, кусай, ломай. Связь улья = .я

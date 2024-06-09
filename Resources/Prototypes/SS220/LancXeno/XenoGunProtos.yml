@@ -1,0 +1,18 @@
+- type: entity
+  noSpawn: true
+  id: XenoSpitQueen
+  name: Плевок обжигающей кислотой
+  description: Для плевков королевы ксено
+  components:
+  - type: RechargeBasicEntityAmmo
+    rechargeCooldown: 3
+  - type: BasicEntityAmmoProvider
+    proto: XenoSpitQueenBullet
+    capacity: 1
+    count: 1
+  - type: Gun
+    projectileSpeed: 15
+    soundGunshot:
+      path: /Audio/Weapons/Xeno/alien_spitacid.ogg
+    soundEmpty: null
+   

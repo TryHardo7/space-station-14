@@ -1,0 +1,20 @@
+- type: entity
+  parent: Bed
+  id: XenoBed
+  name: Xeno bed
+  description: A bed for xenos to heal on
+  components:
+  - type: Sprite
+    state: bed-MED
+  - type: HealOnBuckle
+    damage:
+      types:
+        Poison: -0.2
+        Cold: -0.4
+        Blunt: -0.2
+  - type: Construction
+    graph: bed
+    node: medicalbed
+  - type: GuideHelp
+    guides:
+    - Medical Doctor

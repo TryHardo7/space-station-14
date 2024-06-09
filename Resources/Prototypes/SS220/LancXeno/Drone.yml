@@ -1,0 +1,41 @@
+- type: entity
+  name: Рабочий
+  parent: LancBaseXeno
+  id: LancDrone
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: Mobs/Aliens/Xenos/drone.rsi
+    offset: 0,0.2
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: running
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      170: Dead
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      100: 0.7
+  - type: MeleeWeapon
+    damage:
+      types:
+        Slash: 3
+        Piercing: 3 
+        Caustic: 5
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 3
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.45
+        density: 450
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: PointLight
+    color: Chartreuse
+    radius: 9

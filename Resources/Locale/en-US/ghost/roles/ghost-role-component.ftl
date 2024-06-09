@@ -252,3 +252,11 @@ ghost-role-information-artifact-name = Sentient Artifact
 ghost-role-information-artifact-description =
       Enact your eldritch whims.
       Forcibly activate your nodes for good or for evil.
+
+ghost-role-information-Lxeno-name = Sister of the hive
+ghost-role-information-Lxeno-description = OBEY your QUEEN, protect your sisters, kill everything that is not part of your hive.
+ghost-role-information-Lxeno-rules = You are an antagonist, eat, reap and tear. 
+
+ghost-role-information-LxenoQueen-name = Queen of the hive
+ghost-role-information-LxenoQueen-description = Lead your hive to prosperity, give directions to sisters, only allowed lifeform in this universe is you and your sisters.
+ghost-role-information-LxenoQueen-rules = You are an antagonist, eat, reap and tear. 

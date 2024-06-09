@@ -1,0 +1,41 @@
+- type: entity
+  name: Преторианец
+  parent: LancBaseXeno
+  id: LancPraetorian
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: Mobs/Aliens/Xenos/praetorian.rsi
+    offset: 0,0.4
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: running
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      300: Dead
+  - type: Stamina
+    critThreshold: 300
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      200: 0.7
+  - type: MeleeWeapon
+    damage:
+      types:
+        Slash: 8
+        Piercing: 8 
+        Caustic: 3
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.45
+        density: 400
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: PointLight
+    color: Chartreuse
+    radius: 7

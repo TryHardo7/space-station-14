@@ -1,0 +1,34 @@
+- type: entity
+  name: Охотник
+  parent: LancBaseXeno
+  id: LancRuni
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: Mobs/Aliens/Xenos/runner.rsi
+    offset: 0,0.6
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: running
+  - type: MeleeWeapon
+    damage:
+      types:
+        Slash: 6
+        Piercing: 6 
+        Caustic: 1
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 7
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.35
+        density: 235
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: PointLight
+    color: Chartreuse
+    radius: 3

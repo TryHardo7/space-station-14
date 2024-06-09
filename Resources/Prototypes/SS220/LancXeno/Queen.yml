@@ -1,0 +1,53 @@
+- type: entity
+  name: Королева
+  parent: LancBaseXeno
+  id: LancXenoQueen
+  suffix: Lanc
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: Mobs/Aliens/Xenos/queen.rsi
+    offset: 0,0.4
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: running
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      400: Dead
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      250: 0.7
+  - type: MovementSpeedModifier
+  - type: MeleeWeapon
+    damage:
+      types:
+        Slash: 10
+        Piercing: 10 
+        Caustic: 5
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.45
+        density: 15500
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: PointLight
+    color: Chartreuse
+    radius: 9
+  - type: GhostRole
+    allowMovement: true
+    allowSpeech: true
+    makeSentient: true
+    name: ghost-role-information-LxenoQueen-name
+    description: ghost-role-information-LxenoQueen-description
+    rules: ghost-role-information-LxenoQueen-rules
+  - type: ActionGun
+    action: XenoQueenSpit
+    gunProto: XenoSpitQueen
+  - type: EntityTargetAction
+    action: XenoHealBite

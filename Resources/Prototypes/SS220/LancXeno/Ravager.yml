@@ -1,0 +1,41 @@
+- type: entity
+  name: Крушитель
+  parent: LancBaseXeno
+  id: LancRavager
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    sprite: Mobs/Aliens/Xenos/ravager.rsi
+    offset: 0,0.5
+    layers:
+    - map: ["enum.DamageStateVisualLayers.Base"]
+      state: running
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      300: Dead
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 4
+  - type: MeleeWeapon
+    damage:
+      types:
+        Slash: 14
+        Piercing: 14 
+        Caustic: 3
+  - type: SlowOnDamage
+    speedModifierThresholds:
+      200: 0.7
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.45
+        density: 1350
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: PointLight
+    color: Chartreuse
+    radius: 7

@@ -1,0 +1,26 @@
+- type: entity
+  name: турель ксеносов
+  description: Поливает кислотой врагов улья
+  parent: WeaponTurretXeno
+  id: LancTurretXeno
+  suffix: Lanc
+  components:
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 200
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+            - !type:PlaySoundBehavior
+              sound:
+                path: /Audio/Effects/gib1.ogg
+            - !type:SpawnEntitiesBehavior
+              spawn:
+                FoodMeatXeno:
+                  min: 3
+                  max: 5
+    - type: BallisticAmmoProvider
+      proto: BulletAcidTurret
+      capacity: 5000
