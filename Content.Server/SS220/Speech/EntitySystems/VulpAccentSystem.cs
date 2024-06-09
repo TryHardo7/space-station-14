@@ -8,7 +8,10 @@ namespace Content.Server.SS220.Speech.EntitySystems;
 public sealed class VulpkaninAccentSystem : EntitySystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
-
+    private static readonly Regex RegexLowerR = new("r+");
+    private static readonly Regex RegexUpperR = new("R+");
+    private static readonly Regex RegexRuLowerR = new("р+");
+    private static readonly Regex RegexRuUpperR = new("Р+");
     public override void Initialize()
     {
         base.Initialize();
