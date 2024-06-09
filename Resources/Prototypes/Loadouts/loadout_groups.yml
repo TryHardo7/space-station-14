@@ -25,6 +25,10 @@
   - ClothingNeckTransPin
   - ClothingNeckAutismPin
   - ClothingNeckGoldAutismPin
+  # SS220 Hand/FootWraps begin
+  - ClothingHandWraps
+  - ClothingFootWraps
+  # SS220 Hand/FootWraps end
 
 - type: loadoutGroup
   id: Glasses
@@ -607,6 +611,7 @@
   loadouts:
   - ChiefEngineerHead
   - ChiefEngineerBeret
+  - BeretCE #SS220-CEBeret
 
 - type: loadoutGroup
   id: ChiefEngineerJumpsuit
@@ -875,6 +880,7 @@
   loadouts:
   - HeadofSecurityHead
   - HeadofSecurityBeret
+  - HeadofSecurityBigCap #SS220-FreedomHoSCap
 
 - type: loadoutGroup
   id: HeadofSecurityJumpsuit
