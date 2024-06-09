@@ -191,3 +191,11 @@
   color: "#FFB6C1"
   longRange: true
 # Admin memes end
+# Xeno hivemind
+- type: radioChannel
+  id: Hivemind
+  name: Улей
+  keycode: 'я'
+  frequency: 1001
+  color: "#C71585"
+  longRange: true
