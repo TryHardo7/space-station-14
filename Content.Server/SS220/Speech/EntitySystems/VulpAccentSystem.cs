@@ -3,7 +3,7 @@ using Robust.Shared.Random;
 using Content.Server.SS220.Speech.Components;
 using Content.Server.Speech;
 
-namespace Content.server.ss220.Speech.EntitySystems;
+namespace Content.Server.SS220.Speech.EntitySystems;
 
 public sealed class VulpkaninAccentSystem : EntitySystem
 {
