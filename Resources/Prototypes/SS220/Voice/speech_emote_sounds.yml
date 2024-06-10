@@ -126,11 +126,11 @@
   pitch: 0.75
   sounds:
     Growl:
-      collection: Growl
+      collection: GrowlVulpin
     Howl:
-      collection: Howl
+      collection: HowlVulpin
     Bark:
-      collection: Bark
+      collection: BarkVulpin
     Scream:
       collection: FemaleScreams
     Laugh:
