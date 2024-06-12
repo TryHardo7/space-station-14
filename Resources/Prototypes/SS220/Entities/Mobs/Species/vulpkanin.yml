@@ -15,10 +15,14 @@
   - type: Body
     prototype: Vulpkanin
     requiredLegs: 2
-    #акцент и эмоуты
+    #акцент, эмоуты, хвост и маски
   - type: VulpkaninAccent
   - type: Speech
     allowedEmotes: ['Howl', 'Growl', 'Bark']
+  - type: Inventory
+    speciesId: Vulpkanin
+  - type: Wagging
+    action: ActionToggleWaggingVulp
   - type: Vocal
     sounds:
       Male: MaleVulpkanin
@@ -26,7 +30,7 @@
       Unsexed: MaleVulpkanin
     # голодает быстрее на ~30%, но вмещает на 30% больше еды
   - type: Hunger
-    HungerThreshold:
+    thresholds:
      Overfed: 300
      Okay: 250
      Peckish: 200

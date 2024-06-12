@@ -1,4 +1,4 @@
-## spo9k emote sounds start
+# spo9k emote sounds start
 - type: emoteSounds
   id: MaleFelinid
   params:
@@ -74,13 +74,13 @@
       collection: Gasp
     CritGasp:
       collection: FemaleCritGasp
-      ## spo9k emote sounds end
-
+# spo9k emote sounds end
+# Lanc emore sounds start
 - type: emoteSounds
   id: MaleVulpkanin
   params:
-  variation: 0.125
-  pitch: 0.75
+   variation: 0.125
+   pitch: 0.75
   sounds:
     Growl:
       collection: GrowlVulpin
@@ -122,15 +122,15 @@
 - type: emoteSounds
   id: FemaleVulpkanin
   params:
-  variation: 0.125
-  pitch: 0.75
+   variation: 0.125
+   pitch: 0.75
   sounds:
     Growl:
-      collection: Growl
+      collection: GrowlVulpin
     Howl:
-      collection: Howl
+      collection: HowlVulpin
     Bark:
-      collection: Bark
+      collection: BarkVulpin
     Scream:
       collection: FemaleScreams
     Laugh:
@@ -161,3 +161,4 @@
       collection: FemaleCritGasp
     Weh:
       collection: Weh
+# Lanc emote sounds end
