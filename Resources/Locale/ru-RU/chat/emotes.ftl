@@ -58,4 +58,3 @@ chat-emote-msg-monkeyscreeches = кричит
 chat-emote-msg-robotbeep = издаёт бип
 chat-emote-msg-yawn = зевает
 chat-emote-msg-snore = храпит
-
