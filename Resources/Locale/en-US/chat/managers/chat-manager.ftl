@@ -150,8 +150,3 @@ chat-speech-verb-name-electricity = Electricity
 chat-speech-verb-electricity-1 = crackles
 chat-speech-verb-electricity-2 = buzzes
 chat-speech-verb-electricity-3 = screeches
-
-chat-speech-verb-name-vulpin = Vulp
-chat-speech-verb-vulpin-1 = barks
-chat-speech-verb-vulpin-2 = growls
-chat-speech-verb-vulpin-3 = howls
