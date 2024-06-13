@@ -1,4 +1,5 @@
 using Content.Server.Administration.Logs;
+using Content.Server.Chemistry.ReagentEffectConditions;
 using Content.Server.Mind;
 using Content.Server.Popups;
 using Content.Server.Roles;
@@ -8,6 +9,7 @@ using Content.Shared.Implants;
 using Content.Shared.Implants.Components;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Revolutionary.Components;
+using Content.Shared.SS220.Thermals;
 using Content.Shared.Tag;
 
 namespace Content.Server.Mindshield;
@@ -32,6 +34,10 @@ public sealed class MindShieldSystem : EntitySystem
     [ValidatePrototypeId<TagPrototype>]
     public const string MindSlaveTag = "MindSlave";
     //SS220-mindslave end
+    //SS220 Thermal implant begin
+    [ValidatePrototypeId<TagPrototype>]
+    public const string ThermalImplantTag = "ThermalImplant";
+    //SS220 Thermal implant ends
 
     public override void Initialize()
     {
@@ -57,6 +63,11 @@ public sealed class MindShieldSystem : EntitySystem
                 _sharedSubdermalImplant.ForceRemove(ev.Implanted.Value, ev.Implant);
         }
         //SS220-mindslave end
+        //SS220 Thermalimplant begins
+        if (_tag.HasTag(ev.Implant, ThermalImplantTag) && ev.Implanted != null)
+        {
+            EnsureComp<ThermalVisionImplantComponent>(ev.Implanted.Value);
+        }
     }
 
     /// <summary>

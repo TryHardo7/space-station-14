@@ -1423,5 +1423,6 @@
 - type: Tag
   id: ShrineMaidenWig
 # SS220-TohaUpdate-End
-
+- type: Tag
+  id: ThermalImplant
 # ALPHABETICAL

@@ -1,0 +1,14 @@
+- type: entity
+  id: ActionActivateThermalVision
+  name: ThermalVision
+  description: I CAN SEE EVERYTYNG
+  noSpawn: true
+  components:
+  - type: InstantAction
+    checkCanInteract: false
+    itemIconStyle: BigAction
+    priority: -20
+    icon:
+      sprite: Structures/Specific/anomaly.rsi
+      state: anom4
+    event: !type:UseThermalVisionEvent
