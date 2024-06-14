@@ -13,7 +13,6 @@
     - type: ChameleonClothing
       slot: [eyes]
       default: ClothingEyesGlassesThermal
-# SS220-HiddenDesc-Start
     - type: HiddenDescription 
       entries:
       - label: SS220-hidden-desc-ThermalGoogles-syndicate
@@ -27,7 +26,7 @@
           - ResearchDirector
           - Scientist
           - Borg
-# SS220-HiddenDesc-End
+
 
 # Proto for future if we want to add this to RND 
 - type: entity  
@@ -43,9 +42,6 @@
       sprite: Clothing/Eyes/Glasses/thermal.rsi
     - type: Clothing
       sprite: Clothing/Eyes/Glasses/thermal.rsi
-
-
-# SS220-HiddenDesc-Start
     - type: HiddenDescription 
       entries:
       - label: SS220-hidden-desc-ThermalGoogles-syndicate
@@ -59,4 +55,4 @@
           - ResearchDirector
           - Scientist
           - Borg
-# SS220-HiddenDesc-End
+          

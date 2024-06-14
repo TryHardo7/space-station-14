@@ -19,14 +19,14 @@ public sealed class SharedThermalVisionImplantSystem : EntitySystem
 
     private void OnThermalVisionAction(Entity<ThermalVisionImplantComponent> ent, ref UseThermalVisionEvent args)
     {
-        if (TryComp<ThermalVisionImplantComponent>(args.Performer, out var thermalVision))
-        {
-            if (HasComp<ThermalVisionComponent>(args.Performer) && thermalVision.IsAcive)
-                RemComp<ThermalVisionComponent>(args.Performer);
-            else
-                EnsureComp<ThermalVisionComponent>(args.Performer);
+        if (!TryComp<ThermalVisionImplantComponent>(args.Performer, out var thermalVision))
+            return;
 
-            thermalVision.IsAcive = !thermalVision.IsAcive;
-        }
+        if (HasComp<ThermalVisionComponent>(args.Performer) && thermalVision.IsAcive)
+            RemComp<ThermalVisionComponent>(args.Performer);
+        else
+            EnsureComp<ThermalVisionComponent>(args.Performer);
+
+        thermalVision.IsAcive = !thermalVision.IsAcive;
     }
 }

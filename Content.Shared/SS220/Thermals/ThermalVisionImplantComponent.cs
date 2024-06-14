@@ -9,6 +9,6 @@ namespace Content.Server.SS220.Thermals;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class ThermalVisionImplantComponent : Component
 {
-[DataField, AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public bool IsAcive;
 }

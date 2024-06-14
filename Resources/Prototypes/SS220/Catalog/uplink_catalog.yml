@@ -81,7 +81,7 @@
     Telecrystal: 1
   categories:
   - UplinkPointless
-# ThermalVision Stuff begins
+
 - type: listing 
   id: UplinkThermalGlasses
   name: uplink-thermal-glasses-name
@@ -92,7 +92,6 @@
     Telecrystal: 4
   categories:
   - UplinkWearables
-
 
 - type: listing
   id: ThermalVisionImplanter
@@ -105,7 +104,6 @@
   categories:
   - UplinkImplants
 
-# ThermalVision Stuff ends
 # READD-VEHICLES
 - type: listing
   id: UplinkSyndicateSegwayCrate

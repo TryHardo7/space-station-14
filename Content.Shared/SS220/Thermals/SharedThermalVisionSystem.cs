@@ -1,12 +1,11 @@
 // Original code github.com/CM-14 Licence MIT, EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.Alert;
 
+
 namespace Content.Shared.SS220.Thermals;
 
 public abstract class SharedThermalVisonSystem : EntitySystem
 {
-    [Dependency] private readonly AlertsSystem _alerts = default!;
-
     public override void Initialize()
     {
         SubscribeLocalEvent<ThermalVisionComponent, ComponentStartup>(OnThermalStartup);
@@ -31,8 +30,8 @@ public abstract class SharedThermalVisonSystem : EntitySystem
     }
 
     private void OnThermalRemove(Entity<ThermalVisionComponent> ent, ref ComponentRemove args)
-    { 
-    ThermalVisionRemoved(ent);
+    {
+        ThermalVisionRemoved(ent);
     }
 
     public void Toggle(Entity<ThermalVisionComponent?> ent)
@@ -45,7 +44,7 @@ public abstract class SharedThermalVisonSystem : EntitySystem
             ThermalVisionState.Off => ThermalVisionState.Half,
             ThermalVisionState.Half => ThermalVisionState.Full,
             ThermalVisionState.Full => ThermalVisionState.Off,
-            _ => throw new ArgumentOutOfRangeException() 
+            _ => throw new ArgumentOutOfRangeException()
         };
 
         Dirty(ent);
