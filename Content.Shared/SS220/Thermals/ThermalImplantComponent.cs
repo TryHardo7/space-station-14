@@ -1,6 +1,6 @@
 using Robust.Shared.GameStates;
 
-namespace Content.Shared.SS220.Thermals;
+namespace Content.Server.SS220.Thermals;
 
 /// <summary>
 /// Adds ThermalComponent to the user when implant action is used.

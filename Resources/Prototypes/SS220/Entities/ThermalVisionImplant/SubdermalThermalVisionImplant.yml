@@ -8,6 +8,7 @@
     - type: SubdermalImplant
       implantAction: ActionActivateThermalVision
     - type: TriggerImplantAction
+    - type: ThermalVisionImplant
     - type: Tag
       tags:
         - ThermalImplant
