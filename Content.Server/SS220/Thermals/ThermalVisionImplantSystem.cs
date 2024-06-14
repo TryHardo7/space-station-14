@@ -1,9 +1,5 @@
-using Content.Shared.Implants.Components;
-using Content.Shared.Inventory.Events;
+//EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.SS220.Thermals;
-using Content.Shared.Implants;
-using Content.Shared.Actions;
-using Robust.Shared.Timing;
 
 
 namespace Content.Server.SS220.Thermals;
@@ -25,22 +21,12 @@ public sealed class SharedThermalVisionImplantSystem : EntitySystem
     {
         if (TryComp<ThermalVisionImplantComponent>(args.Performer, out var thermalVision))
         {
-            if (HasComp<ThermalComponent>(args.Performer) && thermalVision.IsAcive)
-                RemComp<ThermalComponent>(args.Performer);
+            if (HasComp<ThermalVisionComponent>(args.Performer) && thermalVision.IsAcive)
+                RemComp<ThermalVisionComponent>(args.Performer);
             else
-                EnsureComp<ThermalComponent>(args.Performer);
+                EnsureComp<ThermalVisionComponent>(args.Performer);
 
             thermalVision.IsAcive = !thermalVision.IsAcive;
         }
     }
 }
-
-// что за ивент? зачем переменная вкл выкл компонент когда у нас идет присвоение и удаление компонента? 
-// функция работает в рамках: (ThermalVisionImplantComponent и UseThermalVisionEvent)
-// при активации экшена if args.performer HasComp<ThermalVisionImplantComponent> и его переменная Is.Active = false
-//                   то ensure.Comp<ThermalComponent> на (args.Performer)
-//  и сменить состояние Is.Active = true 
-//                 else RemComp<ThermalComponent> на (args.Performer)
-// и сменить состояние  Is.Active = false
-// 
-// либо функция работает в рамках (ThermalVisionImplantComponent и IsImplantImplanted и его args)

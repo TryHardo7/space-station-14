@@ -1,4 +1,4 @@
-// Licence
+// Original code github.com/CM-14 Licence MIT, EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.SS220.Thermals;
 using Robust.Client.Graphics;
 using Robust.Client.Player;
@@ -6,7 +6,7 @@ using Robust.Shared.Player;
 
 namespace Content.Client.SS220.Thermals;
 
-public sealed class ThermalSystem : SharedThermalSystem
+public sealed class ThermalVisionSystem : SharedThermalVisonSystem
 {
     [Dependency] private readonly ILightManager _light = default!;
     [Dependency] private readonly IOverlayManager _overlay = default!;
@@ -16,21 +16,20 @@ public sealed class ThermalSystem : SharedThermalSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ThermalComponent, LocalPlayerAttachedEvent>(OnThermalAttached); 
-        SubscribeLocalEvent<ThermalComponent, LocalPlayerDetachedEvent>(OnThermalDetached);
+        SubscribeLocalEvent<ThermalVisionComponent, LocalPlayerAttachedEvent>(OnThermalAttached);
+        SubscribeLocalEvent<ThermalVisionComponent, LocalPlayerDetachedEvent>(OnThermalDetached);
     }
-
-    private void OnThermalAttached(Entity<ThermalComponent> ent, ref LocalPlayerAttachedEvent args)
+    private void OnThermalAttached(Entity<ThermalVisionComponent> ent, ref LocalPlayerAttachedEvent args)
     {
         ThermalVisionChanged(ent);
     }
 
-    private void OnThermalDetached(Entity<ThermalComponent> ent, ref LocalPlayerDetachedEvent args)
+    private void OnThermalDetached(Entity<ThermalVisionComponent> ent, ref LocalPlayerDetachedEvent args)
     {
         Off();
     }
 
-    protected override void ThermalVisionChanged(Entity<ThermalComponent> ent)
+    protected override void ThermalVisionChanged(Entity<ThermalVisionComponent> ent)
     {
         if (ent != _player.LocalEntity)
             return;
@@ -51,7 +50,7 @@ public sealed class ThermalSystem : SharedThermalSystem
         }
     }
 
-    protected override void ThermalVisionRemoved(Entity<ThermalComponent> ent)
+    protected override void ThermalVisionRemoved(Entity<ThermalVisionComponent> ent)
     {
         if (ent != _player.LocalEntity)
             return;

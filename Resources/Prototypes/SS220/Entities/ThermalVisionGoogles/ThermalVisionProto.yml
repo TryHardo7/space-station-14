@@ -1,0 +1,62 @@
+- type: entity
+  parent: ClothingEyesChameleon
+  id: ThermalVisorChameleon
+  name: optical thermal scanner
+  description: Useful both for security and cargonia.
+  suffix: ThermalGoogles
+  components:
+    - type: ThermalVisionClothing
+    - type: Sprite
+      sprite: Clothing/Eyes/Glasses/thermal.rsi
+    - type: Clothing
+      sprite: Clothing/Eyes/Glasses/thermal.rsi
+    - type: ChameleonClothing
+      slot: [eyes]
+      default: ClothingEyesGlassesThermal
+# SS220-HiddenDesc-Start
+    - type: HiddenDescription 
+      entries:
+      - label: SS220-hidden-desc-ThermalGoogles-syndicate
+        whitelistMind:
+          components:
+            - TraitorRole
+            - NukeOperative
+      - label: SS220-hidden-desc-ThermalGoogles-research
+        jobRequired:
+          - ResearchAssistant
+          - ResearchDirector
+          - Scientist
+          - Borg
+# SS220-HiddenDesc-End
+
+# Proto for future if we want to add this to RND 
+- type: entity  
+  noSpawn: true
+  parent: ClothingEyesBase
+  id: ThermalVisorRND
+  name: Продвинутые термальные очки
+  description: Созданные на базе устаревшего и уже нерабочего тремального сканера.
+  suffix: ThermalGooglesRND
+  components:
+    - type: ThermalVisionClothing
+    - type: Sprite
+      sprite: Clothing/Eyes/Glasses/thermal.rsi
+    - type: Clothing
+      sprite: Clothing/Eyes/Glasses/thermal.rsi
+
+
+# SS220-HiddenDesc-Start
+    - type: HiddenDescription 
+      entries:
+      - label: SS220-hidden-desc-ThermalGoogles-syndicate
+        whitelistMind:
+          components:
+            - TraitorRole
+            - NukeOperative
+      - label: SS220-hidden-desc-ThermalGoogles-research
+        jobRequired:
+          - ResearchAssistant
+          - ResearchDirector
+          - Scientist
+          - Borg
+# SS220-HiddenDesc-End

@@ -1,6 +1,5 @@
-// Licence 
-using System.Numerics;
-using Content.Shared.SS220.Thermals; // change 
+// Original code github.com/CM-14 Licence MIT, EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+using Content.Shared.SS220.Thermals; 
 using Content.Shared.Mobs.Components;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -30,7 +29,7 @@ public sealed class ThermalVisionOverlay : Overlay
 
     protected override void Draw(in OverlayDrawArgs args)
     {
-        if (!_entity.TryGetComponent(_players.LocalEntity, out ThermalComponent? thermalVision) ||
+        if (!_entity.TryGetComponent(_players.LocalEntity, out ThermalVisionComponent? thermalVision) ||
             thermalVision.State == ThermalVisionState.Off)
         {
             return;

@@ -8,7 +8,7 @@
     itemIconStyle: BigAction
     priority: -20
     icon:
-      sprite: Structures/Specific/anomaly.rsi
-      state: anom4
+      sprite: /Textures/SS220/Misc/ThermalEye.rsi
+      state: EyeON
     event: !type:UseThermalVisionEvent
     useDelay: 4
