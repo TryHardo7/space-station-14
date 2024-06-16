@@ -103,3 +103,6 @@
     molsPerSecondPerUnitMass: 0.0005
   - type: Speech
     speechVerb: LargeMob
+  - type: InteractionPopup
+    successChance: 0 # Нет.
+    interactFailureString: petting-failure-lxeno
