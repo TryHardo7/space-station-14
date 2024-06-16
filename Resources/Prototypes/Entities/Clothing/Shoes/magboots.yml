@@ -94,7 +94,7 @@
   - type: Magboots
     toggleAction: ActionToggleMagbootsSyndie
   - type: ClothingSpeedModifier
-    walkModifier: 0.95
+    walkModifier: 1
     sprintModifier: 1 #SS220 fix
     enabled: false
   - type: GasTank
