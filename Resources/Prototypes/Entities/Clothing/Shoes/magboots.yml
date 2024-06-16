@@ -98,7 +98,7 @@
     sprintModifier: 1 #SS220 fix
     enabled: false
   - type: GasTank
-    outputPressure: 21.2
+    outputPressure: 42.6
     air:
       # SS220 fix
       volume: 5
