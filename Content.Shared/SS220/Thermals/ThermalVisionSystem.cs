@@ -1,6 +1,4 @@
-// Original code github.com/CM-14 Licence MIT, EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
-using Content.Shared.Alert;
-
+// Original code github.com/CM-14 Licence MIT, all edits under EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
 namespace Content.Shared.SS220.Thermals;
 
@@ -8,16 +6,16 @@ public abstract class SharedThermalVisonSystem : EntitySystem
 {
     public override void Initialize()
     {
-        SubscribeLocalEvent<ThermalVisionComponent, ComponentStartup>(OnThermalStartup);
+        //SubscribeLocalEvent<ThermalVisionComponent, ComponentStartup>(OnThermalStartup);
         SubscribeLocalEvent<ThermalVisionComponent, MapInitEvent>(OnThermalMapInit);
         SubscribeLocalEvent<ThermalVisionComponent, AfterAutoHandleStateEvent>(OnThermalHandle);
         SubscribeLocalEvent<ThermalVisionComponent, ComponentRemove>(OnThermalRemove);
     }
 
-    private void OnThermalStartup(Entity<ThermalVisionComponent> ent, ref ComponentStartup args)
-    {
-        ThermalVisionChanged(ent);
-    }
+    // private void OnThermalStartup(Entity<ThermalVisionComponent> ent, ref ComponentStartup args)
+    // {
+    //     ThermalVisionChanged(ent);
+    // }
 
     private void OnThermalHandle(Entity<ThermalVisionComponent> ent, ref AfterAutoHandleStateEvent args)
     {
@@ -26,7 +24,7 @@ public abstract class SharedThermalVisonSystem : EntitySystem
 
     private void OnThermalMapInit(Entity<ThermalVisionComponent> ent, ref MapInitEvent args)
     {
-    
+        ThermalVisionChanged(ent); // leave it here, maybe smn make it roundstart spawn
     }
 
     private void OnThermalRemove(Entity<ThermalVisionComponent> ent, ref ComponentRemove args)

@@ -31,9 +31,9 @@ public abstract class SharedSubdermalImplantSystem : EntitySystem
     [ValidatePrototypeId<TagPrototype>]
     public const string MindShieldTag = "MindShield";
     //SS220-removable-mindshield end
-    //SS220-romovable-thermalvision begin
+    //SS220 thermalvision begin
     public const string ThermalImplantTag = "ThermalImplant";
-    //SS220-romovable-thermalvision end
+    //SS220 thermalvision end
 
     public override void Initialize()
     {
@@ -99,10 +99,10 @@ public abstract class SharedSubdermalImplantSystem : EntitySystem
         if (_tag.HasTag(uid, MindShieldTag) && TryComp<MindShieldComponent>(component.ImplantedEntity.Value, out var mindShield))
             RemComp(component.ImplantedEntity.Value, mindShield);
         //SS220-removable-mindshield end
-        //SS220-romovable-thermalvision begin
+        //SS220 thermalvision begin
         if (_tag.HasTag(uid, ThermalImplantTag) && TryComp<ThermalVisionComponent>(component.ImplantedEntity.Value, out var thermalVision))
             RemComp(component.ImplantedEntity.Value, thermalVision);
-        //SS220-removable-thermalvision end
+        //SS220 thermalvision end
         if (!_container.TryGetContainer(uid, BaseStorageId, out var storageImplant))
             return;
 

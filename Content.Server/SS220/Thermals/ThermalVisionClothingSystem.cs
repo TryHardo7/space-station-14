@@ -1,16 +1,15 @@
 // EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Shared.Inventory.Events;
-using Robust.Shared.Timing;
+using Content.Shared.SS220.Thermals;
 
 
-namespace Content.Shared.SS220.Thermals;
+namespace Content.Server.SS220.Thermals;
 
 /// <summary>
 /// Handles enabling of thermal vision when clothing is equipped and disabling when unequipped.
 /// </summary>
-public sealed class SharedThermalVisionClothingSystem : EntitySystem
+public sealed class ThermalVisionClothingSystem : EntitySystem
 {
-    [Dependency] private readonly IGameTiming _gameTiming = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -20,8 +19,14 @@ public sealed class SharedThermalVisionClothingSystem : EntitySystem
     }
     private void OnCompEquip(Entity<ThermalVisionClothingComponent> ent, ref GotEquippedEvent args)
     {
-        if (!HasComp<ThermalVisionComponent>(args.Equipee) && !_gameTiming.ApplyingState)
-            EnsureComp<ThermalVisionComponent>(args.Equipee);
+        if (args.Slot != "eyes")
+            return;
+
+        if (!TryComp<ThermalVisionComponent>(args.Equipee, out var thermalVisionComp))
+        {
+            AddComp(args.Equipee, new ThermalVisionComponent(ent.Comp.ThermalVisionRadius));
+            return;
+        }
     }
 
     private void OnCompUnequip(Entity<ThermalVisionClothingComponent> ent, ref GotUnequippedEvent args)

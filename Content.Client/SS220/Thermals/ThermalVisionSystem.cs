@@ -26,24 +26,26 @@ public sealed class ThermalVisionSystem : SharedThermalVisonSystem
 
     private void OnThermalDetached(Entity<ThermalVisionComponent> ent, ref LocalPlayerDetachedEvent args)
     {
-        Off();
+        Off(ent.Comp.ThermalVisionRadius);
     }
 
     protected override void ThermalVisionChanged(Entity<ThermalVisionComponent> ent)
     {
         if (ent != _player.LocalEntity)
             return;
-
+        // Do you know what is the worst finite state automat realization?
+        // After code below you will know
         switch (ent.Comp.State)
         {
             case ThermalVisionState.Off:
-                Off();
+                Off(ent.Comp.ThermalVisionRadius);
                 break;
             case ThermalVisionState.Half:
-                Half();
+                Off(ent.Comp.ThermalVisionRadius);
+                Half(ent.Comp.ThermalVisionRadius);
                 break;
             case ThermalVisionState.Full:
-                Full();
+                Full(ent.Comp.ThermalVisionRadius);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -55,24 +57,24 @@ public sealed class ThermalVisionSystem : SharedThermalVisonSystem
         if (ent != _player.LocalEntity)
             return;
 
-        Off();
+        Off(ent.Comp.ThermalVisionRadius);
     }
 
-    private void Off()
+    private void Off(float radius)
     {
-        _overlay.RemoveOverlay(new ThermalVisionOverlay());
+        _overlay.RemoveOverlay(new ThermalVisionOverlay(radius));
         _light.DrawLighting = true;
     }
 
-    private void Half()
+    private void Half(float radius)
     {
-        _overlay.AddOverlay(new ThermalVisionOverlay());
+        _overlay.AddOverlay(new ThermalVisionOverlay(radius));
         _light.DrawLighting = true;
     }
 
-    private void Full()
+    private void Full(float radius)
     {
-        _overlay.AddOverlay(new ThermalVisionOverlay());
+        _overlay.AddOverlay(new ThermalVisionOverlay(radius));
         _light.DrawLighting = false;
     }
 }

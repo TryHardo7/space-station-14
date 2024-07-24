@@ -2,7 +2,6 @@
   parent: BaseSubdermalImplant
   id: ThermalVisionImplant
   name: thermal-vision implant
-  description: lmaoooo
   noSpawn: true
   components:
     - type: SubdermalImplant

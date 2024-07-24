@@ -6,9 +6,11 @@ namespace Content.Server.SS220.Thermals;
 /// <summary>
 /// Adds ThermalComponent to the user when implant action is used.
 /// </summary>
-[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+[RegisterComponent]
 public sealed partial class ThermalVisionImplantComponent : Component
 {
-    [DataField, AutoNetworkedField]
-    public bool IsAcive;
+    [DataField]
+    public bool IsAcive = false;
+    [DataField, ViewVariables]
+    public float ThermalVisionRadius = 8f;
 }

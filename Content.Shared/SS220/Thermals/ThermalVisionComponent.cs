@@ -15,6 +15,14 @@ public sealed partial class ThermalVisionComponent : Component
 
     [DataField, AutoNetworkedField]
     public ThermalVisionState State = ThermalVisionState.Half;
+
+    [ViewVariables, AutoNetworkedField]
+    public float ThermalVisionRadius = 8f;
+
+    public ThermalVisionComponent(float radius)
+    {
+        ThermalVisionRadius = radius;
+    }
 }
 
 [Serializable, NetSerializable]
