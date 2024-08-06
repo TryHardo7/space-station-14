@@ -1,0 +1,62 @@
+# Turtleneck Time
+- type: loadoutEffectGroup
+  id: SecurityTurtleneck
+  effects:
+  - !type:JobRequirementLoadoutEffect
+    requirement:
+      !type:RoleTimeRequirement
+      role: JobSecurityOfficer
+      time: 108000 # 30 hrs
+
+# Jumpsuit
+- type: loadout
+  id: SecurityJumpsuitTurtleneck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: SecurityTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitTurtleColorBlack
+
+- type: loadout
+  id: SecurityJumpskirtTurtleneck
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: SecurityTurtleneck
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtTurtleColorBlack
+
+- type: loadout
+  id: JumpsuitSecBlue
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSecBlue
+
+# Head
+- type: loadout
+  id: HatCowboyBlack
+  equipment:
+    head: ClothingHeadHatCowboyBlack
+
+# Neck
+- type: loadout
+  id: Headphones
+  equipment:
+    neck: ClothingNeckHeadphones
+
+#Outer
+- type: loadout
+  id: VestArmorSec
+  equipment:
+    outerClothing: ClothingOuterVestArmorSec
+
+- type: loadout
+  id: CoatSecurityOvercoat
+  equipment:
+    outerClothing: ClothingOuterCoatSecurityOvercoat
+
+# Shoes
+- type: loadout
+  id: BootsJackSec
+  equipment:
+    shoes: ClothingShoesBootsJackSec
+
+

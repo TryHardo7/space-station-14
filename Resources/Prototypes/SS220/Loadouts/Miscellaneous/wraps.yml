@@ -1,0 +1,11 @@
+- type: loadout
+  id: ClothingHandWraps
+  storage:
+    back:
+    - ClothingHandWraps
+
+- type: loadout
+  id: ClothingFootWraps
+  storage:
+    back:
+    - ClothingFootWraps
