@@ -174,12 +174,14 @@ uplink-freedom-implanter-name = Freedom Implanter
 uplink-freedom-implanter-desc = Get away from those nasty sec officers with this three use implant!
 
 uplink-scram-implanter-name = Scram Implanter
+#SS220-underused-uplinks-stuff
 uplink-scram-implanter-desc = A 12-use implant which teleports you within a medium radius. Attempts to teleport you onto an unobstructed tile. May sometimes fail to do so. Life insurance not included.
 
 uplink-dna-scrambler-implanter-name = DNA Scrambler Implanter
 uplink-dna-scrambler-implanter-desc = A single use implant that can be activated to modify your DNA and give you a completely new look.
 
 uplink-emp-implanter-name = EMP Implanter
+#SS220-underused-uplinks-stuff
 uplink-emp-implanter-desc = Detonates a small EMP pulse on activation that drains nearby electronics of their power, can be used five times before the internal battery runs out.
 
 uplink-macro-bomb-implanter-name = Macro Bomb Implanter

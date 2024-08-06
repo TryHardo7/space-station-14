@@ -122,7 +122,7 @@
   components:
   - type: InstantAction
     checkCanInteract: false
-    charges: 5
+    charges: 5 #SS220-underused-uplinks-stuff begin
     useDelay: 5
     itemIconStyle: BigAction
     priority: -20
