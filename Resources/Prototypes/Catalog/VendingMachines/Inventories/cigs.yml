@@ -1,6 +1,7 @@
 - type: vendingMachineInventory
   id: CigaretteMachineInventory
   startingInventory:
+#SS220 Cigarettes begin
     CigPackGreen: 3
     CigPackRed: 3
     CigPackBlue: 3
