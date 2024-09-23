@@ -230,7 +230,7 @@
         damage:
           types:
             Cellular: 0.05 # Smoking causes cancer.
-
+#SS220 Cigarettes begin
 - type: reagent
   id: NeoNicotinoid
   name: reagent-name-neonicotinoid
