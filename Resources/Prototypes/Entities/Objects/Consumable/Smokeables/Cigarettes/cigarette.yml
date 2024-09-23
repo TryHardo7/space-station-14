@@ -49,6 +49,32 @@
     graph: smokeableCigarette
     node: cigarette
 
+# SS220 Cigarettes rework this is for all healing cigarettes
+- type: entity
+  id: SoakedHealCigarette
+  parent: BaseHealCigarette # SS220 Cigarettes questions
+  name: cigarette
+  suffix: Soaked
+  description: A roll of tobacco and nicotine soaked in some chemical.
+  components:
+  - type: Sprite
+    sprite: Objects/Consumable/Smokeables/Cigarettes/cigarette.rsi
+    state: unlit-icon
+  - type: Tag
+    tags:
+      - Cigarette
+      - Trash
+  - type: SpaceGarbage
+  - type: Clothing
+    sprite: Objects/Consumable/Smokeables/Cigarettes/cigarette.rsi
+    slots: [ mask ]
+    equippedPrefix: unlit
+  - type: Item
+    size: Tiny
+  - type: Construction
+    graph: smokeableCigarette
+    node: cigarette
+
 - type: entity
   id: CigaretteSpent
   parent: Cigarette
@@ -71,22 +97,22 @@
 - type: entity
   id: CigaretteSyndicate
   suffix: syndicate
-  parent: Cigarette
+  parent: SoakedHealCigarette
   name: cigarette
   components:
   - type: SolutionContainerManager
     solutions:
       smokable:
-        maxVol: 40
+        maxVol: 80
         reagents:
           - ReagentId: Nicotine
-            Quantity: 10
+            Quantity: 20
           - ReagentId: Omnizine
-            Quantity: 30
+            Quantity: 45
 
 - type: entity
   id: CigaretteOmnizine
-  parent: SoakedCigarette
+  parent: SoakedHealCigarette
   name: Hot Dog Water Flavor Explosion
   components:
   - type: SolutionContainerManager
@@ -95,9 +121,9 @@
         maxVol: 40
         reagents:
           - ReagentId: Nicotine
-            Quantity: 10
+            Quantity: 20
           - ReagentId: Omnizine
-            Quantity: 10
+            Quantity: 20
 
 - type: entity
   id: CigaretteIron
@@ -116,67 +142,67 @@
 
 - type: entity
   id: CigaretteTricordrazine
-  parent: SoakedCigarette
+  parent: SoakedHealCigarette
   name: Licorice Allsorts
   components:
   - type: SolutionContainerManager
     solutions:
       smokable:
-        maxVol: 40
+        maxVol: 50
         reagents:
           - ReagentId: Nicotine
-            Quantity: 10
+            Quantity: 20
           - ReagentId: Tricordrazine
-            Quantity: 10
+            Quantity: 20
 
 - type: entity
   id: CigaretteDylovene
-  parent: SoakedCigarette
+  parent: SoakedHealCigarette
   name: Urinal Cake Disolver
   components:
   - type: SolutionContainerManager
     solutions:
       smokable:
-        maxVol: 40
+        maxVol: 50
         reagents:
           - ReagentId: Nicotine
-            Quantity: 10
+            Quantity: 20
           - ReagentId: Dylovene
-            Quantity: 10
+            Quantity: 20
 
 - type: entity
   id: CigaretteDermaline
-  parent: SoakedCigarette
+  parent: SoakedHealCigarette
   name: Aloe Peanut Butter Medley
   components:
   - type: SolutionContainerManager
     solutions:
       smokable:
-        maxVol: 40
+        maxVol: 50
         reagents:
           - ReagentId: Nicotine
-            Quantity: 10
+            Quantity: 20
           - ReagentId: Dermaline
-            Quantity: 10
+            Quantity: 20
 
 - type: entity
   id: CigaretteArithrazine
-  parent: SoakedCigarette
+  parent: SoakedHealCigarette
   name: Roman Pipe Works
   components:
   - type: SolutionContainerManager
     solutions:
       smokable:
-        maxVol: 40
+        maxVol: 50
         reagents:
           - ReagentId: Nicotine
-            Quantity: 10
+            Quantity: 20
           - ReagentId: Arithrazine
-            Quantity: 10
+            Quantity: 20
 
 - type: entity
   id: CigaretteIpecac
-  parent: SoakedCigarette
+  parent: SoakedHealCigarette
   name: Grandma's Christmas Fruitcake
   components:
   - type: SolutionContainerManager
@@ -185,39 +211,39 @@
         maxVol: 40
         reagents:
           - ReagentId: Nicotine
-            Quantity: 10
+            Quantity: 20
           - ReagentId: Ipecac
-            Quantity: 2
+            Quantity: 12
 
 - type: entity
   id: CigaretteBicaridine
-  parent: SoakedCigarette
+  parent: SoakedHealCigarette
   name: Wet Dog Enhanced Cigarette
   components:
   - type: SolutionContainerManager
     solutions:
       smokable:
-        maxVol: 40
+        maxVol: 50
         reagents:
           - ReagentId: Nicotine
-            Quantity: 10
+            Quantity: 20
           - ReagentId: Bicaridine
-            Quantity: 10
+            Quantity: 20
 
 - type: entity
   id: CigaretteDexalin
-  parent: SoakedCigarette
+  parent: SoakedHealCigarette
   name: Rocky Mountain Musk
   components:
   - type: SolutionContainerManager
     solutions:
       smokable:
-        maxVol: 40
+        maxVol: 50
         reagents:
           - ReagentId: Nicotine
-            Quantity: 10
+            Quantity: 20
           - ReagentId: Dexalin
-            Quantity: 10
+            Quantity: 20
 
 - type: entity
   id: CigarettePax
@@ -227,12 +253,12 @@
   - type: SolutionContainerManager
     solutions:
       smokable:
-        maxVol: 40
+        maxVol: 110
         reagents:
-          - ReagentId: Nicotine
-            Quantity: 10
+          - ReagentId: NeoNicotinoid
+            Quantity: 55
           - ReagentId: Pax
-            Quantity: 2
+            Quantity: 55
 
 - type: entity
   id: CigaretteBbqSauce
@@ -242,12 +268,12 @@
   - type: SolutionContainerManager
     solutions:
       smokable:
-        maxVol: 40
+        maxVol: 110
         reagents:
-          - ReagentId: Nicotine
-            Quantity: 10
+          - ReagentId: NeoNicotinoid
+            Quantity: 55
           - ReagentId: BbqSauce
-            Quantity: 10
+            Quantity: 55
 
 - type: entity
   id: CigaretteBlackPepper
@@ -257,12 +283,12 @@
   - type: SolutionContainerManager
     solutions:
       smokable:
-        maxVol: 40
+        maxVol: 110
         reagents:
-          - ReagentId: Nicotine
-            Quantity: 10
+          - ReagentId: NeoNicotinoid
+            Quantity: 55
           - ReagentId: Blackpepper
-            Quantity: 10
+            Quantity: 55
 
 - type: entity
   id: CigaretteCapsaicinOil
@@ -272,12 +298,12 @@
   - type: SolutionContainerManager
     solutions:
       smokable:
-        maxVol: 40
+        maxVol: 110
         reagents:
-          - ReagentId: Nicotine
-            Quantity: 10
+          - ReagentId: NeoNicotinoid
+            Quantity: 55
           - ReagentId: CapsaicinOil
-            Quantity: 10
+            Quantity: 55
 
 - type: entity
   id: CigaretteBread
@@ -289,8 +315,8 @@
       smokable:
         maxVol: 40
         reagents:
-          - ReagentId: Nicotine
-            Quantity: 10
+          - ReagentId: NeoNicotinoid
+            Quantity: 55
 
 - type: entity
   id: CigaretteMilk
@@ -300,12 +326,12 @@
   - type: SolutionContainerManager
     solutions:
       smokable:
-        maxVol: 40
+        maxVol: 110
         reagents:
-          - ReagentId: Nicotine
-            Quantity: 10
+          - ReagentId: NeoNicotinoid
+            Quantity: 55
           - ReagentId: Milk
-            Quantity: 10
+            Quantity: 25
 
 - type: entity
   id: CigaretteBanana
@@ -315,12 +341,12 @@
   - type: SolutionContainerManager
     solutions:
       smokable:
-        maxVol: 40
+        maxVol: 110
         reagents:
-          - ReagentId: Nicotine
-            Quantity: 10
+          - ReagentId: NeoNicotinoid
+            Quantity: 55
           - ReagentId: BananaHonk
-            Quantity: 10
+            Quantity: 25
 
 - type: entity
   id: CigaretteSpaceDrugs
@@ -330,12 +356,12 @@
   - type: SolutionContainerManager
     solutions:
       smokable:
-        maxVol: 40
+        maxVol: 110
         reagents:
-          - ReagentId: Nicotine
-            Quantity: 10
+          - ReagentId: NeoNicotinoid
+            Quantity: 55
           - ReagentId: SpaceDrugs
-            Quantity: 10
+            Quantity: 25
 
 - type: entity
   id: CigaretteMuteToxin
@@ -345,12 +371,12 @@
   - type: SolutionContainerManager
     solutions:
       smokable:
-        maxVol: 40
+        maxVol: 110
         reagents:
-          - ReagentId: Nicotine
-            Quantity: 10
+          - ReagentId: NeoNicotinoid
+            Quantity: 55
           - ReagentId: MuteToxin
-            Quantity: 2
+            Quantity: 55
 
 - type: entity
   id: CigaretteMold
@@ -360,12 +386,12 @@
   - type: SolutionContainerManager
     solutions:
       smokable:
-        maxVol: 40
+        maxVol: 110
         reagents:
-          - ReagentId: Nicotine
-            Quantity: 10
+          - ReagentId: NeoNicotinoid
+            Quantity: 55
           - ReagentId: Mold
-            Quantity: 2
+            Quantity: 55
 
 - type: entity
   id: CigaretteLicoxide
@@ -375,12 +401,12 @@
   - type: SolutionContainerManager
     solutions:
       smokable:
-        maxVol: 40
+        maxVol: 110
         reagents:
-          - ReagentId: Nicotine
-            Quantity: 10
+          - ReagentId: NeoNicotinoid
+            Quantity: 55
           - ReagentId: Licoxide
-            Quantity: 5
+            Quantity: 55
 
 - type: entity
   id: CigaretteWeldingFuel
@@ -390,12 +416,12 @@
   - type: SolutionContainerManager
     solutions:
       smokable:
-        maxVol: 40
+        maxVol: 110
         reagents:
-          - ReagentId: Nicotine
-            Quantity: 10
+          - ReagentId: NeoNicotinoid
+            Quantity: 55
           - ReagentId: WeldingFuel
-            Quantity: 5
+            Quantity: 55
 
 - type: entity
   id: CigaretteTHC
@@ -405,9 +431,56 @@
   - type: SolutionContainerManager
     solutions:
       smokable:
+        maxVol: 110
+        reagents:
+          - ReagentId: NeoNicotinoid
+            Quantity: 55
+          - ReagentId: THC
+            Quantity: 35
+
+- type: entity
+  id: CigaretteNomads
+  parent: SoakedCigarette
+  name: Nomads's extra strong
+  components:
+  - type: Smokable
+    inhaleAmount: 0.45
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 110
+        reagents:
+          - ReagentId: NeoNicotinoid
+            Quantity: 55
+          - ReagentId: Barozine
+            Quantity: 35
+
+- type: entity
+  id: CigaretteAcmeCo
+  parent: SoakedCigarette
+  name: AcmeCo
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 110
+        reagents:
+          - ReagentId: NeoNicotinoid
+            Quantity: 55
+          - ReagentId: Nicotine
+            Quantity: 55
+
+- type: entity
+  id: CigaretteDromedaryCo
+  parent: SoakedHealCigarette
+  name: DromedaryCo
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
         maxVol: 40
         reagents:
           - ReagentId: Nicotine
-            Quantity: 10
-          - ReagentId: THC
-            Quantity: 5
+            Quantity: 20
+          - ReagentId: DexalinPlus
+            Quantity: 20

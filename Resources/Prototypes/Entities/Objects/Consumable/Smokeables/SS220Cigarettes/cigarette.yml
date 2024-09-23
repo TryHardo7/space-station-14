@@ -1,0 +1,93 @@
+- type: entity
+  id: CigaretteSEC
+  parent: SoakedCigarette
+  name: Officer's reserve
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 110
+        reagents:
+          - ReagentId: NeoNicotinoid
+            Quantity: 55
+          - ReagentId: Epinephrine
+            Quantity: 55
+
+- type: entity
+  id: CigaretteENG
+  parent: SoakedCigarette
+  name: Friendly singularity
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 110
+        reagents:
+          - ReagentId: NeoNicotinoid
+            Quantity: 55
+          - ReagentId: PotassiumIodide
+            Quantity: 55
+
+- type: entity
+  id: CigaretteMED
+  parent: SoakedHealCigarette
+  name: Benefactor
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 40
+        reagents:
+          - ReagentId: Nicotine
+            Quantity: 20
+          - ReagentId: Dylovene
+            Quantity: 20
+
+- type: entity
+  id: CigaretteRnD
+  parent: SoakedHealCigarette
+  name: Anomalous war
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 40
+        reagents:
+          - ReagentId: Nicotine
+            Quantity: 20
+          - ReagentId: Bruizine
+            Quantity: 20
+
+- type: entity
+  id: CigaretteWeh
+  parent: SoakedCigarette
+  name: Dreams of Castles
+  components:
+  - type: Smokable
+    inhaleAmount: 0.15
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 70
+        reagents:
+          - ReagentId: NeoNicotinoid
+            Quantity: 35
+          - ReagentId: JuiceThatMakesYouWeh
+            Quantity: 35
+
+- type: entity
+  id: CigaretteAVD
+  parent: SoakedCigarette
+  name: Ocean of inc 
+  components:
+  - type: Smokable
+    inhaleAmount: 0.35
+  - type: SolutionContainerManager
+    solutions:
+      smokable:
+        maxVol: 110
+        reagents:
+          - ReagentId: NeoNicotinoid
+            Quantity: 55
+          - ReagentId: Pax
+            Quantity: 55

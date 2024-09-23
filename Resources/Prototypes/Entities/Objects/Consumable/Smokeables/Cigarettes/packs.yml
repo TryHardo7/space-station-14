@@ -157,6 +157,10 @@
     sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/red.rsi
   - type: Item
     sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/red.rsi
+  - type: StorageFill
+    contents:
+    - id: CigaretteDromedaryCo
+      amount: 10
 
 - type: entity
   id: CigPackBlue
@@ -168,6 +172,10 @@
     sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/blue.rsi
   - type: Item
     sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/blue.rsi
+  - type: StorageFill
+    contents:
+    - id: CigaretteAcmeCo
+      amount: 10
 
 - type: entity
   id: CigPackBlack
@@ -179,6 +187,10 @@
     sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/black.rsi
   - type: Item
     sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/black.rsi
+  - type: StorageFill
+    contents:
+    - id: CigaretteNomads
+      amount: 10
 
 - type: entity
   id: CigPackSyndicate
