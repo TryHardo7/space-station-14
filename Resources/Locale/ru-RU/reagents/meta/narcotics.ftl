@@ -14,6 +14,7 @@ reagent-name-bananadine = бананадин
 reagent-desc-bananadine = Слабый психоделик, который содержится в небольших количествах в банановой кожуре.
 reagent-name-nicotine = никотин
 reagent-desc-nicotine = Опасен и вызывает сильное привыкание, но так утверждает пропаганда.
+#SS220 Cigarettes begin
 reagent-name-neonicotinoid = неоникатиноид
 reagent-desc-neonicotinoid = Менее опасная форма никотина, всё равно убивает растения.
 #SS220 Cigarettes
