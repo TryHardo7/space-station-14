@@ -249,7 +249,7 @@
         damage:
           types:
             Cellular: 0.02 # Smoking causes less cancer.
-
+#SS220 Cigarettes end
 # TODO: Replace these nonstandardized effects with generic brain damage
 - type: reagent
   id: Impedrezene
