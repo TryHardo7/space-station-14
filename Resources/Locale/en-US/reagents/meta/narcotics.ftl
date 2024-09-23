@@ -21,7 +21,7 @@ reagent-desc-nicotine = Dangerous and highly addictive, but that's what the prop
 
 reagent-name-neonicotinoid = neonicotinoid
 reagent-desc-neonicotinoid = Less dangerous form of nicotine, still kills plants.
-
+#SS220 Cigarettes end
 reagent-name-impedrezene = impedrezene
 reagent-desc-impedrezene = A narcotic that impedes one's ability by slowing down the higher brain cell functions.
 
