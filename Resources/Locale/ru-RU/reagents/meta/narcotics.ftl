@@ -16,6 +16,7 @@ reagent-name-nicotine = никотин
 reagent-desc-nicotine = Опасен и вызывает сильное привыкание, но так утверждает пропаганда.
 reagent-name-neonicotinoid = неоникатиноид
 reagent-desc-neonicotinoid = Менее опасная форма никотина, всё равно убивает растения.
+#SS220 Cigarettes
 reagent-name-impedrezene = импедризин
 reagent-desc-impedrezene = Наркотик, который лишает человека дееспособности, замедляя высшие функции клеток мозга.
 reagent-name-space-drugs = космический мираж
