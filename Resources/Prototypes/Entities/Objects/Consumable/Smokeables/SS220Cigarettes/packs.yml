@@ -37,6 +37,22 @@
       map: ["6"]
       sprite: Objects/Consumable/Smokeables/Cigarettes/SS220Cigaretts/Packs/visualizer.rsi
       visible: false
+    - state: 7
+      map: ["7"]
+      sprite: Objects/Consumable/Smokeables/Cigarettes/SS220Cigaretts/Packs/visualizer.rsi
+      visible: false
+    - state: 8
+      map: ["8"]
+      sprite: Objects/Consumable/Smokeables/Cigarettes/SS220Cigaretts/Packs/visualizer.rsi
+      visible: false
+    - state: 9
+      map: ["9"]
+      sprite: Objects/Consumable/Smokeables/Cigarettes/SS220Cigaretts/Packs/visualizer.rsi
+      visible: false
+    - state: 10
+      map: ["10"]
+      sprite: Objects/Consumable/Smokeables/Cigarettes/SS220Cigaretts/Packs/visualizer.rsi
+      visible: false
   - type: Tag
     tags:
     - CigPack
@@ -55,7 +71,7 @@
   - type: StorageFill
     contents:
     - id: Cigarette
-      amount: 6
+      amount: 10
   - type: ItemCounter
     count:
       tags: [Cigarette]
@@ -67,6 +83,10 @@
     - 4
     - 5
     - 6
+    - 7
+    - 8
+    - 9
+    - 10
   - type: Appearance
 
 - type: entity
@@ -82,7 +102,7 @@
   - type: StorageFill
     contents:
     - id: CigaretteENG
-      amount: 6
+      amount: 10
 
 - type: entity
   id: CigPackMED
@@ -97,7 +117,7 @@
   - type: StorageFill
     contents:
     - id: CigaretteMED
-      amount: 6
+      amount: 10
 
 - type: entity
   id: CigPackSEC
@@ -112,7 +132,7 @@
   - type: StorageFill
     contents:
     - id: CigaretteSEC
-      amount: 6
+      amount: 10
 
 - type: entity
   id: CigPackRnD
@@ -127,7 +147,7 @@
   - type: StorageFill
     contents:
     - id: CigaretteRnD
-      amount: 6
+      amount: 10
 
 - type: entity
   id: CigPackWEH
@@ -142,7 +162,7 @@
   - type: StorageFill
     contents:
     - id: CigaretteWeh
-      amount: 6
+      amount: 10
 
 - type: entity
   id: CigPackAVD
@@ -157,4 +177,4 @@
   - type: StorageFill
     contents:
     - id: CigaretteAVD
-      amount: 6
+      amount: 10

@@ -172,7 +172,7 @@
     - id: RubberStampCE
     - id: Telescopichka
     - id: ClothingWristWatchGold # SS220 Wrist Watch
-    - id: CigCartonENG #SS220 Cigarettes
+    - id: CigPackENG #SS220 Cigarettes
 
 # Hardsuit table, used for suit storage as well
 - type: entityTable
@@ -232,7 +232,7 @@
     - id: RubberStampCMO
     - id: Telescopichka # SS220 Telescopic Baton
     - id: ClothingWristWatchGold # SS220 Wrist Watch
-    - id: CigCartonMED #SS220 Cigarettes
+    - id: CigPackMED #SS220 Cigarettes
 
 # Hardsuit table, used for suit storage as well
 - type: entityTable
@@ -285,7 +285,7 @@
     - id: RubberStampRd
     - id: ClothingWristWatchGold # SS220 Wrist Watch
     - id: Telescopichka # SS220 Telescopic Baton
-    - id: CigCartonRnD #SS220 Cigarettes
+    - id: CigPackRnD #SS220 Cigarettes
 
 # Hardsuit table, used for suit storage as well
 - type: entityTable
@@ -347,7 +347,7 @@
     - id: ClothingWristWatchGold # SS220 Wrist Watch
     - id: WeaponMultiPhaseEnergyGun #SS220 MultiPhaze Energy Gun
     - id: BodySecurityCamera #SS220-Bodycam
-    - id: CigCartonSEC #SS220 Cigarettes
+    - id: CigPackSEC #SS220 Cigarettes
 
 # Hardsuit table, used for suit storage as well
 - type: entityTable
