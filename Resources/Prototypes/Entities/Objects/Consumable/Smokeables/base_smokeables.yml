@@ -25,7 +25,8 @@
   components:
   - type: Smokable
     exposeTemperature: 1173.15
-    inhaleAmount: 0.35 # SS220 Cigarettes rework
+    # SS220 Cigarettes rework begin
+    inhaleAmount: 0.35
   - type: Cigar
   - type: Tag
     tags:
@@ -37,6 +38,7 @@
         reagents:
           - ReagentId: NeoNicotinoid
             Quantity: 50
+    # SS220 Cigarettes rework end
 
 #SS220 Cigarettes rework this is base for all healing cigarettes
 - type: entity
