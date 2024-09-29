@@ -15,43 +15,43 @@
       visible: false
     - state: 1
       map: ["1"]
-      sprite: Objects/Consumable/Smokeables/Cigarettes/SS220Cigaretts/Packs/visualizer.rsi
+      sprite: SS220/Objects/Consumable/Smokeables/SS220Cigaretts/Packs/visualizer.rsi
       visible: false
     - state: 2
       map: ["2"]
-      sprite: Objects/Consumable/Smokeables/Cigarettes/SS220Cigaretts/Packs/visualizer.rsi
+      sprite: SS220/Objects/Consumable/Smokeables/SS220Cigaretts/Packs/visualizer.rsi
       visible: false
     - state: 3
       map: ["3"]
-      sprite: Objects/Consumable/Smokeables/Cigarettes/SS220Cigaretts/Packs/visualizer.rsi
+      sprite: SS220/Objects/Consumable/Smokeables/SS220Cigaretts/Packs/visualizer.rsi
       visible: false
     - state: 4
       map: ["4"]
-      sprite: Objects/Consumable/Smokeables/Cigarettes/SS220Cigaretts/Packs/visualizer.rsi
+      sprite: SS220/Objects/Consumable/Smokeables/SS220Cigaretts/Packs/visualizer.rsi
       visible: false
     - state: 5
       map: ["5"]
-      sprite: Objects/Consumable/Smokeables/Cigarettes/SS220Cigaretts/Packs/visualizer.rsi
+      sprite: SS220/Objects/Consumable/Smokeables/SS220Cigaretts/Packs/visualizer.rsi
       visible: false
     - state: 6
       map: ["6"]
-      sprite: Objects/Consumable/Smokeables/Cigarettes/SS220Cigaretts/Packs/visualizer.rsi
+      sprite: SS220/Objects/Consumable/Smokeables/SS220Cigaretts/Packs/visualizer.rsi
       visible: false
     - state: 7
       map: ["7"]
-      sprite: Objects/Consumable/Smokeables/Cigarettes/SS220Cigaretts/Packs/visualizer.rsi
+      sprite: SS220/Objects/Consumable/Smokeables/SS220Cigaretts/Packs/visualizer.rsi
       visible: false
     - state: 8
       map: ["8"]
-      sprite: Objects/Consumable/Smokeables/Cigarettes/SS220Cigaretts/Packs/visualizer.rsi
+      sprite: SS220/Objects/Consumable/Smokeables/SS220Cigaretts/Packs/visualizer.rsi
       visible: false
     - state: 9
       map: ["9"]
-      sprite: Objects/Consumable/Smokeables/Cigarettes/SS220Cigaretts/Packs/visualizer.rsi
+      sprite: SS220/Objects/Consumable/Smokeables/SS220Cigaretts/Packs/visualizer.rsi
       visible: false
     - state: 10
       map: ["10"]
-      sprite: Objects/Consumable/Smokeables/Cigarettes/SS220Cigaretts/Packs/visualizer.rsi
+      sprite: SS220/Objects/Consumable/Smokeables/SS220Cigaretts/Packs/visualizer.rsi
       visible: false
   - type: Tag
     tags:
@@ -96,9 +96,9 @@
   description: A label on the packaging reads, Face the singularity with no fear.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Smokeables/Cigarettes/SS220Cigaretts/Packs/ENG.rsi
+    sprite: SS220/Objects/Consumable/Smokeables/SS220Cigaretts/Packs/ENG.rsi
   - type: Item
-    sprite: Objects/Consumable/Smokeables/Cigarettes/SS220Cigaretts/Packs/ENG.rsi
+    sprite: SS220/Objects/Consumable/Smokeables/SS220Cigaretts/Packs/ENG.rsi
   - type: StorageFill
     contents:
     - id: CigaretteENG
@@ -111,9 +111,9 @@
   description: A label on the packaging reads, Smoking is somewhat good for your health!
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Smokeables/Cigarettes/SS220Cigaretts/Packs/MED.rsi
+    sprite: SS220/Objects/Consumable/Smokeables/SS220Cigaretts/Packs/MED.rsi
   - type: Item
-    sprite: Objects/Consumable/Smokeables/Cigarettes/SS220Cigaretts/Packs/MED.rsi
+    sprite: SS220/Objects/Consumable/Smokeables/SS220Cigaretts/Packs/MED.rsi
   - type: StorageFill
     contents:
     - id: CigaretteMED
@@ -126,9 +126,9 @@
   description: A label on the packaging reads, When dark times come, ember will lighten your path.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Smokeables/Cigarettes/SS220Cigaretts/Packs/SEC.rsi
+    sprite: SS220/Objects/Consumable/Smokeables/SS220Cigaretts/Packs/SEC.rsi
   - type: Item
-    sprite: Objects/Consumable/Smokeables/Cigarettes/SS220Cigaretts/Packs/SEC.rsi
+    sprite: SS220/Objects/Consumable/Smokeables/SS220Cigaretts/Packs/SEC.rsi
   - type: StorageFill
     contents:
     - id: CigaretteSEC
@@ -141,9 +141,9 @@
   description: A label on the packaging reads, No anomaly can withstand science.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Smokeables/Cigarettes/SS220Cigaretts/Packs/RnD.rsi
+    sprite: SS220/Objects/Consumable/Smokeables/SS220Cigaretts/Packs/RnD.rsi
   - type: Item
-    sprite: Objects/Consumable/Smokeables/Cigarettes/SS220Cigaretts/Packs/RnD.rsi
+    sprite: SS220/Objects/Consumable/Smokeables/SS220Cigaretts/Packs/RnD.rsi
   - type: StorageFill
     contents:
     - id: CigaretteRnD
@@ -156,9 +156,9 @@
   description: A label on the packaging reads, Dream and you will become.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Smokeables/Cigarettes/SS220Cigaretts/Packs/WEH.rsi
+    sprite: SS220/Objects/Consumable/Smokeables/SS220Cigaretts/Packs/WEH.rsi
   - type: Item
-    sprite: Objects/Consumable/Smokeables/Cigarettes/SS220Cigaretts/Packs/WEH.rsi
+    sprite: SS220/Objects/Consumable/Smokeables/SS220Cigaretts/Packs/WEH.rsi
   - type: StorageFill
     contents:
     - id: CigaretteWeh
@@ -171,9 +171,9 @@
   description: A label on the packaging reads, Manuscripts never burn.
   components:
   - type: Sprite
-    sprite: Objects/Consumable/Smokeables/Cigarettes/SS220Cigaretts/Packs/AVD.rsi
+    sprite: SS220/Objects/Consumable/Smokeables/SS220Cigaretts/Packs/AVD.rsi
   - type: Item
-    sprite: Objects/Consumable/Smokeables/Cigarettes/SS220Cigaretts/Packs/AVD.rsi
+    sprite: SS220/Objects/Consumable/Smokeables/SS220Cigaretts/Packs/AVD.rsi
   - type: StorageFill
     contents:
     - id: CigaretteAVD
