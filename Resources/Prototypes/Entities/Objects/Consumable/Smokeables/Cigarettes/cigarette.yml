@@ -86,7 +86,7 @@
 
 - type: entity
   id: CigaretteOmnizine
-  parent: SoakedHealCigarette
+  parent: SoakedHealCigarette # SS220 Cigarettes
   name: Hot Dog Water Flavor Explosion
   components:
   - type: SolutionContainerManager #SS220 Cigarettes begin
