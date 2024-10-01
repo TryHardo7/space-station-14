@@ -146,7 +146,7 @@
 
 - type: entity
   id: CigaretteDermaline
-  parent: SoakedHealCigarette
+  parent: SoakedHealCigarette # SS220 Cigarettes
   name: Aloe Peanut Butter Medley
   components:
   - type: SolutionContainerManager #SS220 Cigarettes begin
