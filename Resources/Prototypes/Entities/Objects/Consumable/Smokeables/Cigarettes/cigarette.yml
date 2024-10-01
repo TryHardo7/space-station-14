@@ -71,7 +71,7 @@
 - type: entity
   id: CigaretteSyndicate
   suffix: syndicate
-  parent: SoakedHealCigarette
+  parent: SoakedHealCigarette # SS220 Cigarettes
   name: cigarette
   components:
   - type: SolutionContainerManager #SS220 Cigarettes begin
