@@ -206,7 +206,7 @@
 
 - type: entity
   id: CigaretteDexalin
-  parent: SoakedHealCigarette
+  parent: SoakedHealCigarette #  SS220 Cigarettes
   name: Rocky Mountain Musk
   components:
   - type: SolutionContainerManager #SS220 Cigarettes begin
