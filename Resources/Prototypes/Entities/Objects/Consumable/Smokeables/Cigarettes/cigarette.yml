@@ -116,7 +116,7 @@
 
 - type: entity
   id: CigaretteTricordrazine
-  parent: SoakedHealCigarette
+  parent: SoakedHealCigarette # SS220 Cigarettes
   name: Licorice Allsorts
   components:
   - type: SolutionContainerManager #SS220 Cigarettes begin
