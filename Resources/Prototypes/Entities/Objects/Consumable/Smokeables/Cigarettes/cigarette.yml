@@ -191,7 +191,7 @@
 
 - type: entity
   id: CigaretteBicaridine
-  parent: SoakedHealCigarette
+  parent: SoakedHealCigarette #  SS220 Cigarettes
   name: Wet Dog Enhanced Cigarette
   components:
   - type: SolutionContainerManager #SS220 Cigarettes begin
