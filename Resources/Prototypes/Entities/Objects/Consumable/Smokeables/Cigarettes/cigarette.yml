@@ -176,7 +176,7 @@
 
 - type: entity
   id: CigaretteIpecac
-  parent: SoakedHealCigarette
+  parent: SoakedHealCigarette #  SS220 Cigarettes
   name: Grandma's Christmas Fruitcake
   components:
   - type: SolutionContainerManager #SS220 Cigarettes begin
