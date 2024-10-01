@@ -131,7 +131,7 @@
 
 - type: entity
   id: CigaretteDylovene
-  parent: SoakedHealCigarette
+  parent: SoakedHealCigarette # SS220 Cigarettes
   name: Urinal Cake Disolver
   components:
   - type: SolutionContainerManager #SS220 Cigarettes begin
