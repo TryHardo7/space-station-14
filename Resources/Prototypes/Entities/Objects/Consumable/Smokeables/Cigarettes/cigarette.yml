@@ -161,7 +161,7 @@
 
 - type: entity
   id: CigaretteArithrazine
-  parent: SoakedHealCigarette
+  parent: SoakedHealCigarette # SS220 Cigarettes
   name: Roman Pipe Works
   components:
   - type: SolutionContainerManager #SS220 Cigarettes begin
