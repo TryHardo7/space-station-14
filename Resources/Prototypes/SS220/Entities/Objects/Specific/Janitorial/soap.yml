@@ -154,6 +154,7 @@
   - type: StepTrigger
     intersectRatio: 0.04
   - type: Item
+    sprite: SS220/Objects/Specific/Janitorial/soap.rsi
     heldPrefix: snot
   - type: FlavorProfile
     flavors:
