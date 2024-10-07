@@ -49,9 +49,6 @@ reagent-desc-leporazine = A chemical used to stabilize body temperature and rapi
 reagent-name-barozine = barozine
 reagent-desc-barozine = A potent chemical that prevents pressure damage. Causes extreme stress on the body.
 
-reagent-name-nicotizine = nicotizine
-reagent-desc-nicotizine = Less concentrated form of barozine mixed with nicotine, still heats body up, and prevents pressure damage, used in cigarettes.
-
 reagent-name-phalanximine = phalanximine
 reagent-desc-phalanximine = An advanced chemical used in the treatment of cancer. Causes moderate radiation poisoning on organics and vomiting. Can potentially remove the death gene on plants.
 

@@ -1,8 +1,81 @@
+- type: entity
+  name: soap
+  id: SS220Soap
+  categories: [ HideSpawnMenu ]
+  parent: BaseItem
+  description: base soap for SS220 sprites.
+  components:
+  - type: Tag
+    tags:
+    - Soap
+  - type: Sprite
+    sprite: SS220/Objects/Specific/Janitorial/soap.rsi
+    layers:
+    - state: snot-4
+      map: ["enum.SolutionContainerLayers.Fill"]
+  - type: SolutionContainerVisuals
+    maxFillLevels: 4
+    fillBaseName: snot-
+    changeColor: false
+  - type: Appearance
+  - type: Item
+    sprite: SS220/Objects/Specific/Janitorial/soap.rsi
+    storedRotation: -90
+  - type: Slippery
+  - type: StepTrigger
+    intersectRatio: 0.2
+  - type: CollisionWake
+    enabled: false
+  - type: Physics
+    bodyType: Dynamic
+  - type: Fixtures
+    fixtures:
+      slips:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.3,-0.2,0.3,0.2"
+        layer:
+        - SlipLayer
+        hard: false
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.3,-0.2,0.3,0.2"
+        density: 10
+        mask:
+        - ItemMask
+  - type: SolutionContainerManager
+    solutions:
+      soap:
+        maxVol: 50
+        reagents:
+        - ReagentId: SoapReagent
+          Quantity: 50
+  - type: SolutionTransfer
+    transferAmount: 10
+    minTransferAmount: 1
+    maxTransferAmount: 25
+    canReceive: false
+    canChangeTransferAmount: true
+  - type: DrainableSolution
+    solution: soap
+  - type: DeleteOnSolutionEmpty
+    solution: soap
+  - type: FlavorProfile
+    flavors:
+      - clean
+  - type: Food
+    solution: soap
+  - type: BadFood
+  - type: CleansForensics
+  - type: Residue
+    residueAdjective: residue-slippery
+    residueColor: residue-green
 
 - type: entity
-  parent: Soap
+  parent: SS220Soap
   id: SnotSoap
-  name: Snotoap
+  name: snotoap
   description: Eww...slimey...u can try to clean something with it...feels fragile.
   components:
   - type: EmitSoundOnLand
@@ -32,6 +105,9 @@
     sprite: SS220/Objects/Specific/Janitorial/soap.rsi
     storedRotation: -90
     heldPrefix: snot
+  - type: FlavorProfile
+    flavors:
+      - horrible
   - type: DamageOnLand
     damage:
       types:
@@ -59,20 +135,29 @@
   name: snotlet
   id: snotlet
   categories: [ HideSpawnMenu ]
-  parent: Soap
+  parent: SS220Soap
   description: A tiny piece of snots.
   components:
   - type: Sprite
-    sprite: SS220/Objects/Specific/Janitorial/soap.rsi
     layers:
     - state: snotlet
   - type: Slippery
     paralyzeTime: 1.5
     launchForwardsMultiplier: 1.5
+  - type: SolutionContainerManager
+    solutions:
+      soap:
+        maxVol: 5
+        reagents:
+        - ReagentId: SoapReagent
+          Quantity: 5
   - type: StepTrigger
     intersectRatio: 0.04
   - type: Item
     heldPrefix: snot
+  - type: FlavorProfile
+    flavors:
+      - horrible
   - type: Fixtures
     fixtures:
       slips:

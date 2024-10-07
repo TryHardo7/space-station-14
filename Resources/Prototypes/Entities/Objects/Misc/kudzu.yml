@@ -249,8 +249,10 @@
           reagents:
           - ReagentId: Protein
             Quantity: 2
-          - ReagentId: Razorium #SS220 bon appétit
+            #SS220 bon appétit start
+          - ReagentId: Razorium
             Quantity: 7
+            #SS220 bon appétit end
     - type: Respirator
       damage:
         types:
