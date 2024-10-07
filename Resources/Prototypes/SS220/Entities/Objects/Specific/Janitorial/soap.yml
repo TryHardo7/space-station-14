@@ -74,6 +74,10 @@
   - type: Item
     sprite: SS220/Objects/Specific/Janitorial/soap.rsi
     heldPrefix: snot
+  - type: SolutionContainerVisuals
+    maxFillLevels: 1
+    fillBaseName: snot-
+    changeColor: false
   - type: Fixtures
     fixtures:
       slips:
