@@ -5,12 +5,15 @@ using Content.Shared.Actions;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Explosion.Components;
-using Content.Shared.Movement.Pulling.Components;
 using PullableComponent = Content.Shared.Movement.Pulling.Components.PullableComponent;
+using Content.Shared.Flash;
+using Content.Shared.Flash.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Components;
+using Content.Shared.Movement.Pulling.Systems;
+using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Systems;
 using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Systems;
@@ -18,9 +21,9 @@ using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
+using Content.Shared.StatusEffect;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
-using Content.Shared.Movement.Pulling.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
@@ -57,6 +60,8 @@ public abstract class SharedDarkReaperSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
     [Dependency] private readonly PullingSystem _puller = default!;
+    [Dependency] private readonly SharedFlashSystem _flash = default!;
+    [Dependency] private readonly StatusEffectsSystem _statusEffectsSystem = default!;
 
     public override void Initialize()
     {
@@ -167,6 +172,12 @@ public abstract class SharedDarkReaperSystem : EntitySystem
         foreach (var entity in entities)
         {
             _stun.TryParalyze(entity, comp.StunDuration, true);
+        }
+        var confusedentities = _lookup.GetEntitiesInRange(uid, comp.StunAbilityConfusion);
+        foreach (var entity in confusedentities)
+        {
+            if (!_statusEffectsSystem.TryAddStatusEffect<FlashedComponent>(entity, comp.ConfusionEffectName, comp.ConfusionDuration, true))
+                continue;
         }
     }
 

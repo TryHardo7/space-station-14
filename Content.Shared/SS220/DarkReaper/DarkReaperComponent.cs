@@ -112,6 +112,16 @@ public sealed partial class DarkReaperComponent : Component
     public float StunAbilityLightBreakRadius = 4.5f;
 
     /// <summary>
+    /// Handles confusion ability params
+    /// StunAbilityConfusion - radius 
+    /// ConfusionDuration - 
+    /// ConfusionEffectName -
+    /// </summary>
+    public float StunAbilityConfusion = 12f;
+    public TimeSpan ConfusionDuration = TimeSpan.FromSeconds(7);
+    public string ConfusionEffectName = "Flashed";
+
+    /// <summary>
     /// Duration of the stun that is applied by the ability
     /// </summary>
     [ViewVariables, DataField, AutoNetworkedField]
