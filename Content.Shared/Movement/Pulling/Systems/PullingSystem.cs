@@ -20,6 +20,7 @@ using Content.Shared.Pulling.Events;
 using Content.Shared.SS220.Cart.Components;
 using Content.Shared.Standing;
 using Content.Shared.Verbs;
+using Content.Shared.SS220.DarkReaper;
 using Robust.Shared.Containers;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Physics;
@@ -89,9 +90,9 @@ public sealed class PullingSystem : EntitySystem
         // networked for the space wizards to do it themselves
         // right after me, so this will work for now and I don't really care
         // COPIUM
-        if (!HasComp<CartPullerComponent>(entity))
+        if (!HasComp<CartPullerComponent>(entity)&&!HasComp<DarkReaperComponent>(entity))
             return;
-
+            
         entity.Comp.NeedsHands = false;
     }
     //SS220-Cart-system end

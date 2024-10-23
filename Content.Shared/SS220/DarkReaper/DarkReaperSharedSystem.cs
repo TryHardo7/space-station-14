@@ -5,6 +5,8 @@ using Content.Shared.Actions;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Explosion.Components;
+using Content.Shared.Movement.Pulling.Components;
+using PullableComponent = Content.Shared.Movement.Pulling.Components.PullableComponent;
 using Content.Shared.Humanoid;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
@@ -18,6 +20,7 @@ using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Shared.Movement.Pulling.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
@@ -53,6 +56,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly NpcFactionSystem _npcFaction = default!;
+    [Dependency] private readonly PullingSystem _puller = default!;
 
     public override void Initialize()
     {
@@ -370,6 +374,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
 
         if (isMaterial)
         {
+            EnsureComp<PullerComponent>(uid);
             _tag.AddTag(uid, "DoorBumpOpener");
 
             if (TryComp<ExplosionResistanceComponent>(uid, out var explosionResistanceComponent))
@@ -400,6 +405,10 @@ public abstract class SharedDarkReaperSystem : EntitySystem
                 _npcFaction.AddFaction(uid, "DarkReaperPassive");
             }
             _appearance.SetData(uid, DarkReaperVisual.StunEffect, false);
+            if (TryComp(uid, out PullerComponent? puller) && TryComp(puller.Pulling, out PullableComponent? pullable))
+                _puller.TryStopPull(puller.Pulling.Value, pullable);
+            RemComp<PullerComponent>(uid);
+            RemComp<ActivePullerComponent>(uid);
         }
 
         _actions.SetEnabled(comp.StunActionEntity, isMaterial);
