@@ -78,6 +78,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
         SubscribeLocalEvent<DarkReaperComponent, MobStateChangedEvent>(OnMobStateChanged);
         SubscribeLocalEvent<DarkReaperComponent, GetMeleeDamageEvent>(OnGetMeleeDamage);
         SubscribeLocalEvent<DarkReaperComponent, DamageModifyEvent>(OnDamageModify);
+        SubscribeLocalEvent<DarkReaperComponent, ReaperBloodMistEvent>(OnBloodMistAction);
 
         SubscribeLocalEvent<DarkReaperComponent, AfterMaterialize>(OnAfterMaterialize);
         SubscribeLocalEvent<DarkReaperComponent, AfterDeMaterialize>(OnAfterDeMaterialize);
@@ -88,8 +89,19 @@ public abstract class SharedDarkReaperSystem : EntitySystem
     private void OnRoflAction(EntityUid uid, DarkReaperComponent comp, ReaperRoflEvent args)
     {
         args.Handled = true;
-
+        if (!comp.PhysicalForm)
+            return;
         DoRoflAbility(uid, comp);
+    }
+
+    private void OnBloodMistAction(EntityUid uid, DarkReaperComponent comp, ReaperBloodMistEvent args)
+    {
+        if (!comp.PhysicalForm)
+            return;
+        args.Handled = true;
+        _audio.PlayPredicted(comp.BloodMistSound, uid, uid);
+
+        DoBloodMistAction(uid, comp);
     }
 
     private void OnConsumeAction(EntityUid uid, DarkReaperComponent comp, ReaperConsumeEvent args)
@@ -179,6 +191,11 @@ public abstract class SharedDarkReaperSystem : EntitySystem
             if (!_statusEffectsSystem.TryAddStatusEffect<FlashedComponent>(entity, comp.ConfusionEffectName, comp.ConfusionDuration, true))
                 continue;
         }
+    }
+
+    protected virtual void DoBloodMistAction(EntityUid uid, DarkReaperComponent comp)
+    {
+        Spawn(comp.BloodMistProto, Transform(uid).Coordinates);
     }
 
     protected virtual void DoRoflAbility(EntityUid uid, DarkReaperComponent comp)

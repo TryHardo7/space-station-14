@@ -61,5 +61,5 @@
   - type: InstantAction
     event: !type:ReaperBloodMistEvent
     itemIconStyle: NoItem
-    icon: { sprite: SS220/DemonRofler/dark_reaper.rsi, state: jnecexit }
-    useDelay: 1
+    icon: { sprite: SS220/DemonRofler/dark_reaper.rsi, state: icon_bloodmist }
+    useDelay: 60

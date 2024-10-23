@@ -112,10 +112,10 @@ public sealed partial class DarkReaperComponent : Component
     public float StunAbilityLightBreakRadius = 4.5f;
 
     /// <summary>
-    /// Handles confusion ability params
-    /// StunAbilityConfusion - radius 
-    /// ConfusionDuration - 
-    /// ConfusionEffectName -
+    /// Handles confusion params
+    /// StunAbilityConfusion - radius in which entities are affected by confusion 
+    /// ConfusionDuration - duration of the confusion effect
+    /// ConfusionEffectName - name of effect that applied
     /// </summary>
     public float StunAbilityConfusion = 12f;
     public TimeSpan ConfusionDuration = TimeSpan.FromSeconds(7);
@@ -136,6 +136,29 @@ public sealed partial class DarkReaperComponent : Component
     [ViewVariables, DataField, AutoNetworkedField]
     public SoundSpecifier StunAbilitySound = new SoundPathSpecifier("/Audio/SS220/DarkReaper/jnec_scrm.ogg");
 
+    /// BLOOD MIST
+
+    /// <summary>
+    /// How long the mist stays for, after it has spread
+    /// </summary>
+    [ViewVariables, DataField]
+    public TimeSpan BloodMistLength = TimeSpan.FromSeconds(10);
+    /// <summary>
+    /// Proto of what is being spawned by ability
+    /// </summary>
+    [ViewVariables, DataField]
+    public string BloodMistProto = "BloodMistSpread";
+
+    /// <summary>
+    /// BloodMist sound
+    /// </summary>
+    /// 
+    [ViewVariables, DataField, AutoNetworkedField]
+    public SoundSpecifier BloodMistSound = new SoundPathSpecifier("/Audio/Items/smoke_grenade_smoke.ogg", new()
+    {
+        MaxDistance = 7
+    });
+    
     /// ROFL
 
     /// <summary>
@@ -229,21 +252,24 @@ public sealed partial class DarkReaperComponent : Component
         new()
         {
             { "Slash", 12 },
-            { "Piercing", 4 }
+            { "Piercing", 4 },
+            { "Structural", 20 }
         },
 
         // Stage 2
         new()
         {
             { "Slash", 16 },
-            { "Piercing", 8 }
+            { "Piercing", 8 },
+            { "Structural", 40 }
         },
 
         // Stage 3
         new()
         {
             { "Slash", 20 },
-            { "Piercing", 16 }
+            { "Piercing", 16 },
+            { "Structural", 80 }
         }
     };
 
@@ -306,6 +332,8 @@ public sealed partial class DarkReaperComponent : Component
     public EntProtoId ConsumeAction = "ActionDarkReaperConsume";
     [DataField]
     public EntProtoId MaterializeAction = "ActionDarkReaperMaterialize";
+    [DataField]
+    public EntProtoId BloodMistAction = "ActionDarkReaperBloodMist";
 
     [DataField, AutoNetworkedField]
     public EntityUid? RoflActionEntity;
@@ -315,6 +343,8 @@ public sealed partial class DarkReaperComponent : Component
     public EntityUid? ConsumeActionEntity;
     [DataField, AutoNetworkedField]
     public EntityUid? MaterializeActionEntity;
+    [DataField, AutoNetworkedField]
+    public EntityUid? BloodMistActionEntity;
 
     // ABILITY STATES ///
     [ViewVariables, AutoNetworkedField]
@@ -331,6 +361,8 @@ public sealed partial class DarkReaperComponent : Component
 
     [ViewVariables]
     public TimeSpan? MaterializedStart;
+    [ViewVariables, AutoNetworkedField]
+    public TimeSpan? BloodMistStart;
 }
 
 [Serializable, NetSerializable]
