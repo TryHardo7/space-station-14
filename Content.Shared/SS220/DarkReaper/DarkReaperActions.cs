@@ -26,3 +26,7 @@ public sealed partial class ReaperSpawnEvent : InstantActionEvent
 public sealed partial class ReaperSmokeEvent : InstantActionEvent
 {
 }
+
+public sealed partial class ReaperBloodMistEvent : InstantActionEvent
+{
+}
