@@ -5,7 +5,6 @@ using Content.Shared.Actions;
 using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Explosion.Components;
-using PullableComponent = Content.Shared.Movement.Pulling.Components.PullableComponent;
 using Content.Shared.Flash;
 using Content.Shared.Flash.Components;
 using Content.Shared.Humanoid;
@@ -89,8 +88,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
     private void OnRoflAction(EntityUid uid, DarkReaperComponent comp, ReaperRoflEvent args)
     {
         args.Handled = true;
-        if (!comp.PhysicalForm)
-            return;
+
         DoRoflAbility(uid, comp);
     }
 
@@ -433,6 +431,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
                 _npcFaction.AddFaction(uid, "DarkReaperPassive");
             }
             _appearance.SetData(uid, DarkReaperVisual.StunEffect, false);
+
             if (TryComp(uid, out PullerComponent? puller) && TryComp(puller.Pulling, out PullableComponent? pullable))
                 _puller.TryStopPull(puller.Pulling.Value, pullable);
             RemComp<PullerComponent>(uid);
