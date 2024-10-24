@@ -400,7 +400,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
 
         if (isMaterial)
         {
-            EnsureComp<PullerComponent>(uid);
+            EnsureComp<PullerComponent>(uid).NeedsHands = false;
             _tag.AddTag(uid, "DoorBumpOpener");
 
             if (TryComp<ExplosionResistanceComponent>(uid, out var explosionResistanceComponent))

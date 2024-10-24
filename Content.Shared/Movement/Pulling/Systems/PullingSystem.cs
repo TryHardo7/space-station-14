@@ -90,7 +90,7 @@ public sealed class PullingSystem : EntitySystem
         // networked for the space wizards to do it themselves
         // right after me, so this will work for now and I don't really care
         // COPIUM
-        if (!HasComp<CartPullerComponent>(entity)&&!HasComp<DarkReaperComponent>(entity))
+        if (!HasComp<CartPullerComponent>(entity))
             return;
             
         entity.Comp.NeedsHands = false;
