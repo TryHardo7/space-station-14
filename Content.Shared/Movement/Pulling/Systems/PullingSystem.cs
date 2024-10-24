@@ -20,7 +20,6 @@ using Content.Shared.Pulling.Events;
 using Content.Shared.SS220.Cart.Components;
 using Content.Shared.Standing;
 using Content.Shared.Verbs;
-using Content.Shared.SS220.DarkReaper;
 using Robust.Shared.Containers;
 using Robust.Shared.Input.Binding;
 using Robust.Shared.Physics;
