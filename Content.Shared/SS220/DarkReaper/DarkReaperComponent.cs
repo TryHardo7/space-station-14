@@ -136,29 +136,6 @@ public sealed partial class DarkReaperComponent : Component
     [ViewVariables, DataField, AutoNetworkedField]
     public SoundSpecifier StunAbilitySound = new SoundPathSpecifier("/Audio/SS220/DarkReaper/jnec_scrm.ogg");
 
-    /// BLOOD MIST
-
-    /// <summary>
-    /// How long the mist stays for, after it has spread
-    /// </summary>
-    [ViewVariables, DataField]
-    public TimeSpan BloodMistLength = TimeSpan.FromSeconds(10);
-    /// <summary>
-    /// Proto of what is being spawned by ability
-    /// </summary>
-    [ViewVariables, DataField]
-    public string BloodMistProto = "BloodMistSpread";
-
-    /// <summary>
-    /// BloodMist sound
-    /// </summary>
-    /// 
-    [ViewVariables, DataField, AutoNetworkedField]
-    public SoundSpecifier BloodMistSound = new SoundPathSpecifier("/Audio/Items/smoke_grenade_smoke.ogg", new()
-    {
-        MaxDistance = 7
-    });
-    
     /// ROFL
 
     /// <summary>

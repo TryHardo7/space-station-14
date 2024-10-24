@@ -97,9 +97,9 @@ public abstract class SharedDarkReaperSystem : EntitySystem
         if (!comp.PhysicalForm)
             return;
         args.Handled = true;
-        _audio.PlayPredicted(comp.BloodMistSound, uid, uid);
+        _audio.PlayPredicted(args.BloodMistSound, uid, uid);
 
-        DoBloodMistAction(uid, comp);
+        DoBloodMistAction(uid, args);
     }
 
     private void OnConsumeAction(EntityUid uid, DarkReaperComponent comp, ReaperConsumeEvent args)
@@ -191,9 +191,9 @@ public abstract class SharedDarkReaperSystem : EntitySystem
         }
     }
 
-    protected virtual void DoBloodMistAction(EntityUid uid, DarkReaperComponent comp)
+    protected virtual void DoBloodMistAction(EntityUid uid, ReaperBloodMistEvent args)
     {
-        Spawn(comp.BloodMistProto, Transform(uid).Coordinates);
+        Spawn(args.BloodMistProto, Transform(uid).Coordinates);
     }
 
     protected virtual void DoRoflAbility(EntityUid uid, DarkReaperComponent comp)
