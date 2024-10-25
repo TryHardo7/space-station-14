@@ -48,7 +48,6 @@ public sealed partial class ReaperBloodMistEvent : InstantActionEvent
     /// <summary>
     /// BloodMist sound
     /// </summary>
-    /// 
     [DataField, AutoNetworkedField]
     public SoundSpecifier BloodMistSound = new SoundPathSpecifier("/Audio/Items/smoke_grenade_smoke.ogg", new()
     {

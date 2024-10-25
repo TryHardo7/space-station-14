@@ -98,8 +98,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
             return;
         args.Handled = true;
         _audio.PlayPredicted(args.BloodMistSound, uid, uid);
-
-        DoBloodMistAction(uid, args);
+        Spawn(args.BloodMistProto, Transform(uid).Coordinates);
     }
 
     private void OnConsumeAction(EntityUid uid, DarkReaperComponent comp, ReaperConsumeEvent args)
@@ -183,17 +182,13 @@ public abstract class SharedDarkReaperSystem : EntitySystem
         {
             _stun.TryParalyze(entity, comp.StunDuration, true);
         }
+
         var confusedentities = _lookup.GetEntitiesInRange(uid, comp.StunAbilityConfusion);
         foreach (var entity in confusedentities)
         {
             if (!_statusEffectsSystem.TryAddStatusEffect<FlashedComponent>(entity, comp.ConfusionEffectName, comp.ConfusionDuration, true))
                 continue;
         }
-    }
-
-    protected virtual void DoBloodMistAction(EntityUid uid, ReaperBloodMistEvent args)
-    {
-        Spawn(args.BloodMistProto, Transform(uid).Coordinates);
     }
 
     protected virtual void DoRoflAbility(EntityUid uid, DarkReaperComponent comp)

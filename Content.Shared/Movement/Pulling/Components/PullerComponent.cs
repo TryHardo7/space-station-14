@@ -36,9 +36,10 @@ public sealed partial class PullerComponent : Component
     public EntityUid? Pulling;
 
     /// <summary>
-    ///     Does this entity need hands to be able to pull something? SS220 DarkReaper Access
+    ///     Does this entity need hands to be able to pull something?
     /// </summary>
-    [DataField] [Access(Other = AccessPermissions.ReadWriteExecute)]
+    [DataField] 
+    [Access(Other = AccessPermissions.ReadWriteExecute)] //SS220 DarkReaper Access
     public bool NeedsHands = true;
 
     [DataField]
