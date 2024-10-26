@@ -116,7 +116,7 @@ public sealed partial class DarkReaperComponent : Component
     /// </summary>
     [DataField]
     public float StunAbilityConfusion = 12f;
-        /// <summary>
+    /// <summary>
     /// ConfusionDuration - duration of the confusion effect
     /// </summary>
     [DataField]

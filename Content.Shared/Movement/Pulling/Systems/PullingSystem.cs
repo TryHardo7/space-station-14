@@ -90,7 +90,8 @@ public sealed class PullingSystem : EntitySystem
         // right after me, so this will work for now and I don't really care
         // COPIUM
         if (!HasComp<CartPullerComponent>(entity))
-            return; 
+            return;
+
         entity.Comp.NeedsHands = false;
     }
     //SS220-Cart-system end
