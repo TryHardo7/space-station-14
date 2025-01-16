@@ -93,7 +93,7 @@
   flavor: Bacchus
   color: "#8B4513"
   metamorphicSprite:
-    sprite: SS220\Objects\Consumable\Drinks\bacchus_blessing.rsi
+    sprite: SS220/Objects/Consumable/Drinks/bacchus_blessing.rsi
     state: icon_empty
   metamorphicMaxFillLevels: 3
   metamorphicFillBaseName: fill-
