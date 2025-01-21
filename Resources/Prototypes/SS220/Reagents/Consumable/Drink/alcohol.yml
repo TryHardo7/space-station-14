@@ -111,7 +111,7 @@
         - !type:ReagentThreshold
           min: 1
       - !type:Drunk
-        boozePower: 100
+        boozePower: 20
         conditions:
         - !type:ReagentThreshold
           min: 1
