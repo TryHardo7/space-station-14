@@ -43,6 +43,8 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
     [Dependency] private readonly ThirstSystem _thirstSystem = default!;
     [Dependency] private readonly VomitSystem _vomitSystem = default!;
 
+    private const string CultDefaultMarking = "CultStage-Halo";
+
     public override void Initialize()
     {
         base.Initialize();
@@ -71,51 +73,51 @@ public sealed class CultYoggSystem : SharedCultYoggSystem
 
         switch (args.Stage)
         {
-            case 0:
+            case CultYoggStage.Initial:
                 return;
-            case 1:
+            case CultYoggStage.Reveal:
                 entity.Comp.PreviousEyeColor = new Color(huAp.EyeColor.R, huAp.EyeColor.G, huAp.EyeColor.B, huAp.EyeColor.A);
                 huAp.EyeColor = Color.Green;
                 break;
-            case 2:
-                if (!_prototype.HasIndex<MarkingPrototype>("CultStage-Halo"))
+            case CultYoggStage.Alarm:
+                if (_prototype.HasIndex<MarkingPrototype>(CultDefaultMarking))
                 {
-                    Log.Error("CultStage-Halo marking doesn't exist");
-                    return;
-                }
-
-                if (!huAp.MarkingSet.Markings.ContainsKey(MarkingCategories.Special))
-                {
-                    huAp.MarkingSet.Markings.Add(MarkingCategories.Special, new List<Marking>([new Marking("CultStage-Halo", colorCount: 1)]));
+                    if (!huAp.MarkingSet.Markings.ContainsKey(MarkingCategories.Special))
+                    {
+                        huAp.MarkingSet.Markings.Add(MarkingCategories.Special, new List<Marking>([new Marking(CultDefaultMarking, colorCount: 1)]));
+                    }
+                    else
+                    {
+                        _humanoidAppearance.SetMarkingId(entity.Owner,
+                            MarkingCategories.Special,
+                            0,
+                            CultDefaultMarking,
+                            huAp);
+                    }
                 }
                 else
                 {
-                    _humanoidAppearance.SetMarkingId(entity.Owner,
-                        MarkingCategories.Special,
-                        0,
-                        "CultStage-Halo",
-                        huAp);
+                    Log.Error($"{CultDefaultMarking} marking doesn't exist");
                 }
-
-                Dirty(entity.Owner, huAp);
 
                 var newMarkingId = $"CultStage-{huAp.Species}";
 
-                if (!_prototype.HasIndex<MarkingPrototype>(newMarkingId))
+                if (_prototype.HasIndex<MarkingPrototype>(newMarkingId))
                 {
-                    Log.Error($"{newMarkingId} marking doesn't exist");
-                    return;
+                    if (huAp.MarkingSet.Markings.TryGetValue(MarkingCategories.Special, out var value))
+                    {
+                        entity.Comp.PreviousTail = value.FirstOrDefault();
+                        value.Clear();
+                        huAp.MarkingSet.Markings[MarkingCategories.Special].Add(new Marking(newMarkingId, colorCount: 1));
+                    }
                 }
-
-                if (huAp.MarkingSet.Markings.TryGetValue(MarkingCategories.Tail, out var value))
+                else
                 {
-                    entity.Comp.PreviousTail = value.FirstOrDefault();
-                    value.Clear();
-                    huAp.MarkingSet.Markings[MarkingCategories.Special].Add(new Marking(newMarkingId, colorCount: 1));
-                    Dirty(entity.Owner, huAp);
+                    // We have species-marking only for the Nians, so this log only leads to unnecessary errors.
+                    //Log.Error($"{newMarkingId} marking doesn't exist"); 
                 }
                 break;
-            case 3:
+            case CultYoggStage.God:
                 if (!TryComp<MobStateComponent>(entity, out var mobstate))
                     return;
 

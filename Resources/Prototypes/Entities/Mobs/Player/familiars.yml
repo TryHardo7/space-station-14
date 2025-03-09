@@ -11,6 +11,8 @@
     name: ghost-role-information-remilia-name
     description: ghost-role-information-remilia-description
     rules: ghost-role-information-familiar-rules
+    mindRoles:
+    - MindRoleGhostRoleFamiliar
   - type: GhostTakeoverAvailable
   - type: Grammar
     attributes:
@@ -47,6 +49,8 @@
     requirements: #SS220 ghostrole-times (20h overall) start
       - !type:OverallPlaytimeRequirement
         time: 72000 #SS220 ghostrole-times (20h overall) end
+    mindRoles:
+    - MindRoleGhostRoleFamiliar
     raffle:
       settings: default
   - type: GhostTakeoverAvailable

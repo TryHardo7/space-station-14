@@ -22,6 +22,8 @@
     requirements: #SS220 ghostrole-times (20h overall) start
       - !type:OverallPlaytimeRequirement
         time: 72000 #SS220 ghostrole-times (20h overall) end
+    mindRoles:
+    - MindRoleGhostRoleFreeAgent
     raffle:
       settings: default
   - type: GhostRoleMobSpawner
@@ -43,6 +45,8 @@
     name: ghost-role-information-remilia-name
     description: ghost-role-information-remilia-description
     rules: ghost-role-information-familiar-rules
+    mindRoles:
+    - MindRoleGhostRoleFamiliar
     raffle:
       settings: short
   - type: GhostRoleMobSpawner
@@ -67,6 +71,8 @@
     requirements: #SS220 ghostrole-times (20h overall) start
       - !type:OverallPlaytimeRequirement
         time: 72000 #SS220 ghostrole-times (20h overall) end
+    mindRoles:
+    - MindRoleGhostRoleFamiliar
     raffle:
       settings: default
   - type: GhostRoleMobSpawner
@@ -87,6 +93,8 @@
   components:
   - type: GhostRole
     rules: ghost-role-information-rules-default-team-antagonist
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
     raffle:
       settings: default
   - type: GhostRoleMobSpawner
@@ -107,6 +115,8 @@
     name: ghost-role-information-loneop-name
     description: ghost-role-information-loneop-description
     rules: ghost-role-information-loneop-rules
+    mindRoles:
+    - MindRoleGhostRoleSoloAntagonist
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:
@@ -123,6 +133,8 @@
     name: roles-antag-nuclear-operative-commander-name
     description: roles-antag-nuclear-operative-commander-objective
     rules: ghost-role-information-rules-default-team-antagonist
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
 
 - type: entity
   categories: [ HideSpawnMenu, Spawner ]
@@ -133,6 +145,8 @@
     name: roles-antag-nuclear-operative-agent-name
     description: roles-antag-nuclear-operative-agent-objective
     rules: ghost-role-information-rules-default-team-antagonist
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
 
 - type: entity
   categories: [ HideSpawnMenu, Spawner ]
@@ -143,6 +157,8 @@
     name: roles-antag-nuclear-operative-name
     description: roles-antag-nuclear-operative-objective
     rules: ghost-role-information-rules-default-team-antagonist
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
 
 - type: entity
   categories: [ HideSpawnMenu, Spawner ]
@@ -156,6 +172,8 @@
     requirements: #SS220 ghostrole-times (20h overall) start
       - !type:OverallPlaytimeRequirement
         time: 72000 #SS220 ghostrole-times (20h overall) end
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
   - type: Sprite
     layers:
     - state: green
@@ -174,6 +192,8 @@
     requirements: #SS220 ghostrole-times (20h overall) start
       - !type:OverallPlaytimeRequirement
         time: 72000 #SS220 ghostrole-times (20h overall) end
+    mindRoles:
+    - MindRoleGhostRoleSoloAntagonist
     raffle:
       settings: default
   - type: Sprite
