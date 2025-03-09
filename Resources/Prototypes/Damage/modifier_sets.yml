@@ -185,14 +185,14 @@
   coefficients:
     Blunt: 0.7
     Slash: 0.8
-    Heat: 1.1 #SS220 lowTTKUpdate
+    Heat: 1.25 #SS220 lowTTKUpdate
     Shock: 1.2
 
 - type: damageModifierSet
   id: Moth # Slightly worse at everything but cold
   coefficients:
     Cold: 0.7
-    Heat: 1.1 #SS220 lowTTKUpdate
+    Heat: 1.15 #SS220 lowTTKUpdate
 
 - type: damageModifierSet
   id: Vox

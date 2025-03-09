@@ -112,7 +112,7 @@ public sealed partial class DarkReaperComponent : Component
     public float StunAbilityLightBreakRadius = 4.5f;
 
     /// <summary>
-    /// StunAbilityConfusion - radius in which entities are affected by confusion 
+    /// StunAbilityConfusion - radius in which entities are affected by confusion
     /// </summary>
     [DataField]
     public float StunAbilityConfusion = 12f;
@@ -252,7 +252,7 @@ public sealed partial class DarkReaperComponent : Component
         {
             { "Slash", 20 },
             { "Piercing", 16 },
-            { "Structural", 80 }
+            { "Structural", 60 }
         }
     };
 
