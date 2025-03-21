@@ -95,7 +95,7 @@
   name: greenshift-title
   showInVote: false #4boring4vote
   description: greenshift-description
-  rules:
+  # rules: #SS220 NoTrashStation at GreenShift
   #- SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls ReWork
   #- BasicRoundstartVariation #SS220 NoTrashStation at GreenShift
 
