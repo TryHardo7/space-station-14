@@ -97,7 +97,7 @@
   description: greenshift-description
   rules:
   #- SpaceTrafficControlFriendlyEventScheduler # SS220-LostSouls ReWork
-  - BasicRoundstartVariation
+  #- BasicRoundstartVariation #SS220 NoTrashStation at GreenShift
 
 - type: gamePreset
   id: Secret
