@@ -38,7 +38,7 @@
   - type: Tag
     tags:
     - EngravedKnuckleduster
-    - HighRiskItem # this is HighRisk item
+    - HighRiskItem
   - type: StaticPrice
     price: 1000
   - type: StealTarget
