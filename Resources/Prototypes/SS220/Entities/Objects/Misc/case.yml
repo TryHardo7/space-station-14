@@ -74,7 +74,7 @@
     price: 200
   - type: Tag
     tags:
-    - HighRiskItem # no cheating the storageimplant system.
+    - HighRiskItem # to prevent stealing the highrisk in it
 
 - type: entity
   parent: GlassCaseEngravedKnuckleduster
