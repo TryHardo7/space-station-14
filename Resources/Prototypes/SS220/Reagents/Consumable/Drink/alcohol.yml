@@ -157,11 +157,11 @@
   desc: reagent-desc-skooma
   physicalDesc: reagent-physical-desc-exotic-smelling
   flavor: Skooma
-  color: "#9932CC"
+  color: "#dcdedc"
   metamorphicSprite:
-    sprite: SS220/Objects/Consumable/Drinks/bacchus_blessing.rsi
+    sprite: SS220/Objects/Consumable/Drinks/skooma.rsi
     state: icon_empty
-  metamorphicMaxFillLevels: 3
+  metamorphicMaxFillLevels: 2
   metamorphicFillBaseName: fill-
   metamorphicChangeColor: false
   metabolisms:
