@@ -24,3 +24,7 @@ reagent-name-xlebnuldiesel =  хлебнулдизель
 reagent-desc-xlebnuldiesel = Ядрёная смесь сварочного топлива, пива и космического маунтин винда. Распивается с честью.
 reagent-name-rrranta = ррр-анта
 reagent-desc-rrranta = Отвратительный синтетический напиток. Содержит только добавки.
+reagent-name-skooma = скума
+reagent-desc-skooma = Не давать таярам. Не говорить о ней таярам.
+reagent-name-mintjuice = мятный сок
+reagent-desc-mintjuice = Притягивает кошек.

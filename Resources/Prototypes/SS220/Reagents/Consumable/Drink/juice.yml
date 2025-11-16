@@ -6,3 +6,27 @@
   physicalDesc: reagent-physical-desc-thick
   flavor: beets
   color: "#300010"
+
+#Mintjuice
+
+- type: reagent
+  id: MintJuice
+  name: reagent-name-mintjuice
+  parent: BaseDrink
+  desc: reagent-desc-mintjuice
+  physicalDesc: reagent-physical-desc-piquant
+  flavor: minty
+  color: "#c275ca"
+  recognizable: false
+  metabolisms:
+    Drink:
+      effects:
+      - !type:SatiateThirst
+        factor: 1
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectSeeingRainbow
+        type: Add
+        time: 2
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [ Tajaran ]
