@@ -126,7 +126,6 @@
 - type: entity
   parent: DrinkGlass
   id: DrinkSkoomalGlass
-  suffix: Skooma
   components:
   - type: SolutionContainerManager
     solutions:

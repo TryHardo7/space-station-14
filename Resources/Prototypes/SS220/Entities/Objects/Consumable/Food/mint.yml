@@ -23,3 +23,6 @@
           Quantity: 15
   - type: Extractable
     grindableSolutionName: food
+  - type: Tag
+    tags:
+    - Crayon #So moth cant eat it
