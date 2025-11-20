@@ -73,12 +73,12 @@
   copyright:  "Public Domain. Recording provided by Musopen.org"
   source: "https://musopen.org/music/composer/antonio-vivaldi/"
 
-- files: [Jhonny i knew ya.ogg, Wellerman.ogg]
+- files: [Jhonny_i_knew_ya.ogg, Wellerman.ogg]
   license: "Custom"
   copyright:  "PGN Music is a Copyright Free/DMCA Free/Royalty Free music"
   source: "https://pgnmusic.bandcamp.com/album/sea-shanties"
 
-- files: [The Drunken Sailor.ogg]
-  license: "CC BY-NC-SA 4.0"
+- files: [The_Drunken_Sailor.ogg]
+  license: "CC-BY-NC-SA-4.0"
   copyright:  "Recorded, produced and published by: Gregor Quendel, on www.classicals.de"
   source: "https://musopen.org/music/composer/antonio-vivaldi/"
