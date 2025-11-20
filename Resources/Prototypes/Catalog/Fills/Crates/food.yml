@@ -104,7 +104,7 @@
     - id: DrinkCreamCarton
       amount: 2
       #SS220 Start
-    - id: FoodMint
+    - id: FoodCataria
       amount: 2
       #SS220 End
 

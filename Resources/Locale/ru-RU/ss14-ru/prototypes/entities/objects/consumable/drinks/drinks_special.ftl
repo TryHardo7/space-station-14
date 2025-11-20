@@ -28,5 +28,4 @@ ent-DrinkShakeRobo = робо-коктейль
     .desc = { ent-DrinkShakeBase.desc }
 ent-DrinkShakeWhite = белый коктейль
     .desc = { ent-DrinkShakeBase.desc }
-ent-DrinkSkoomalGlass = Скума
-    .desc = { ent-DrinkShakeBase.desc }
+    

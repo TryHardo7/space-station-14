@@ -1,6 +1,6 @@
 - type: entity
   parent: FoodMealBase
-  id: FoodMint
+  id: FoodCataria
   name: mint
   description: Meaowee
   components:
@@ -8,10 +8,10 @@
     storedOffset: 0,-1
   - type: FlavorProfile
     flavors:
-      - minty
+    - minty
   - type: Sprite
-    sprite: SS220/Objects/Consumable/Food/mint.rsi
-    state: mint
+    sprite: SS220/Objects/Consumable/Food/cataria.rsi
+    state: cataria
   - type: SolutionContainerManager
     solutions:
       food:
@@ -19,10 +19,7 @@
         reagents:
         - ReagentId: Nutriment
           Quantity: 1
-        - ReagentId: MintJuice
+        - ReagentId: CatariaJuice
           Quantity: 15
   - type: Extractable
     grindableSolutionName: food
-  - type: Tag
-    tags:
-    - Crayon #So moth cant eat it

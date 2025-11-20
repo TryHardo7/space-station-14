@@ -1,3 +1,3 @@
 metabolizer-type-hydroponic = гидропонный
 
-metabolizer-type-tajaran = таярский
+metabolizer-type-tajaran = таяранский

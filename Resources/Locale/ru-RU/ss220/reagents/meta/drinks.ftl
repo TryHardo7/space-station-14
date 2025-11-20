@@ -26,5 +26,5 @@ reagent-name-rrranta = ррр-анта
 reagent-desc-rrranta = Отвратительный синтетический напиток. Содержит только добавки.
 reagent-name-skooma = скума
 reagent-desc-skooma = Не давать таярам. Не говорить о ней таярам.
-reagent-name-mintjuice = мятный сок
-reagent-desc-mintjuice = Притягивает кошек.
+reagent-name-catariajuice = мятный сок
+reagent-desc-catariajuice = Притягивает кошек.

@@ -7,13 +7,13 @@
   flavor: beets
   color: "#300010"
 
-#Mintjuice
+#CatariaJuice
 
 - type: reagent
-  id: MintJuice
-  name: reagent-name-mintjuice
+  id: CatariaJuice
+  name: reagent-name-catariajuice
   parent: BaseDrink
-  desc: reagent-desc-mintjuice
+  desc: reagent-desc-catariajuice
   physicalDesc: reagent-physical-desc-piquant
   flavor: minty
   color: "#c275ca"
