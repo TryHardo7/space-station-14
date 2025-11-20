@@ -72,4 +72,4 @@
         acts: ["Destruction"]
       - !type:PlaySoundBehavior
         sound:
-          collection: WoodBreak
+          collection: WoodDestroy
