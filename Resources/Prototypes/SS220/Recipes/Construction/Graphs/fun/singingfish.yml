@@ -25,10 +25,8 @@
               amount: 5
               doAfter: 5
 
-#MetalRod
-
     - node: SingingFishNode
-      entity: SingingFish #to-do
+      entity: SingingFish
       edges:
         - to: start
           completed:
