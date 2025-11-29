@@ -74,8 +74,8 @@
   source: "https://musopen.org/music/composer/antonio-vivaldi/"
 
 - files: [Jhonny_i_knew_ya.ogg, Wellerman.ogg]
-  license: "Custom"
-  copyright:  "PGN Music is a Copyright Free/DMCA Free/Royalty Free music"
+  license: "CC-BY-4.0"
+  copyright:  "PGN Music"
   source: "https://pgnmusic.bandcamp.com/album/sea-shanties"
 
 - files: [The_Drunken_Sailor.ogg]
