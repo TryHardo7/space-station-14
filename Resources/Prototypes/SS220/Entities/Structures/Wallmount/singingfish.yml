@@ -2,7 +2,6 @@
   id: SingingFish
   name: Singing Fish
   description: "Oddly noisy wallmounted fish."
-  suffix: Le Fish
   components: 
   #no - type: anchorable bc u cant pull it onto wall, this is intended as wallmount.
   - type: RequireProjectileTarget
