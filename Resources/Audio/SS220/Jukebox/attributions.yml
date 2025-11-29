@@ -74,11 +74,11 @@
   source: "https://musopen.org/music/composer/antonio-vivaldi/"
 
 - files: [Jhonny_i_knew_ya.ogg, Wellerman.ogg]
-  license: "CC-BY-4.0"
-  copyright:  "PGN Music"
+  license: "CC BY-SA"
+  copyright: "PGN Music by Tyler"
   source: "https://pgnmusic.bandcamp.com/album/sea-shanties"
 
 - files: [The_Drunken_Sailor.ogg]
-  license: "CC-BY-NC-SA-4.0"
-  copyright:  "Recorded, produced and published by: Gregor Quendel, on www.classicals.de"
-  source: "https://musopen.org/music/composer/antonio-vivaldi/"
+  license: "CC BY-SA"
+  copyright: "PGN Music by Tyler"
+  source: "https://pgnmusic.bandcamp.com/track/johnny-i-hardly-knew-ye"
