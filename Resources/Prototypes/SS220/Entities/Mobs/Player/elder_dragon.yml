@@ -14,9 +14,6 @@
     name: ghost-role-information-elder-space-dragon-name
     description: ghost-role-information-elder-space-dragon-description
     rules: ghost-role-information-space-dragon-rules
-    requirements:
-      - !type:OverallPlaytimeRequirement
-        time: 72000
     mindRoles:
     - MindRoleElderDragon
     raffle:
@@ -421,7 +418,7 @@
     tags:
     - CaptainSabre
   - type: DisarmMalus
-    weight: 0.0002
+    malus: 0.01
   - type: LandAtCursor
   - type: ThrowingAngle
     angle: 225
