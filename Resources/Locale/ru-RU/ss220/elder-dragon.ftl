@@ -1,6 +1,9 @@
 ent-MobElderDragon = древний дракон
     .desc = На вид очень старый и очень злой космический дракон, покрытый следами былых сражений
 
+ent-MindRoleElderDragon = Роль древний дракон
+    .desc = { ent-BaseMindRoleAntag.desc }
+
 ghost-role-information-elder-space-dragon-name = Древний космический дракон
 ghost-role-information-elder-space-dragon-description = После длительных скитаный в глубоком космосе пришло время насытиться!
 

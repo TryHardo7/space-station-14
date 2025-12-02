@@ -18,8 +18,7 @@
       - !type:OverallPlaytimeRequirement
         time: 72000
     mindRoles:
-    - MindRoleGhostRoleTeamAntagonist
- #  - MindRoleDragon to-do, just spawn for now
+    - MindRoleElderDragon
     raffle:
       settings: default
   - type: GhostTakeoverAvailable
@@ -422,8 +421,6 @@
     tags:
     - CaptainSabre
   - type: DisarmMalus
-  - type: SentienceTarget
-    flavorKind: station-event-random-sentience-flavor-inanimate
     weight: 0.0002
   - type: LandAtCursor
   - type: ThrowingAngle
@@ -436,3 +433,16 @@
       types:
         Slash: 17
         Caustic: 5
+
+# Role
+- type: entity
+  parent: BaseMindRoleAntag
+  id: MindRoleElderDragon
+  name: Elder dragon Role
+  components:
+  - type: MindRole
+    antagPrototype: Dragon
+    roleType: TeamAntagonist
+    subtype: role-subtype-dragon
+    exclusiveAntag: true
+  - type: DragonRole
