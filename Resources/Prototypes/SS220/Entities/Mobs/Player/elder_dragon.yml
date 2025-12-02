@@ -310,8 +310,8 @@
       allowMovement: true
       allowSpeech: true
       makeSentient: true
-      name: ghost-role-information-sentient-shark-name 
-      description: ghost-role-information-sentient-shark-description
+      name: ghost-role-information-elder-dragon-shark-name 
+      description: ghost-role-information-elder-dragon-shark-description
       rules: ghost-role-information-space-dragon-summoned-carp-rules
       mindRoles:
       - MindRoleGhostRoleTeamAntagonistFlock
