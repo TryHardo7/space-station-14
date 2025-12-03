@@ -1,7 +1,7 @@
 - type: entity
   parent: [ SimpleSpaceMobBase, FlyingMobBase, MobPassiveCollision ]
   id: MobElderDragon
-  suffix: Lanc
+  suffix: Shitspawn, Lanc
   name: elrich space dragon
   description: Really old really angry flying leviathan, loosely related to space carps.
   components:
@@ -42,7 +42,7 @@
     baseSprintSpeed: 6
     baseWeightlessModifier: 1.5
   - type: Sprite
-    sprite: SS220/Mobs/ElderDragon/elderdragon.rsi
+    sprite: SS220/Shitspawn/ElderDragon/elderdragon.rsi
     noRot: true
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
@@ -130,7 +130,6 @@
     - StunImmune
   - type: Language
     availableLanguages:
-    - id: Dragon
     - id: Carpish
       canSpeak: true
   - type: Damageable
@@ -178,7 +177,7 @@
 - type: entity
   categories: [ HideSpawnMenu ]
   id: EldrichDragonsBreathGun
-  suffix: Lanc
+  suffix: Shitspawn, Lanc
   name: dragon's lung
   description: For dragon's breathing.
   components:
@@ -199,13 +198,13 @@
 - type: entity
   parent: BaseAction
   id: ActionSpawnEldrichRift
-  suffix: Lanc
+  suffix: Shitspawn, Lanc
   name: Summon Carp Rift
   description: Summons a carp rift that will periodically spawns carps.
   components:
   - type: Action
     icon:
-      sprite: SS220/Structures/Specific/carp_rift.rsi
+      sprite: SS220/Shitspawn/ElderDragon/carp_rift.rsi
       state: icon
     useDelay: 1
     priority: 3
@@ -251,7 +250,7 @@
 #portal
 - type: entity
   id: EldrichCarpRift
-  suffix: Lanc
+  suffix: Shitspawn, Lanc
   name: eldrich carp rift
   description: Strange looking rift, something dark can be seen on the other side.
   placement:
@@ -267,7 +266,7 @@
   - type: Fixtures
   - type: Sprite
     layers:
-    - sprite: SS220/Structures/Specific/carp_rift.rsi 
+    - sprite: SS220/Shitspawn/ElderDragon/carp_rift.rsi 
       state: icon
   - type: InteractionOutline
   - type: Clickable
@@ -301,7 +300,7 @@
 - type: entity
   name: SharkDragon
   id: MobSharkEldrichDragon
-  suffix: Lanc
+  suffix: Shitspawn, Lanc
   parent: [ SimpleSpaceMobBase, FlyingMobBase, MobCombat, MobPassiveCollision ]
   components:
     - type: InputMover
@@ -387,7 +386,7 @@
   name: forgotten captain's sabre
   parent: [ BaseSword]
   id: OldCaptainSabre
-  suffix: Lanc
+  suffix: Shitspawn, Lanc
   description: Old ceremonial weapon once belonged to the unknown heroic captain, was stuck in dragon's stomach for unknown amount of time.
   components:
   - type: EmitSoundOnLand
