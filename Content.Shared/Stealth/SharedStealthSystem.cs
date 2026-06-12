@@ -98,7 +98,7 @@ public abstract class SharedStealthSystem : EntitySystem
 
     private void OnStealthGetState(EntityUid uid, StealthComponent component, ref ComponentGetState args)
     {
-        args.State = new StealthComponentState(component.LastVisibility, component.LastUpdated, component.Enabled, component.MinVisibility, component.MaxVisibility);
+        args.State = new StealthComponentState(component.LastVisibility, component.LastUpdated, component.Enabled, component.MinVisibility, component.MaxVisibility); // SS220 invis buff
     }
 
     private void OnStealthHandleState(EntityUid uid, StealthComponent component, ref ComponentHandleState args)
@@ -109,8 +109,8 @@ public abstract class SharedStealthSystem : EntitySystem
         SetEnabled(uid, cast.Enabled, component);
         component.LastVisibility = cast.Visibility;
         component.LastUpdated = cast.LastUpdated;
-        component.MinVisibility = cast.MinVisibility;
-        component.MaxVisibility = cast.MaxVisibility;
+        component.MinVisibility = cast.MinVisibility; // SS220 invis buff
+        component.MaxVisibility = cast.MaxVisibility; // SS220 invis buff
     }
 
     private void OnMove(EntityUid uid, StealthOnMoveComponent component, ref MoveEvent args)

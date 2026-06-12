@@ -80,15 +80,15 @@ public sealed class StealthComponentState : ComponentState
     public readonly float Visibility;
     public readonly TimeSpan? LastUpdated;
     public readonly bool Enabled;
-    public readonly float MinVisibility; // SS220
-    public readonly float MaxVisibility; // SS220
+    public readonly float MinVisibility; // SS220 invis buff
+    public readonly float MaxVisibility; // SS220 invis buff
 
-    public StealthComponentState(float stealthLevel, TimeSpan? lastUpdated, bool enabled, float minVisibility, float maxVisibility)
+    public StealthComponentState(float stealthLevel, TimeSpan? lastUpdated, bool enabled, float minVisibility, float maxVisibility) // SS220 invis buff
     {
         Visibility = stealthLevel;
         LastUpdated = lastUpdated;
         Enabled = enabled;
-        MinVisibility = minVisibility; // SS220
-        MaxVisibility = maxVisibility; // SS220
+        MinVisibility = minVisibility; // SS220 invis buff
+        MaxVisibility = maxVisibility; // SS220 invis buff
     }
 }
