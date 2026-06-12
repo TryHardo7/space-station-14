@@ -85,15 +85,16 @@ public abstract class SharedSpaceNinjaSystem : EntitySystem
     {
         TryRevealNinja(ent, disable: true);
     }
-
+    // SS220 invis buff start
     /// <summary>
-    /// Handle revealing ninja if cloaked when taking health damage (gunfire).
+    /// Handle revealing ninja if cloaked when taking amount of health damage.
     /// </summary>
     private void OnNinjaDamaged(Entity<SpaceNinjaComponent> ent, ref DamageChangedEvent args)
     {
-        if (args.DamageIncreased)
+        if (args.DamageIncreased && args.DamageDelta is { } delta && delta.GetTotal() >= ent.Comp.RevealDamageThreshold)
             TryRevealNinja(ent, disable: true);
     }
+    // SS220 invis buff end
 
     /// <summary>
     /// Handle revealing ninja if cloaked when attacking.
