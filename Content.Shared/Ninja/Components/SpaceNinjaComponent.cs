@@ -55,7 +55,7 @@ public sealed partial class SpaceNinjaComponent : Component
     /// </summary>
     [DataField]
     public ProtoId<AlertPrototype> SuitPowerAlert = "SuitPower";
-    
+
     // SS220 invis buff start
     /// <summary>
     /// Minimum health damage taken in a single hit to disable invis

@@ -193,6 +193,7 @@
       minVisibility: 0.05
       maxVisibility: 1
       lastVisibility: 1
+      shimmerScale: 0.25
     - type: StealthOnMove
       passiveVisibilityRate: -0.475
       movementVisibilityRate: 0

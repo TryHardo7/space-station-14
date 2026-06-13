@@ -3,10 +3,10 @@ light_mode unshaded;
 uniform sampler2D SCREEN_TEXTURE;
 uniform highp float visibility; // number between -1 and 1
 uniform mediump vec2 reference;
+uniform mediump float shimmer_scale; // SS220 cloak shimmer strength, set from StealthComponent
 
 const mediump float time_scale = 0.25;
 const mediump float distance_scale = 0.125;
-const mediump float shimmer_scale = 0.25; // SS220 added multiplier for easy tweaking and not touch actual formula
 
 void fragment() {
 

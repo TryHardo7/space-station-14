@@ -72,6 +72,12 @@ public sealed partial class StealthComponent : Component
     /// </summary>
     [DataField("examinedDesc")]
     public string ExaminedDesc = "stealth-visual-effect";
+
+    /// <summary>
+    /// Multiplier for the shimmer strength in the stealth shader.
+    /// </summary>
+    [DataField]
+    public float ShimmerScale = 1f; // SS220 invis buff
 }
 
 [Serializable, NetSerializable]
@@ -82,13 +88,15 @@ public sealed class StealthComponentState : ComponentState
     public readonly bool Enabled;
     public readonly float MinVisibility; // SS220 invis buff
     public readonly float MaxVisibility; // SS220 invis buff
+    public readonly float ShimmerScale; // SS220 invis buff
 
-    public StealthComponentState(float stealthLevel, TimeSpan? lastUpdated, bool enabled, float minVisibility, float maxVisibility) // SS220 invis buff
+    public StealthComponentState(float stealthLevel, TimeSpan? lastUpdated, bool enabled, float minVisibility, float maxVisibility, float shimmerScale) // SS220 invis buff
     {
         Visibility = stealthLevel;
         LastUpdated = lastUpdated;
         Enabled = enabled;
         MinVisibility = minVisibility; // SS220 invis buff
         MaxVisibility = maxVisibility; // SS220 invis buff
+        ShimmerScale = shimmerScale; // SS220 invis buff
     }
 }
