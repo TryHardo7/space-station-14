@@ -62,5 +62,5 @@ public sealed partial class SpaceNinjaComponent : Component
     /// </summary>
     [DataField]
     public FixedPoint2 RevealDamageThreshold = 8;
-}
     // SS220 invis buff end
+}

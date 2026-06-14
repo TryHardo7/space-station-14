@@ -73,11 +73,13 @@ public sealed partial class StealthComponent : Component
     [DataField("examinedDesc")]
     public string ExaminedDesc = "stealth-visual-effect";
 
+    // SS220 invis buff begin
     /// <summary>
     /// Multiplier for the shimmer strength in the stealth shader.
     /// </summary>
     [DataField]
-    public float ShimmerScale = 1f; // SS220 invis buff
+    public float ShimmerScale = 1f;
+    // SS220 invis buff end
 }
 
 [Serializable, NetSerializable]
