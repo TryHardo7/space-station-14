@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "license": "EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt",
+  "copyright": "Sprited by Dinazewwr for SS220",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "turned_on",
+      "delays": [
+        [0.3, 0.3, 0.3, 0.3, 0.3, 0.3]
+      ]
+    },
+    {
+      "name": "running",
+      "delays": [
+        [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15]
+      ]
+    },
+    {
+      "name": "vial_installed_blood"
+    },
+    {
+      "name": "vial_installed_empty"
+    },
+    {
+      "name": "vial_installed_mutagen"
+    },
+    {
+      "name": "buffer_mutagen",
+      "delays": [
+        [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2]
+      ]
+    }
+  ]
+}

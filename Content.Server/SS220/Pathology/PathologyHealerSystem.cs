@@ -11,10 +11,10 @@ namespace Content.Server.SS220.Pathology;
 
 public sealed class PathologyHealerSystem : EntitySystem
 {
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedDoAfterSystem _doAfter = default!;
-    [Dependency] private readonly SharedPathologySystem _pathology = default!;
-    [Dependency] private readonly PowerCellSystem _powerCell = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedPathologySystem _pathology = default!;
+    [Dependency] private PowerCellSystem _powerCell = default!;
 
     public override void Initialize()
     {

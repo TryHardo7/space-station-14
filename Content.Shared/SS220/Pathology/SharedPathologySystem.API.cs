@@ -13,8 +13,8 @@ namespace Content.Shared.SS220.Pathology;
 
 public abstract partial class SharedPathologySystem
 {
-    [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private INetManager _net = default!;
 
     public Dictionary<ProtoId<PathologyPrototype>, PathologyDefinition> GetActivePathologies(Entity<PathologyHolderComponent?> entity)
     {
@@ -106,6 +106,7 @@ public abstract partial class SharedPathologySystem
             return false;
 
         var ev = new PathologyRemoveAttempt(pathologyId, instanceData.Level);
+        RaiseLocalEvent(entity, ref ev);
         if (ev.Cancelled)
             return false;
 
@@ -136,6 +137,25 @@ public abstract partial class SharedPathologySystem
             return true;
 
         return pathologyPrototype.Definition[instanceData.Level].MaxStackCount > OneStack;
+    }
+
+    public bool TryGetSymptomData(Entity<PathologyHolderComponent?> entity, ProtoId<PathologyPrototype> pathologyId, [NotNullWhen(true)] out PathologyInstanceData? data)
+    {
+        data = null;
+        if (!Resolve(entity.Owner, ref entity.Comp, false))
+            return false;
+
+        return entity.Comp.ActivePathologies.TryGetValue(pathologyId, out data);
+    }
+
+    public bool TryGetStageValue<T>(Entity<PathologyHolderComponent?> entity, ProtoId<PathologyPrototype> pathologyId, IReadOnlyList<T> perStage, [NotNullWhen(true)] out T? value)
+    {
+        value = default;
+        if (perStage.Count == 0 || !TryGetSymptomData(entity, pathologyId, out var data))
+            return false;
+
+        value = perStage[Math.Min(data.Level, perStage.Count - 1)]!;
+        return true;
     }
 
     public bool TryGetPathologyStack(Entity<PathologyHolderComponent?> entity, ProtoId<PathologyPrototype> pathologyId, [NotNullWhen(true)] out int? stackCount)
@@ -172,8 +192,9 @@ public abstract partial class SharedPathologySystem
             for (var _ = 0; _ < newStackCount - instanceData.StackCount; _++)
                 instanceData.PathologyContexts.Add(context);
 
+            var args = new PathologyEffectArgs(entity.Owner, instanceData, EntityManager, _gameTiming.CurTime, _net.IsClient);
             foreach (var stackAddEffect in pathologyPrototype.Definition[instanceData.Level].AddStackEffects)
-                stackAddEffect.ApplyEffect(entity, instanceData, EntityManager);
+                stackAddEffect.ApplyEffect(in args);
         }
         else
         {

@@ -1,3 +1,7 @@
+#Implants
+uplink-virus-immunity-implanter-name = Virus immunity implant
+uplink-virus-immunity-implanter-desc = A subdermal chip overclocking immune system, not very healthy long-term, but body can resist every virus.
+
 #Misc
 
 uplink-clothing-eyes-hud-syndicate-agent-name = Syndicate agent Visor

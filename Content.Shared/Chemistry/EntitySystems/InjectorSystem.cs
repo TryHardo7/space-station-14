@@ -518,6 +518,13 @@ public sealed partial class InjectorSystem : EntitySystem
         // Jugsuit blocking Hyposprays when
         if (ev.Cancelled)
         {
+            // SS220-Start: let the blocker supply its own message, matching the self-inject path above
+            if (ev.OverrideMessage != null)
+            {
+                _popup.PopupPredicted(ev.OverrideMessage, target, user, PopupType.SmallCaution);
+                return true;
+            }
+            // SS220-End
             var userMessage = Loc.GetString("injector-component-blocked-user");
             var otherMessage = Loc.GetString("injector-component-blocked-other", ("target", target), ("user", user));
             _popup.PopupPredicted(userMessage, otherMessage, target, user, PopupType.SmallCaution);

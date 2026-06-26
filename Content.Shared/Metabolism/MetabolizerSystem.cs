@@ -35,6 +35,8 @@ public sealed class MetabolizerSystem : EntitySystem
     [Dependency] private readonly EntityQuery<OrganComponent> _organQuery = default!;
     [Dependency] private readonly EntityQuery<SolutionContainerManagerComponent> _solutionQuery = default!;
 
+    private readonly HashSet<string> _excludedPrototypes = new(); // SS220
+
     // ss220 add narcotic test start
     private const string NarcoticsGroup = "Narcotics";
     // ss220 add narcotic test end
@@ -152,6 +154,12 @@ public sealed class MetabolizerSystem : EntitySystem
         var ev = new MetabolismExclusionEvent();
         RaiseLocalEvent(solutionOwner.Value, ref ev);
 
+        // SS220-Start reuse the buffer instead of allocating a set per call
+        _excludedPrototypes.Clear();
+        foreach (var excluded in ev.Reagents)
+            _excludedPrototypes.Add(excluded.Prototype);
+        // SS220-End
+
         // randomize the reagent list so we don't have any weird quirks
         // like alphabetical order or insertion order mattering for processing
         var rand = SharedRandomExtensions.PredictedRandom(_gameTiming, GetNetEntity(ent), GetNetEntity(solutionOwner));
@@ -166,7 +174,12 @@ public sealed class MetabolizerSystem : EntitySystem
                 continue;
 
             // Skip blood reagents
-            if (ev.Reagents.Contains(reagent))
+            // SS220-Start.
+            // So in the end we match just by prototype. This way extra reagent data (DNA, virus) on the body's own
+            // blood doesn't drop it out of the exclusion and get it metabolized
+            // if (ev.Reagents.Contains(reagent))
+            if (_excludedPrototypes.Contains(reagent.Prototype))
+            // SS220-End
                 continue;
 
             // ss220 add narcotics test start

@@ -30,3 +30,20 @@
   - type: AutoEmote
     emotes:
     - Cough
+
+- type: trait
+  id: SkillSuppressed
+  name: trait-skill-suppressed-name
+  description: trait-skill-suppressed-desc
+  category: Disabilities
+  components:
+  - type: SkillSuppression
+
+# Hidden: the category isn't real traitCategory, so the lobby picker skips it.
+- type: trait
+  id: VirusImmunity
+  name: trait-virus-immunity-name
+  description: trait-virus-immunity-desc
+  category: Hidden
+  components:
+  - type: VirusImmunity

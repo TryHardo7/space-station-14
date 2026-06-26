@@ -1,3 +1,7 @@
+# Implants
+uplink-virus-immunity-implanter-name = Имплант вирусного иммунитета
+uplink-virus-immunity-implanter-desc = Подкожный чип, разгоняющий имунную систему, не особо полезно на дистанции, но защитит от вирусов.
+
 # Weapons
 uplink-ecrossbow-name = { ent-WeaponMiniEnergyCrossbow }
 uplink-ecrossbow-desc = { ent-WeaponMiniEnergyCrossbow.desc }

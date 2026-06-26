@@ -21,4 +21,25 @@
     containers:
       machine_board: !type:Container
       machine_parts: !type:Container
+      vaccinatorSlot: !type:ContainerSlot # SS220
   - type: RequireProjectileTarget
+  # SS220-Start
+  - type: Vaccinator
+  - type: ItemSlots
+    slots:
+      vaccinatorSlot:
+        whitelist:
+          components:
+          - FitsInDispenser
+  - type: SolutionContainerManager
+    solutions:
+      buffer:
+        maxVol: 100
+  - type: ActivatableUI
+    key: enum.VaccinatorUiKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.VaccinatorUiKey.Key:
+        type: VaccinatorBoundUserInterface
+  # SS220-End

@@ -8,3 +8,9 @@ trait-nervousness-popup = У вас затряслись руки
 
 trait-chronic-cough-name = Хронический кашель
 trait-chronic-cough-desc = Вы страдаете от постоянного раздражения дыхательных путей.
+
+trait-skill-suppressed-name = Бездарь
+trait-skill-suppressed-desc = Пришло время сбросить маски. Явите миру истинного себя!
+
+trait-virus-immunity-name = Вирусный иммунитет
+trait-virus-immunity-desc = Ваш иммунитет работаент на 300%, организм сопротивляется вирусам.
