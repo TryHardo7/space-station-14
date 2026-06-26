@@ -27,25 +27,18 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.Medical;
 
-public sealed class HealthAnalyzerPrintSystem : EntitySystem
+public sealed partial class HealthAnalyzerPrintSystem : EntitySystem
 {
-    [Dependency] private readonly SharedPopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
-    [Dependency] private readonly PaperSystem _paperSystem = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainerSystem = default!;
-    [Dependency] private readonly SharedDocumentHelperSystem _documentHelper = default!;
-    [Dependency] private readonly SharedAudioSystem _audio = default!; // SS220-health-analyzer-report
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private PathologySystem _pathology = default!;
-
-    // Disease lines a basic health analyzer will show on scan. Used by both the live UI and the print.
-    public List<string> GetDiseaseLines(EntityUid target)
-    {
-        return _pathology.GetAnalyzerVirusLines(target);
-    }
+    [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private SharedHandsSystem _handsSystem = default!;
+    [Dependency] private PaperSystem _paperSystem = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private SharedSolutionContainerSystem _solutionContainerSystem = default!;
+    [Dependency] private SharedDocumentHelperSystem _documentHelper = default!;
+    [Dependency] private SharedAudioSystem _audio = default!; // SS220-health-analyzer-report
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private DamageableSystem _damageable = default!;
 
     public override void Initialize()
     {

@@ -9,7 +9,7 @@ using Content.Shared.SS220.Pathology;
 
 namespace Content.Server.SS220.Pathology;
 
-public sealed class PathologyHealerSystem : EntitySystem
+public sealed partial class PathologyHealerSystem : EntitySystem
 {
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
