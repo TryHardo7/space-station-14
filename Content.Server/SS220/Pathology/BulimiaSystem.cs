@@ -7,7 +7,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.Pathology;
 
-public sealed class BulimiaSystem : EntitySystem
+public sealed partial class BulimiaSystem : EntitySystem
 {
     [Dependency] private VomitSystem _vomit = default!;
     [Dependency] private IGameTiming _timing = default!;

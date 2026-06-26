@@ -12,7 +12,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server.SS220.Pathology;
 
-public sealed class DiseaseChemistrySystem : EntitySystem
+public sealed partial class DiseaseChemistrySystem : EntitySystem
 {
     [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private SharedPathologySystem _pathology = default!;

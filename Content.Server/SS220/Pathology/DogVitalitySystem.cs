@@ -8,7 +8,7 @@ using Content.Shared.SS220.Pathology;
 
 namespace Content.Server.SS220.Pathology;
 
-public sealed class DogVitalitySystem : EntitySystem
+public sealed partial class DogVitalitySystem : EntitySystem
 {
     [Dependency] private MobThresholdSystem _mobThreshold = default!;
     [Dependency] private SharedPathologySystem _pathology = default!;

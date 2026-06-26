@@ -7,7 +7,7 @@ using Content.Shared.SS220.Pathology;
 
 namespace Content.Server.SS220.Pathology;
 
-public sealed class BreathInversionSystem : EntitySystem
+public sealed partial class BreathInversionSystem : EntitySystem
 {
     [Dependency] private BodySystem _body = default!;
 

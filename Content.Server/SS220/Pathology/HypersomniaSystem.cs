@@ -10,7 +10,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.Pathology;
 
-public sealed class HypersomniaSystem : EntitySystem
+public sealed partial class HypersomniaSystem : EntitySystem
 {
     [Dependency] private StatusEffectsSystem _statusEffects = default!;
     [Dependency] private StandingStateSystem _standing = default!;

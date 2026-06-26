@@ -9,7 +9,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.Pathology;
 
-public sealed class ElectrophiliaSystem : EntitySystem
+public sealed partial class ElectrophiliaSystem : EntitySystem
 {
     [Dependency] private IPrototypeManager _prototype = default!;
     [Dependency] private IGameTiming _timing = default!;

@@ -10,7 +10,7 @@ namespace Content.Server.SS220.Pathology;
 /// Applies a symptom's <see cref="PathologyDamageModifierComponent"/> to incoming damage, picking the
 /// modifier for the current stage. One reusable system for every resistance/vulnerability symptom.
 /// </summary>
-public sealed class PathologyDamageModifierSystem : EntitySystem
+public sealed partial class PathologyDamageModifierSystem : EntitySystem
 {
     [Dependency] private SharedPathologySystem _pathology = default!;
 

@@ -12,7 +12,7 @@ namespace Content.Server.SS220.Pathology;
 /// Knocks a host with the recoil-weakness symptom off its feet whenever it fires a wielded two-handed weapon.
 /// <see cref="GunShotEvent"/> is raised on the gun, so we subscribe there and check the shooter.
 /// </summary>
-public sealed class RecoilWeaknessSystem : EntitySystem
+public sealed partial class RecoilWeaknessSystem : EntitySystem
 {
     [Dependency] private SharedStunSystem _stun = default!;
 

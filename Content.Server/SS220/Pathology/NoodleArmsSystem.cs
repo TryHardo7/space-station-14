@@ -7,7 +7,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.Pathology;
 
-public sealed class NoodleArmsSystem : EntitySystem
+public sealed partial class NoodleArmsSystem : EntitySystem
 {
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private IGameTiming _timing = default!;

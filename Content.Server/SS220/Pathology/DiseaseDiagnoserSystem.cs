@@ -14,7 +14,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.Pathology;
 
-public sealed class DiseaseDiagnoserSystem : EntitySystem
+public sealed partial class DiseaseDiagnoserSystem : EntitySystem
 {
     [Dependency] private ItemSlotsSystem _itemSlots = default!;
     [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;

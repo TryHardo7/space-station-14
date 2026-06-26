@@ -6,7 +6,7 @@ using Content.Shared.SS220.Pathology;
 
 namespace Content.Server.SS220.Pathology;
 
-public sealed class SharpHearingSystem : EntitySystem
+public sealed partial class SharpHearingSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedPathologySystem _pathology = default!;

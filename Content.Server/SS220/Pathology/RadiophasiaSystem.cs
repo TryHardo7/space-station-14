@@ -10,7 +10,7 @@ using Robust.Server.GameObjects;
 
 namespace Content.Server.SS220.Pathology;
 
-public sealed class RadiophasiaSystem : EntitySystem
+public sealed partial class RadiophasiaSystem : EntitySystem
 {
     [Dependency] private SharedPointLightSystem _light = default!;
     [Dependency] private SharedRadiationSystem _radiation = default!;

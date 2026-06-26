@@ -13,7 +13,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server.SS220.Pathology;
 
-public sealed class SynthificationSystem : EntitySystem
+public sealed partial class SynthificationSystem : EntitySystem
 {
     [Dependency] private SiliconLawSystem _siliconLaw = default!;
     [Dependency] private SharedLanguageSystem _language = default!;

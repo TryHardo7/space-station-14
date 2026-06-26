@@ -39,6 +39,13 @@ public sealed partial class HealthAnalyzerPrintSystem : EntitySystem
     [Dependency] private SharedAudioSystem _audio = default!; // SS220-health-analyzer-report
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private PathologySystem _pathology = default!;
+
+    // Disease lines a basic health analyzer will show on scan. Used by both the live UI and the print.
+    public List<string> GetDiseaseLines(EntityUid target)
+    {
+        return _pathology.GetAnalyzerVirusLines(target);
+    }
 
     public override void Initialize()
     {

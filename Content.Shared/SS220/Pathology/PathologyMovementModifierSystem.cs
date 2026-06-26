@@ -9,7 +9,7 @@ namespace Content.Shared.SS220.Pathology;
 /// Applies a symptom's <see cref="PathologyMovementModifierComponent"/> to the host's movement speed.
 /// One reusable system for every movement-altering symptom.
 /// </summary>
-public sealed class PathologyMovementModifierSystem : EntitySystem
+public sealed partial class PathologyMovementModifierSystem : EntitySystem
 {
     [Dependency] private MovementSpeedModifierSystem _movement = default!;
 

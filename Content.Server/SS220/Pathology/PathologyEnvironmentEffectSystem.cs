@@ -9,7 +9,7 @@ using Robust.Shared.Random;
 
 namespace Content.Server.SS220.Pathology;
 
-public sealed class PathologyEnvironmentEffectSystem : EntitySystem
+public sealed partial class PathologyEnvironmentEffectSystem : EntitySystem
 {
     [Dependency] private TemperatureSystem _temperature = default!;
     [Dependency] private FlammableSystem _flammable = default!;

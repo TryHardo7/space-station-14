@@ -12,7 +12,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.Pathology;
 
-public sealed class DiseaseSpreadSystem : EntitySystem
+public sealed partial class DiseaseSpreadSystem : EntitySystem
 {
     [Dependency] private SharedPathologySystem _pathology = default!;
     [Dependency] private DiseaseContaminationSystem _contamination = default!;

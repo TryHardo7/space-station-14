@@ -6,7 +6,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.Pathology;
 
-public sealed class SkillSuppressionSystem : EntitySystem
+public sealed partial class SkillSuppressionSystem : EntitySystem
 {
     [Dependency] private ExperienceSystem _experience = default!;
     [Dependency] private IPrototypeManager _prototype = default!;

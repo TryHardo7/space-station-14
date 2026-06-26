@@ -7,7 +7,7 @@ using Content.Shared.SS220.Pathology;
 
 namespace Content.Server.SS220.Pathology;
 
-public sealed class VirusSampleSystem : EntitySystem
+public sealed partial class VirusSampleSystem : EntitySystem
 {
     [Dependency] private SharedPathologySystem _pathology = default!;
     [Dependency] private SharedSolutionContainerSystem _solutionContainer = default!;

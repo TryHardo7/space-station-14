@@ -6,7 +6,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.Pathology;
 
-public sealed class DiseaseContaminationSystem : EntitySystem
+public sealed partial class DiseaseContaminationSystem : EntitySystem
 {
     [Dependency] private SharedPathologySystem _pathology = default!;
     [Dependency] private IGameTiming _timing = default!;

@@ -10,7 +10,7 @@ using Robust.Shared.Map;
 
 namespace Content.Server.SS220.Pathology;
 
-public sealed class FireBreathingSystem : EntitySystem
+public sealed partial class FireBreathingSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedTransformSystem _transform = default!;

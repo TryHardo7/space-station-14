@@ -13,7 +13,7 @@ using Robust.Shared.Map;
 
 namespace Content.Server.SS220.Pathology;
 
-public sealed class LaserEyesSystem : EntitySystem
+public sealed partial class LaserEyesSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
