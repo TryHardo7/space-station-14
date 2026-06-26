@@ -84,7 +84,10 @@ public sealed partial class LaserEyesSystem : EntitySystem
 
         if (TryComp<ProjectileComponent>(bolt, out var proj)
             && _pathology.TryGetStageValue(ent.Owner, ent.Comp.Pathology, ent.Comp.DamagePerStage, out var damage))
+        {
             proj.Damage = damage;
+            Dirty(bolt, proj);
+        }
 
         _gun.ShootProjectile(bolt, dirNorm, Vector2.Zero, ent, ent, ent.Comp.LaserSpeed);
 

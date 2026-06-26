@@ -118,7 +118,7 @@ public sealed partial class HealthAnalyzerControl : BoxContainer
         DiseasesContainer.DisposeAllChildren();
         if (state.Diseases != null)
         {
-            foreach (var line in state.Diseases)
+            foreach (string line in state.Diseases)
                 DiseasesContainer.AddChild(new Label { Text = line });
         }
         DiseasesSection.Visible = DiseasesContainer.ChildCount > 0;

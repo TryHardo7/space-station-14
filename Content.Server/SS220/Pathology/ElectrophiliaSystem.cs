@@ -39,13 +39,19 @@ public sealed partial class ElectrophiliaSystem : EntitySystem
             return;
 
         // scale the shock damage for the current stage (0.5 -> 0 -> 0)
-        var coefficient = ent.Comp.ShockCoefficientPerStage[Math.Min(data.Level, ent.Comp.ShockCoefficientPerStage.Count - 1)];
+        var coefCount = ent.Comp.ShockCoefficientPerStage.Count;
+        var coefficient = coefCount > 0
+            ? ent.Comp.ShockCoefficientPerStage[Math.Min(data.Level, coefCount - 1)]
+            : 1f;
         var modifier = new DamageModifierSet();
         modifier.Coefficients[ent.Comp.ShockType] = coefficient;
         args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, modifier);
 
         // final stage - shock comes back as healing instead, across each configured group
-        var healFraction = ent.Comp.HealFractionPerStage[Math.Min(data.Level, ent.Comp.HealFractionPerStage.Count - 1)];
+        var healCount = ent.Comp.HealFractionPerStage.Count;
+        var healFraction = healCount > 0
+            ? ent.Comp.HealFractionPerStage[Math.Min(data.Level, healCount - 1)]
+            : FixedPoint2.Zero;
         if (healFraction <= FixedPoint2.Zero)
             return;
 
