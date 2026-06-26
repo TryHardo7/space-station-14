@@ -566,9 +566,14 @@
     - type: Radiophasia
       healPerRad:
         types:
+        #real ugly and not tested
           Radiation: -1
-          Brute: -1
-          Burn: -1
+          Blunt: -1
+          Slash: -1
+          Piercing: -1
+          Heat: -1
+          Shock: -1
+          Cold: -1
   # Stage 2
   - description: pathology-radiophasia-description
     progressMessage: pathology-radiophasia-progress-2
