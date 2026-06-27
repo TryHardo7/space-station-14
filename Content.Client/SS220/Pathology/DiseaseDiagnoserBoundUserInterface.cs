@@ -27,6 +27,7 @@ public sealed class DiseaseDiagnoserBoundUserInterface : BoundUserInterface
         _window.EjectButton.OnPressed += _ => SendMessage(new ItemSlotButtonPressedEvent("diagnoserSlot"));
         _window.TransferButton.OnPressed += _ => SendMessage(new DiseaseDiagnoserTransferMutagenMessage());
         _window.CopyButton.OnPressed += _ => SendMessage(new DiseaseDiagnoserCopyMessage());
+        _window.PrintButton.OnPressed += _ => SendMessage(new DiseaseDiagnoserPrintMessage());
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)

@@ -1,14 +1,18 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
-using System.Linq;
+using System.Text;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.FixedPoint;
 using Content.Server.Power.EntitySystems;
+using Content.Server.SS220.Photocopier.Forms;
+using Content.Shared.Paper;
 using Content.Shared.Popups;
 using Content.Shared.SS220.Pathology;
+using Content.Shared.SS220.Photocopier.Forms.FormManagerShared;
 using Robust.Server.GameObjects;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 
@@ -23,8 +27,10 @@ public sealed partial class DiseaseDiagnoserSystem : EntitySystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedPathologySystem _pathology = default!;
-
-    private static readonly TimeSpan UiUpdateInterval = TimeSpan.FromSeconds(0.2);
+    [Dependency] private FormManager _formManager = default!;
+    [Dependency] private PaperSystem _paper = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
 
     public override void Initialize()
     {
@@ -37,11 +43,19 @@ public sealed partial class DiseaseDiagnoserSystem : EntitySystem
         SubscribeLocalEvent<DiseaseDiagnoserComponent, DiseaseDiagnoserScanMessage>(OnScan);
         SubscribeLocalEvent<DiseaseDiagnoserComponent, DiseaseDiagnoserTransferMutagenMessage>(OnTransferMutagen);
         SubscribeLocalEvent<DiseaseDiagnoserComponent, DiseaseDiagnoserCopyMessage>(OnCopy);
+        SubscribeLocalEvent<DiseaseDiagnoserComponent, DiseaseDiagnoserPrintMessage>(OnPrint);
+        SubscribeLocalEvent<DiseaseDiagnoserComponent, SolutionContainerChangedEvent>(OnSolutionChanged);
     }
 
     private void OnUiDirty<T>(Entity<DiseaseDiagnoserComponent> ent, ref T args)
     {
         UpdateUi(ent);
+    }
+
+    private void OnSolutionChanged(Entity<DiseaseDiagnoserComponent> ent, ref SolutionContainerChangedEvent args)
+    {
+        if (args.SolutionId == ent.Comp.BufferSolutionId)
+            UpdateUi(ent);
     }
 
     private void OnEntInserted(Entity<DiseaseDiagnoserComponent> ent, ref EntInsertedIntoContainerMessage args)
@@ -60,6 +74,7 @@ public sealed partial class DiseaseDiagnoserSystem : EntitySystem
             return;
 
         ent.Comp.ScanEndTime = null;
+        ent.Comp.PrintEndTime = null;
         ClearResult(ent);
         UpdateUi(ent);
     }
@@ -70,7 +85,7 @@ public sealed partial class DiseaseDiagnoserSystem : EntitySystem
         if (!this.IsPowered(ent, EntityManager))
             return;
 
-        if (ent.Comp.ScanEndTime != null)
+        if (ent.Comp.ScanEndTime != null || ent.Comp.PrintEndTime != null)
             return;
 
         if (_itemSlots.GetItemOrNull(ent, ent.Comp.SlotId) == null)
@@ -78,7 +93,6 @@ public sealed partial class DiseaseDiagnoserSystem : EntitySystem
 
         ClearResult(ent);
         ent.Comp.ScanEndTime = _timing.CurTime + ent.Comp.ScanDuration;
-        ent.Comp.NextUiUpdate = _timing.CurTime;
         UpdateUi(ent);
     }
 
@@ -103,7 +117,7 @@ public sealed partial class DiseaseDiagnoserSystem : EntitySystem
 
         _solutionContainer.RemoveReagent(sourceSoln.Value, ent.Comp.MutagenReagent, amount);
         _solutionContainer.TryAddReagent(bufferSoln.Value, ent.Comp.MutagenReagent, amount, out _);
-        UpdateUi(ent);
+        // buffer change fires SolutionContainerChangedEvent -> OnSolutionChanged -> UpdateUi
     }
 
     private void OnCopy(Entity<DiseaseDiagnoserComponent> ent, ref DiseaseDiagnoserCopyMessage args)
@@ -115,7 +129,9 @@ public sealed partial class DiseaseDiagnoserSystem : EntitySystem
         if (item == null || !_solutionContainer.TryGetFitsInDispenser(item.Value, out _, out var source))
             return;
 
-        var viruses = VirusData.EnumerateViruses(source).Select(v => v.Clone()).ToList();
+        var viruses = new List<VirusInstance>();
+        foreach (var virus in VirusData.EnumerateViruses(source))
+            viruses.Add(virus.Clone());
         if (viruses.Count == 0)
         {
             _popup.PopupEntity(Loc.GetString("disease-diagnoser-no-virus"), ent, args.Actor);
@@ -144,6 +160,20 @@ public sealed partial class DiseaseDiagnoserSystem : EntitySystem
         _solutionContainer.TryAddReagent(bottleSoln.Value, ent.Comp.MutagenReagent, ent.Comp.CopyAmount, out _, data: new List<ReagentData> { virusData });
 
         _popup.PopupEntity(Loc.GetString("disease-diagnoser-copied"), ent, args.Actor);
+        // buffer consumption fires SolutionContainerChangedEvent -> OnSolutionChanged -> UpdateUi
+    }
+
+    private void OnPrint(Entity<DiseaseDiagnoserComponent> ent, ref DiseaseDiagnoserPrintMessage args)
+    {
+        if (!this.IsPowered(ent, EntityManager))
+            return;
+
+        // a report can only be printed off an analysed sample, and not while the machine is busy
+        if (!ent.Comp.HasResult || ent.Comp.ScanEndTime != null || ent.Comp.PrintEndTime != null)
+            return;
+
+        ent.Comp.PrintEndTime = _timing.CurTime + ent.Comp.PrintDuration;
+        _audio.PlayPvs(ent.Comp.PrintSound, ent);
         UpdateUi(ent);
     }
 
@@ -152,21 +182,21 @@ public sealed partial class DiseaseDiagnoserSystem : EntitySystem
         var query = EntityQueryEnumerator<DiseaseDiagnoserComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
-            if (comp.ScanEndTime is not { } end)
-                continue;
+            var ent = (uid, comp);
 
-            if (_timing.CurTime >= end)
+            if (comp.ScanEndTime is { } scanEnd && _timing.CurTime >= scanEnd)
             {
                 comp.ScanEndTime = null;
-                BuildResult((uid, comp));
-                UpdateUi((uid, comp));
+                BuildResult(ent);
+                UpdateUi(ent);
                 continue;
             }
 
-            if (_timing.CurTime >= comp.NextUiUpdate)
+            if (comp.PrintEndTime is { } printEnd && _timing.CurTime >= printEnd)
             {
-                comp.NextUiUpdate = _timing.CurTime + UiUpdateInterval;
-                UpdateUi((uid, comp));
+                comp.PrintEndTime = null;
+                FinishPrint(ent);
+                UpdateUi(ent);
             }
         }
     }
@@ -180,10 +210,11 @@ public sealed partial class DiseaseDiagnoserSystem : EntitySystem
         if (item == null || !_solutionContainer.TryGetFitsInDispenser(item.Value, out _, out var solution))
             return;
 
-        // a symptom shared by several strains in one sample is reported once, not per strain
-        var seen = new HashSet<string>();
+        // each virus is reported as its own block, so a symptom shared by two strains shows in both
         foreach (var virus in VirusData.EnumerateViruses(solution))
         {
+            var block = new DiseaseDiagnoserVirusResult();
+
             var allReadable = true;
             foreach (var symptomId in virus.Symptoms)
             {
@@ -192,29 +223,25 @@ public sealed partial class DiseaseDiagnoserSystem : EntitySystem
                     && _pathology.TryGetSymptomDescription(symptomId, out description)
                     && description != null;
 
-                if (!readable)
-                    allReadable = false;
-
-                if (!seen.Add(symptomId))
-                    continue;
-
                 // symptom reported only if revealed, otherwise stay unreadable
                 if (readable)
-                    ent.Comp.ResultSymptoms.Add(_pathology.FormatSymptom(symptomId, description!, virus, showAccelerant: true));
+                    block.Symptoms.Add(_pathology.FormatSymptom(symptomId, description!, virus, showAccelerant: true));
                 else
-                    ent.Comp.ResultUnreadableCount++;
+                {
+                    allReadable = false;
+                    block.UnreadableCount++;
+                }
             }
 
-            // spread vectors are reported only if every symptom of the strain has been revealed
+            // spread vectors and name are reported only if every symptom has been revealed
             if (allReadable)
-                ent.Comp.ResultTransmission |= GetVectors(virus.Transmission);
-
-            if (allReadable
-                && ent.Comp.ResultVirusName == null
-                && virus.Name is { } name)
             {
-                ent.Comp.ResultVirusName = name;
+                block.Transmission = GetVectors(virus.Transmission);
+                if (virus.Name is { } name)
+                    block.Name = name;
             }
+
+            ent.Comp.ResultViruses.Add(block);
         }
     }
 
@@ -233,11 +260,62 @@ public sealed partial class DiseaseDiagnoserSystem : EntitySystem
         return vectors;
     }
 
+    // fills configured paper form with scan result
+    private void FinishPrint(Entity<DiseaseDiagnoserComponent> ent)
+    {
+        var form = _formManager.TryGetFormFromDescriptor(
+            new FormDescriptor(ent.Comp.FormCollection, ent.Comp.FormGroup, ent.Comp.FormId));
+        if (form == null)
+        {
+            Log.Error($"Diagnoser form {ent.Comp.FormCollection}/{ent.Comp.FormGroup}/{ent.Comp.FormId} not found");
+            return;
+        }
+
+        var report = new StringBuilder();
+        foreach (var virus in ent.Comp.ResultViruses)
+        {
+            report.AppendLine(Loc.GetString("pathology-report-pathogen",
+                ("name", virus.Name ?? Loc.GetString("pathology-report-pathogen-unknown"))));
+            report.AppendLine(Loc.GetString("pathology-report-symptoms"));
+            if (virus.Symptoms.Count > 0)
+            {
+                foreach (var symptom in virus.Symptoms)
+                    report.AppendLine($" · {symptom}");
+            }
+            else
+                report.AppendLine(" · —");
+
+            report.AppendLine(Loc.GetString("pathology-report-unreadable", ("count", virus.UnreadableCount)));
+
+            var vectors = new List<string>();
+            if ((virus.Transmission & VirusTransmissionVector.Contact) != 0)
+                vectors.Add(Loc.GetString("disease-diagnoser-vector-contact"));
+            if ((virus.Transmission & VirusTransmissionVector.Proximity) != 0)
+                vectors.Add(Loc.GetString("disease-diagnoser-vector-proximity"));
+            var transmission = vectors.Count > 0 ? string.Join(", ", vectors) : "—";
+            report.AppendLine(Loc.GetString("pathology-report-transmission", ("vectors", transmission)));
+            report.AppendLine();
+        }
+
+        var content = form.Content.Replace("$REPORT$", report.ToString().TrimEnd());
+
+        var paper = Spawn(form.PrototypeId, Transform(ent).Coordinates);
+        if (TryComp<PaperComponent>(paper, out var paperComp))
+            _paper.SetContent((paper, paperComp), content);
+        _metaData.SetEntityName(paper, form.EntityName);
+    }
+
     private void UpdateUi(Entity<DiseaseDiagnoserComponent> ent)
     {
         var hasSample = _itemSlots.GetItemOrNull(ent, ent.Comp.SlotId) != null;
         var scanning = ent.Comp.ScanEndTime != null;
-        var progress = PathologyMachine.ComputeScanProgress(ent.Comp.ScanEndTime, ent.Comp.ScanDuration, ent.Comp.HasResult, _timing.CurTime);
+        var printing = ent.Comp.PrintEndTime != null;
+        var operationEnd = ent.Comp.ScanEndTime ?? ent.Comp.PrintEndTime;
+        var operationDuration = scanning
+            ? ent.Comp.ScanDuration
+            : printing
+                ? ent.Comp.PrintDuration
+                : TimeSpan.Zero;
 
         var bufferMutagen = 0f;
         if (_solutionContainer.TryGetSolution(ent.Owner, ent.Comp.BufferSolutionId, out _, out var buffer))
@@ -246,12 +324,11 @@ public sealed partial class DiseaseDiagnoserSystem : EntitySystem
         var state = new DiseaseDiagnoserBoundUserInterfaceState(
             hasSample,
             scanning,
-            progress,
+            printing,
+            operationEnd,
+            operationDuration,
             ent.Comp.HasResult,
-            ent.Comp.ResultVirusName,
-            new List<string>(ent.Comp.ResultSymptoms),
-            ent.Comp.ResultUnreadableCount,
-            ent.Comp.ResultTransmission,
+            new List<DiseaseDiagnoserVirusResult>(ent.Comp.ResultViruses),
             bufferMutagen);
 
         _ui.SetUiState(ent.Owner, DiseaseDiagnoserUiKey.Key, state);
@@ -259,16 +336,19 @@ public sealed partial class DiseaseDiagnoserSystem : EntitySystem
         UpdateVisuals(ent);
     }
 
-    // Fancy af.
     private void UpdateVisuals(Entity<DiseaseDiagnoserComponent> ent)
     {
-        var bufferFull = false;
-        if (_solutionContainer.TryGetSolution(ent.Owner, ent.Comp.BufferSolutionId, out _, out var buffer))
-            bufferFull = buffer.GetTotalPrototypeQuantity(ent.Comp.MutagenReagent) >= ent.Comp.BufferDisplayThreshold;
+        var fill = 0f;
+        if (_solutionContainer.TryGetSolution(ent.Owner, ent.Comp.BufferSolutionId, out _, out var buffer)
+            && buffer.MaxVolume > FixedPoint2.Zero)
+        {
+            var amount = buffer.GetTotalPrototypeQuantity(ent.Comp.MutagenReagent);
+            fill = Math.Clamp((float)(amount / buffer.MaxVolume), 0f, 1f);
+        }
 
-        _appearance.SetData(ent, DiseaseDiagnoserVisuals.Running, ent.Comp.ScanEndTime != null);
+        _appearance.SetData(ent, DiseaseDiagnoserVisuals.Running, ent.Comp.PrintEndTime != null);
         _appearance.SetData(ent, DiseaseDiagnoserVisuals.Vial, GetVialVisual(ent));
-        _appearance.SetData(ent, DiseaseDiagnoserVisuals.Buffer, bufferFull);
+        _appearance.SetData(ent, DiseaseDiagnoserVisuals.Buffer, fill);
     }
 
     private DiseaseDiagnoserVial GetVialVisual(Entity<DiseaseDiagnoserComponent> ent)
@@ -289,9 +369,6 @@ public sealed partial class DiseaseDiagnoserSystem : EntitySystem
     private static void ClearResult(Entity<DiseaseDiagnoserComponent> ent)
     {
         ent.Comp.HasResult = false;
-        ent.Comp.ResultVirusName = null;
-        ent.Comp.ResultSymptoms = new();
-        ent.Comp.ResultUnreadableCount = 0;
-        ent.Comp.ResultTransmission = VirusTransmissionVector.None;
+        ent.Comp.ResultViruses = new();
     }
 }

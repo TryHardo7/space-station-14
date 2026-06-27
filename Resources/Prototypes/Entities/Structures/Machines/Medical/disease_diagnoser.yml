@@ -22,7 +22,7 @@
     - state: vial_installed_empty
       map: ["enum.DiseaseDiagnoserVisualLayers.Vial"]
       visible: false
-    - state: buffer_mutagen
+    - state: fill-1
       map: ["enum.DiseaseDiagnoserVisualLayers.Buffer"]
       visible: false
   - type: Appearance
@@ -43,10 +43,7 @@
           "Blood": { visible: true, state: vial_installed_blood }
           "Empty": { visible: true, state: vial_installed_empty }
           "Mutagen": { visible: true, state: vial_installed_mutagen }
-      enum.DiseaseDiagnoserVisuals.Buffer:
-        enum.DiseaseDiagnoserVisualLayers.Buffer:
-          "True": { visible: true }
-          "False": { visible: false }
+  - type: DiseaseDiagnoserBufferVisuals
   # SS220-End
   - type: Machine
     board: DiagnoserMachineCircuitboard

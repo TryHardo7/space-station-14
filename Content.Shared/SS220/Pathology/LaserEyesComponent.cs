@@ -36,7 +36,7 @@ public sealed partial class LaserEyesComponent : Component
 
     /// <summary>Shots needed to reach full eye damage (welding-flash blindness).</summary>
     [DataField]
-    public int ShotsToMax = 6;
+    public int ShotsToMax = 18;
 
     [DataField]
     public TimeSpan Cooldown = TimeSpan.FromSeconds(4);

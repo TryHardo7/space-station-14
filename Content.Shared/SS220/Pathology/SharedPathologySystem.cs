@@ -173,11 +173,9 @@ public abstract partial class SharedPathologySystem : EntitySystem
         if (instanceData.Level + 1 >= pathologyPrototype.Definition.Length)
             return false;
 
-        var previous = pathologyPrototype.Definition[instanceData.Level];
         instanceData.Level++;
         var current = pathologyPrototype.Definition[instanceData.Level];
         instanceData.StageStartTime = _gameTiming.CurTime;
-        RemoveStaleStageComponents(entity, instanceData, previous, current);
         AddPathologyDefinitionEffects(entity, instanceData, current, popup);
         DebugTools.Assert(instanceData.PathologyContexts.Count == instanceData.StackCount);
 
@@ -257,7 +255,7 @@ public abstract partial class SharedPathologySystem : EntitySystem
 
     protected virtual void ApplyPathologyContext(Entity<PathologyHolderComponent> entity, IPathologyContext? context) { }
 
-    // so wecan strip only components this virus added
+    // we need to record what this symptom adds so a full cure strips exactly these
     private void AddTrackedComponents(Entity<PathologyHolderComponent> entity, PathologyInstanceData data, ComponentRegistry registry)
     {
         if (registry.Count == 0)
@@ -271,25 +269,5 @@ public abstract partial class SharedPathologySystem : EntitySystem
         }
 
         EntityManager.AddComponents(entity, registry, false);
-    }
-
-    // On a stage change, strip the components the old stage added that the new stage no longer
-    // declares, so a stage-scoped component doesn't linger past its stage. Components shared by
-    // both stages (or owned by the host beforehand, which were never tracked) are left in place.
-    private void RemoveStaleStageComponents(Entity<PathologyHolderComponent> entity, PathologyInstanceData data, PathologyDefinition previous, PathologyDefinition current)
-    {
-        // both registries are prototype data (Dictionary), so this allocates nothing
-        foreach (var name in previous.Components.Keys)
-        {
-            if (current.Components.ContainsKey(name))
-                continue;
-
-            // only strip what this symptom actually added (AddedComponents excludes pre-owned ones)
-            if (!data.AddedComponents.Remove(name))
-                continue;
-
-            if (_componentFactory.TryGetRegistration(name, out var registration))
-                RemComp(entity, registration.Type);
-        }
     }
 }

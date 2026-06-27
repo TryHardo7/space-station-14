@@ -3,6 +3,7 @@
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
 using Content.Shared.SS220.Pathology;
+using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.Pathology;
@@ -27,12 +28,6 @@ public sealed partial class DiseaseDiagnoserComponent : Component
     /// </summary>
     [DataField]
     public string BufferSolutionId = "buffer";
-
-    /// <summary>
-    /// Mutagen in the buffer at or above this amount lights up the filled-buffer sprite overlay.
-    /// </summary>
-    [DataField]
-    public FixedPoint2 BufferDisplayThreshold = 50;
 
     /// <summary>
     /// Reagent used to copy a virus.
@@ -64,25 +59,35 @@ public sealed partial class DiseaseDiagnoserComponent : Component
     [DataField]
     public string BottleSolutionId = "drink";
 
+    /// <summary>How long print takes, keep in sync with animation length.</summary>
+    [DataField]
+    public TimeSpan PrintDuration = TimeSpan.FromSeconds(3);
+
+    /// <summary>Paper form.</summary>
+    [DataField]
+    public string FormCollection = "nanotrasen_station";
+
+    [DataField]
+    public string FormGroup = "medical";
+
+    [DataField]
+    public string FormId = "med_rep_virus";
+
+    [DataField]
+    public SoundSpecifier PrintSound = new SoundPathSpecifier("/Audio/Machines/diagnoser_printing.ogg");
+
     /// <summary>
-    /// When the current scan finishes.
+    /// When current scan finishes.
     /// </summary>
     public TimeSpan? ScanEndTime;
 
     /// <summary>
-    /// Throttle for pushing progress updates to UI while scanning.
+    /// When current form print finishes.
     /// </summary>
-    public TimeSpan NextUiUpdate;
-
-    // last scan results below
+    public TimeSpan? PrintEndTime;
 
     public bool HasResult;
-    public string? ResultVirusName;
-    public List<string> ResultSymptoms = new();
-    public int ResultUnreadableCount;
 
-    /// <summary>
-    /// Final spread vectors dedcoded virus shows.
-    /// </summary>
-    public VirusTransmissionVector ResultTransmission;
+    /// <summary>One block per virus.</summary>
+    public List<DiseaseDiagnoserVirusResult> ResultViruses = new();
 }

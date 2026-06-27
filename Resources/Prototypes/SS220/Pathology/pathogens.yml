@@ -475,11 +475,7 @@
       - !type:PathologyReagentProgressCondition
     components:
     - type: SiliconLawBound
-    - type: UserInterface
-      interfaces:
-        enum.SiliconLawsUiKey.Key:
-          type: SiliconLawBoundUserInterface
-          requireInputValidation: false
+    # no UserInterface component here bc we setUi in SynthificationSystem
     - type: Synthification
   # Stage 2
   - description: pathology-synthification-description

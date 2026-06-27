@@ -23,45 +23,62 @@ public sealed class VaccinatorTransferMessage : BoundUserInterfaceMessage;
 public sealed class VaccinatorCreateVaccineMessage : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]
+public sealed class VaccinatorPrintMessage : BoundUserInterfaceMessage;
+
+/// <summary>One analysed virus from sample — its own name, symptoms, cure and suppression state.</summary>
+[Serializable, NetSerializable]
+public sealed class VaccinatorVirusResult
+{
+    /// <summary>Virus name, null when not every symptom is readable.</summary>
+    public string? Name;
+    public List<string> Symptoms = new();
+    public int UnreadableCount;
+
+    /// <summary>Cure reagent names vaccinator read.</summary>
+    public List<string> CureReagents = new();
+
+    /// <summary>True when a cure exists but can't be read.</summary>
+    public bool CureHidden;
+
+    /// <summary>True when this virus is suppressed.</summary>
+    public bool Suppressed;
+}
+
+[Serializable, NetSerializable]
 public sealed class VaccinatorBoundUserInterfaceState : BoundUserInterfaceState
 {
     public readonly bool HasSample;
     public readonly bool Scanning;
-    public readonly float Progress;
+    public readonly bool Printing;
+
+    /// <summary>When running scan/print finishes. Client animates bar off this.</summary>
+    public readonly TimeSpan? OperationEnd;
+    public readonly TimeSpan OperationDuration;
+
     public readonly bool HasResult;
-    public readonly string? VirusName;
-    public readonly List<string> Symptoms;
-    public readonly int UnreadableCount;
 
-    /// <summary>Cure reagent names vaccinator read.</summary>
-    public readonly List<string> CureReagents;
-
-    /// <summary>True when a cure exists but its key symptom can't be read.</summary>
-    public readonly bool CureHidden;
+    /// <summary>One block per virus found in sample.</summary>
+    public readonly List<VaccinatorVirusResult> Viruses;
 
     public readonly float BufferTricordrazine;
 
     public VaccinatorBoundUserInterfaceState(
         bool hasSample,
         bool scanning,
-        float progress,
+        bool printing,
+        TimeSpan? operationEnd,
+        TimeSpan operationDuration,
         bool hasResult,
-        string? virusName,
-        List<string> symptoms,
-        int unreadableCount,
-        List<string> cureReagents,
-        bool cureHidden,
+        List<VaccinatorVirusResult> viruses,
         float bufferTricordrazine)
     {
         HasSample = hasSample;
         Scanning = scanning;
-        Progress = progress;
+        Printing = printing;
+        OperationEnd = operationEnd;
+        OperationDuration = operationDuration;
         HasResult = hasResult;
-        VirusName = virusName;
-        Symptoms = symptoms;
-        UnreadableCount = unreadableCount;
-        CureReagents = cureReagents;
-        CureHidden = cureHidden;
+        Viruses = viruses;
         BufferTricordrazine = bufferTricordrazine;
     }
 }

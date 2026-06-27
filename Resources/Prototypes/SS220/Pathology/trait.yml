@@ -83,12 +83,16 @@
 - type: pathology
   id: Paracusia
   name: pathology-paracusia-name
+  genome: Rna
   definition:
   - description: pathology-paracusia-description
     components:
     - type: Paracusia
       minTimeBetweenIncidents: 0.1
       maxTimeBetweenIncidents: 300
+      maxSoundDistance: 7
+      sounds:
+        collection: Paracusia
 
 - type: pathology
   id: PainNumbness

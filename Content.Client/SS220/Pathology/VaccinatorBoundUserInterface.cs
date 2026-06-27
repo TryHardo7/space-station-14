@@ -27,6 +27,7 @@ public sealed class VaccinatorBoundUserInterface : BoundUserInterface
         _window.EjectButton.OnPressed += _ => SendMessage(new ItemSlotButtonPressedEvent("vaccinatorSlot"));
         _window.TransferButton.OnPressed += _ => SendMessage(new VaccinatorTransferMessage());
         _window.CreateVaccineButton.OnPressed += _ => SendMessage(new VaccinatorCreateVaccineMessage());
+        _window.PrintButton.OnPressed += _ => SendMessage(new VaccinatorPrintMessage());
     }
 
     protected override void UpdateState(BoundUserInterfaceState state)

@@ -12,6 +12,11 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using System.Text;
+using Content.Shared.Paper;
+using Content.Server.SS220.Photocopier.Forms;
+using Content.Shared.SS220.Photocopier.Forms.FormManagerShared;
+using Robust.Shared.Audio.Systems;
 
 namespace Content.Server.SS220.Pathology;
 
@@ -24,8 +29,11 @@ public sealed partial class VaccinatorSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IPrototypeManager _prototype = default!;
-
-    private static readonly TimeSpan UiUpdateInterval = TimeSpan.FromSeconds(0.2);
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private FormManager _formManager = default!;
+    [Dependency] private PaperSystem _paper = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private MetaDataSystem _metaData = default!;
 
     public override void Initialize()
     {
@@ -38,11 +46,21 @@ public sealed partial class VaccinatorSystem : EntitySystem
         SubscribeLocalEvent<VaccinatorComponent, VaccinatorScanMessage>(OnScan);
         SubscribeLocalEvent<VaccinatorComponent, VaccinatorTransferMessage>(OnTransfer);
         SubscribeLocalEvent<VaccinatorComponent, VaccinatorCreateVaccineMessage>(OnCreateVaccine);
+        SubscribeLocalEvent<VaccinatorComponent, VaccinatorPrintMessage>(OnPrint);
+        SubscribeLocalEvent<VaccinatorComponent, SolutionContainerChangedEvent>(OnSolutionChanged);
     }
 
     private void OnUiDirty<T>(Entity<VaccinatorComponent> ent, ref T args)
     {
         UpdateUi(ent);
+    }
+
+    // the buffer display tracks its actual reagent level, so refresh on any buffer change rather than
+    // hanging the update off whichever action (transfer/create) happened to move the reagent
+    private void OnSolutionChanged(Entity<VaccinatorComponent> ent, ref SolutionContainerChangedEvent args)
+    {
+        if (args.SolutionId == ent.Comp.BufferSolutionId)
+            UpdateUi(ent);
     }
 
     private void OnEntInserted(Entity<VaccinatorComponent> ent, ref EntInsertedIntoContainerMessage args)
@@ -61,6 +79,7 @@ public sealed partial class VaccinatorSystem : EntitySystem
             return;
 
         ent.Comp.ScanEndTime = null;
+        ent.Comp.PrintEndTime = null;
         ClearResult(ent);
         UpdateUi(ent);
     }
@@ -71,12 +90,11 @@ public sealed partial class VaccinatorSystem : EntitySystem
         if (!this.IsPowered(ent, EntityManager))
             return;
 
-        if (ent.Comp.ScanEndTime != null || _itemSlots.GetItemOrNull(ent, ent.Comp.SlotId) == null)
+        if (ent.Comp.ScanEndTime != null || ent.Comp.PrintEndTime != null || _itemSlots.GetItemOrNull(ent, ent.Comp.SlotId) == null)
             return;
 
         ClearResult(ent);
         ent.Comp.ScanEndTime = _timing.CurTime + ent.Comp.ScanDuration;
-        ent.Comp.NextUiUpdate = _timing.CurTime;
         UpdateUi(ent);
     }
 
@@ -101,7 +119,7 @@ public sealed partial class VaccinatorSystem : EntitySystem
 
         _solutionContainer.RemoveReagent(sourceSoln.Value, ent.Comp.TricordrazineReagent, amount);
         _solutionContainer.TryAddReagent(bufferSoln.Value, ent.Comp.TricordrazineReagent, amount, out _);
-        UpdateUi(ent);
+        // buffer change fires SolutionContainerChangedEvent -> OnSolutionChanged -> UpdateUi
     }
 
     private void OnCreateVaccine(Entity<VaccinatorComponent> ent, ref VaccinatorCreateVaccineMessage args)
@@ -147,6 +165,18 @@ public sealed partial class VaccinatorSystem : EntitySystem
         _solutionContainer.TryAddReagent(bottleSoln.Value, ent.Comp.VaccineReagent, ent.Comp.VaccineAmount, out _, data: new List<ReagentData> { vaccineData });
 
         _popup.PopupEntity(Loc.GetString("vaccinator-vaccine-created"), ent, args.Actor);
+    }
+
+    private void OnPrint(Entity<VaccinatorComponent> ent, ref VaccinatorPrintMessage args)
+    {
+        if (!this.IsPowered(ent, EntityManager))
+            return;
+
+        if (!ent.Comp.HasResult || ent.Comp.ScanEndTime != null || ent.Comp.PrintEndTime != null)
+            return;
+
+        ent.Comp.PrintEndTime = _timing.CurTime + ent.Comp.PrintDuration;
+        _audio.PlayPvs(ent.Comp.PrintSound, ent);
         UpdateUi(ent);
     }
 
@@ -155,21 +185,21 @@ public sealed partial class VaccinatorSystem : EntitySystem
         var query = EntityQueryEnumerator<VaccinatorComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
-            if (comp.ScanEndTime is not { } end)
-                continue;
+            var ent = (uid, comp);
 
-            if (_timing.CurTime >= end)
+            if (comp.ScanEndTime is { } scanEnd && _timing.CurTime >= scanEnd)
             {
                 comp.ScanEndTime = null;
-                BuildResult((uid, comp));
-                UpdateUi((uid, comp));
+                BuildResult(ent);
+                UpdateUi(ent);
                 continue;
             }
 
-            if (_timing.CurTime >= comp.NextUiUpdate)
+            if (comp.PrintEndTime is { } printEnd && _timing.CurTime >= printEnd)
             {
-                comp.NextUiUpdate = _timing.CurTime + UiUpdateInterval;
-                UpdateUi((uid, comp));
+                comp.PrintEndTime = null;
+                FinishPrint(ent);
+                UpdateUi(ent);
             }
         }
     }
@@ -183,10 +213,14 @@ public sealed partial class VaccinatorSystem : EntitySystem
         if (item == null || !_solutionContainer.TryGetFitsInDispenser(item.Value, out _, out var solution))
             return;
 
-        // a symptom shared by several strains in one sample is reported once, not per strain
-        var seen = new HashSet<string>();
+        // each virus is reported as its own block, so a symptom shared by two strains shows in both
         foreach (var virus in VirusData.EnumerateViruses(solution))
         {
+            var block = new VaccinatorVirusResult();
+
+            if (virus.SuppressedUntil is { } until && _timing.CurTime < until)
+                block.Suppressed = true;
+
             var allReadable = true;
             foreach (var symptomId in virus.Symptoms)
             {
@@ -195,49 +229,93 @@ public sealed partial class VaccinatorSystem : EntitySystem
                     && _pathology.TryGetSymptomDescription(symptomId, out description)
                     && description != null;
 
-                if (!readable)
-                    allReadable = false;
-
-                if (!seen.Add(symptomId))
-                    continue;
-
                 if (readable)
-                    ent.Comp.ResultSymptoms.Add(_pathology.FormatSymptom(symptomId, description!, virus));
+                    block.Symptoms.Add(_pathology.FormatSymptom(symptomId, description!, virus));
                 else
-                    ent.Comp.ResultUnreadableCount++;
-            }
-
-            if (allReadable
-                && ent.Comp.ResultVirusName == null
-                && virus.Name is { } name)
-            {
-                ent.Comp.ResultVirusName = name;
-            }
-
-            if (virus.Cure is not { } cure)
-                continue;
-
-            // the cure reagents only show once every symptom of the strain has been revealed
-            if (allReadable)
-            {
-                foreach (var reagent in cure.Reagents)
                 {
-                    if (_prototype.TryIndex<ReagentPrototype>(reagent, out var reagentProto))
-                        ent.Comp.ResultCureReagents.Add(reagentProto.LocalizedName);
+                    allReadable = false;
+                    block.UnreadableCount++;
                 }
             }
-            else
+
+            if (allReadable && virus.Name is { } name)
+                block.Name = name;
+
+            // the cure reagents only show once every symptom of the strain has been revealed
+            if (virus.Cure is { } cure)
             {
-                ent.Comp.ResultCureHidden = true;
+                if (allReadable)
+                {
+                    foreach (var reagent in cure.Reagents)
+                    {
+                        if (_prototype.TryIndex<ReagentPrototype>(reagent, out var reagentProto))
+                            block.CureReagents.Add(reagentProto.LocalizedName);
+                    }
+                }
+                else
+                {
+                    block.CureHidden = true;
+                }
             }
+
+            ent.Comp.ResultViruses.Add(block);
         }
+    }
+
+    private void FinishPrint(Entity<VaccinatorComponent> ent)
+    {
+        var form = _formManager.TryGetFormFromDescriptor(
+            new FormDescriptor(ent.Comp.FormCollection, ent.Comp.FormGroup, ent.Comp.FormId));
+        if (form == null)
+        {
+            Log.Error($"Vaccinator form {ent.Comp.FormCollection}/{ent.Comp.FormGroup}/{ent.Comp.FormId} not found");
+            return;
+        }
+
+        var report = new StringBuilder();
+        foreach (var virus in ent.Comp.ResultViruses)
+        {
+            report.AppendLine(Loc.GetString("pathology-report-pathogen",
+                ("name", virus.Name ?? Loc.GetString("pathology-report-pathogen-unknown"))));
+            report.AppendLine(Loc.GetString("pathology-report-symptoms"));
+            if (virus.Symptoms.Count > 0)
+            {
+                foreach (var symptom in virus.Symptoms)
+                    report.AppendLine($" · {symptom}");
+            }
+            else
+                report.AppendLine(" · —");
+
+            report.AppendLine(Loc.GetString("pathology-report-unreadable", ("count", virus.UnreadableCount)));
+
+            var cure = virus.CureHidden
+                ? Loc.GetString("pathology-report-cure-hidden")
+                : virus.CureReagents.Count > 0
+                    ? string.Join(", ", virus.CureReagents)
+                    : "—";
+            report.AppendLine(Loc.GetString("pathology-report-cure", ("cure", cure)));
+            report.AppendLine();
+        }
+
+        var content = form.Content.Replace("$REPORT$", report.ToString().TrimEnd());
+
+        var paper = Spawn(form.PrototypeId, Transform(ent).Coordinates);
+        if (TryComp<PaperComponent>(paper, out var paperComp))
+            _paper.SetContent((paper, paperComp), content);
+        _metaData.SetEntityName(paper, form.EntityName);
     }
 
     private void UpdateUi(Entity<VaccinatorComponent> ent)
     {
         var hasSample = _itemSlots.GetItemOrNull(ent, ent.Comp.SlotId) != null;
         var scanning = ent.Comp.ScanEndTime != null;
-        var progress = PathologyMachine.ComputeScanProgress(ent.Comp.ScanEndTime, ent.Comp.ScanDuration, ent.Comp.HasResult, _timing.CurTime);
+        var printing = ent.Comp.PrintEndTime != null;
+        var operationEnd = ent.Comp.ScanEndTime ?? ent.Comp.PrintEndTime;
+        var operationDuration = scanning
+            ? ent.Comp.ScanDuration
+            : printing
+                ? ent.Comp.PrintDuration
+                : TimeSpan.Zero;
 
         var bufferTricordrazine = 0f;
         if (_solutionContainer.TryGetSolution(ent.Owner, ent.Comp.BufferSolutionId, out _, out var buffer))
@@ -246,25 +324,50 @@ public sealed partial class VaccinatorSystem : EntitySystem
         var state = new VaccinatorBoundUserInterfaceState(
             hasSample,
             scanning,
-            progress,
+            printing,
+            operationEnd,
+            operationDuration,
             ent.Comp.HasResult,
-            ent.Comp.ResultVirusName,
-            new List<string>(ent.Comp.ResultSymptoms),
-            ent.Comp.ResultUnreadableCount,
-            new List<string>(ent.Comp.ResultCureReagents),
-            ent.Comp.ResultCureHidden,
+            new List<VaccinatorVirusResult>(ent.Comp.ResultViruses),
             bufferTricordrazine);
 
         _ui.SetUiState(ent.Owner, VaccinatorUiKey.Key, state);
+
+        UpdateVisuals(ent);
+    }
+
+    private void UpdateVisuals(Entity<VaccinatorComponent> ent)
+    {
+        var fill = 0f;
+        if (_solutionContainer.TryGetSolution(ent.Owner, ent.Comp.BufferSolutionId, out _, out var buffer)
+            && buffer.MaxVolume > FixedPoint2.Zero)
+        {
+            var amount = buffer.GetTotalPrototypeQuantity(ent.Comp.TricordrazineReagent);
+            fill = Math.Clamp((float)(amount / buffer.MaxVolume), 0f, 1f);
+        }
+
+        _appearance.SetData(ent, VaccinatorVisuals.Running, ent.Comp.PrintEndTime != null);
+        _appearance.SetData(ent, VaccinatorVisuals.Vial, GetVialVisual(ent));
+        _appearance.SetData(ent, VaccinatorVisuals.BufferFill, fill);
+    }
+
+    private VaccinatorVial GetVialVisual(Entity<VaccinatorComponent> ent)
+    {
+        if (_itemSlots.GetItemOrNull(ent, ent.Comp.SlotId) is not { } item)
+            return VaccinatorVial.None;
+
+        if (!_solutionContainer.TryGetFitsInDispenser(item, out _, out var solution) || solution.Volume <= FixedPoint2.Zero)
+            return VaccinatorVial.Empty;
+
+        if (solution.GetTotalPrototypeQuantity(ent.Comp.TricordrazineReagent) > FixedPoint2.Zero)
+            return VaccinatorVial.Tricordrazine;
+
+        return VaccinatorVial.Blood;
     }
 
     private static void ClearResult(Entity<VaccinatorComponent> ent)
     {
         ent.Comp.HasResult = false;
-        ent.Comp.ResultVirusName = null;
-        ent.Comp.ResultSymptoms = new();
-        ent.Comp.ResultUnreadableCount = 0;
-        ent.Comp.ResultCureReagents = new();
-        ent.Comp.ResultCureHidden = false;
+        ent.Comp.ResultViruses = new();
     }
 }

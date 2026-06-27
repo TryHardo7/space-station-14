@@ -103,14 +103,19 @@ public abstract partial class SharedPathologySystem
 
         var candidates = cure is { Reagents.Count: > 0 } c
             ? pool.Accelerants.Where(a => !c.Reagents.Contains(a)).ToList()
-            : pool.Accelerants;
+            : pool.Accelerants.ToList();
 
         if (candidates.Count == 0)
             return result;
 
         var rng = GetStrainRng(symptoms, AccelerantSalt);
         foreach (var symptom in symptoms)
-            result[symptom] = Pick(rng, candidates);
+        {
+            if (candidates.Count == 0)
+                break; // distinct accelerants exhausted — remaining symptoms simply get none (just in case)
+
+            result[symptom] = PickAndTake(rng, candidates);
+        }
 
         return result;
     }

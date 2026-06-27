@@ -33,6 +33,25 @@ public abstract partial class SharedPathologySystem
         return result;
     }
 
+    public int ForceAdvanceAllPathologies(Entity<PathologyHolderComponent?> entity)
+    {
+        if (!Resolve(entity.Owner, ref entity.Comp, false))
+            return 0;
+
+        var advanced = 0;
+        foreach (var pathologyId in new List<ProtoId<PathologyPrototype>>(entity.Comp.ActivePathologies.Keys))
+        {
+            if (!entity.Comp.ActivePathologies.TryGetValue(pathologyId, out var data)
+                || !_prototype.Resolve(pathologyId, out var proto))
+                continue;
+
+            if (AdvancePathologyStage((entity.Owner, entity.Comp), proto, data))
+                advanced++;
+        }
+
+        return advanced;
+    }
+
     public bool TryAddRandom(Entity<PathologyHolderComponent?> entity, ProtoId<WeightedRandomPrototype> weightedPathology, float chance, IPathologyContext? context = null)
     {
         if (!_prototype.Resolve(weightedPathology, out var weightedRandomPrototype))

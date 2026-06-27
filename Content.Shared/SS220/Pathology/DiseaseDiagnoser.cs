@@ -29,50 +29,61 @@ public sealed class DiseaseDiagnoserTransferMutagenMessage : BoundUserInterfaceM
 public sealed class DiseaseDiagnoserCopyMessage : BoundUserInterfaceMessage;
 
 [Serializable, NetSerializable]
+public sealed class DiseaseDiagnoserPrintMessage : BoundUserInterfaceMessage;
+
+/// <summary>One analysed virus from the sample — its own name, symptoms and spread vectors.</summary>
+[Serializable, NetSerializable]
+public sealed class DiseaseDiagnoserVirusResult
+{
+    /// <summary>Virus name, null if not every symptom is readable.</summary>
+    public string? Name;
+
+    /// <summary>Descriptions of symptoms diagnoser could read.</summary>
+    public List<string> Symptoms = new();
+
+    /// <summary>How many symptoms could not be decoded.</summary>
+    public int UnreadableCount;
+
+    /// <summary>Spread vectors, filled only once every symptom of the strain has been revealed.</summary>
+    public VirusTransmissionVector Transmission;
+}
+
+[Serializable, NetSerializable]
 public sealed class DiseaseDiagnoserBoundUserInterfaceState : BoundUserInterfaceState
 {
     public readonly bool HasSample;
     public readonly bool Scanning;
+    public readonly bool Printing;
 
-    /// <summary>Scan progress, 0..1.</summary>
-    public readonly float Progress;
+    /// <summary>When the running scan/print finishes. Client animates bar off this.</summary>
+    public readonly TimeSpan? OperationEnd;
+    public readonly TimeSpan OperationDuration;
 
     public readonly bool HasResult;
 
-    /// <summary>Virus name, set only when every symptom of a single virus is readable.</summary>
-    public readonly string? VirusName;
+    /// <summary>One block per virus found in sample.</summary>
+    public readonly List<DiseaseDiagnoserVirusResult> Viruses;
 
-    /// <summary>Descriptions of symptoms diagnoser could read.</summary>
-    public readonly List<string> Symptoms;
-
-    /// <summary>How many symptoms could not be decoded (the "unreadable" hint).</summary>
-    public readonly int UnreadableCount;
-
-    /// <summary>Union of the fully-decoded viruses spread vectors, for the "ways it spreads" line.</summary>
-    public readonly VirusTransmissionVector Transmission;
-
-    /// <summary>Stable mutagen currently held in the machine buffer.</summary>
+    /// <summary>Stable mutagen currently held in buffer.</summary>
     public readonly float BufferMutagen;
 
     public DiseaseDiagnoserBoundUserInterfaceState(
         bool hasSample,
         bool scanning,
-        float progress,
+        bool printing,
+        TimeSpan? operationEnd,
+        TimeSpan operationDuration,
         bool hasResult,
-        string? virusName,
-        List<string> symptoms,
-        int unreadableCount,
-        VirusTransmissionVector transmission,
+        List<DiseaseDiagnoserVirusResult> viruses,
         float bufferMutagen)
     {
         HasSample = hasSample;
         Scanning = scanning;
-        Progress = progress;
+        Printing = printing;
+        OperationEnd = operationEnd;
+        OperationDuration = operationDuration;
         HasResult = hasResult;
-        VirusName = virusName;
-        Symptoms = symptoms;
-        UnreadableCount = unreadableCount;
-        Transmission = transmission;
+        Viruses = viruses;
         BufferMutagen = bufferMutagen;
     }
 }

@@ -2,6 +2,8 @@
 
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.FixedPoint;
+using Content.Shared.SS220.Pathology;
+using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.Pathology;
@@ -36,15 +38,28 @@ public sealed partial class VaccinatorComponent : Component
     [DataField]
     public string BottleSolutionId = "drink";
 
-    public TimeSpan? ScanEndTime;
-    public TimeSpan NextUiUpdate;
+    /// <summary>How long print takes, keep in sync with animation length.</summary>
+    [DataField]
+    public TimeSpan PrintDuration = TimeSpan.FromSeconds(3);
 
-    // --- last scan result ---
+    /// <summary>Paper form.</summary>
+    [DataField]
+    public string FormCollection = "nanotrasen_station";
+
+    [DataField]
+    public string FormGroup = "medical";
+
+    [DataField]
+    public string FormId = "med_rep_vaccine";
+
+    [DataField]
+    public SoundSpecifier PrintSound = new SoundPathSpecifier("/Audio/Machines/diagnoser_printing.ogg");
+
+    public TimeSpan? ScanEndTime;
+    public TimeSpan? PrintEndTime;
 
     public bool HasResult;
-    public string? ResultVirusName;
-    public List<string> ResultSymptoms = new();
-    public int ResultUnreadableCount;
-    public List<string> ResultCureReagents = new();
-    public bool ResultCureHidden;
+
+    /// <summary>One block per virus.</summary>
+    public List<VaccinatorVirusResult> ResultViruses = new();
 }

@@ -9,7 +9,6 @@ using Content.Shared.SS220.Language.Components;
 using Content.Shared.SS220.Language.Systems;
 using Content.Shared.SS220.Pathology;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Random;
 
 namespace Content.Server.SS220.Pathology;
 
@@ -19,7 +18,7 @@ public sealed partial class SynthificationSystem : EntitySystem
     [Dependency] private SharedLanguageSystem _language = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private IPrototypeManager _prototype = default!;
-    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {
@@ -35,14 +34,23 @@ public sealed partial class SynthificationSystem : EntitySystem
     {
         var lawsets = _prototype.EnumeratePrototypes<SiliconLawsetPrototype>().ToList();
         if (lawsets.Count > 0)
-            ent.Comp.RolledLawset = _random.Pick(lawsets).ID;
+        {
+            // seed lawset roll so reactivated (or otherwise re-created)
+            // Synthification reproduces same lawset
+            var rng = new System.Random(ent.Owner.GetHashCode());
+            ent.Comp.RolledLawset = lawsets[rng.Next(lawsets.Count)].ID;
+        }
 
         _actions.AddAction(ent.Owner, ref ent.Comp.LawsActionEntity, ent.Comp.LawsAction);
+
+        // all already got UserInterfaceComponent, so register laws BUI interface directly instead
+        _ui.SetUi(ent.Owner, SiliconLawsUiKey.Key, new InterfaceData("SiliconLawBoundUserInterface", requireInputValidation: false));
     }
 
     private void OnShutdown(Entity<SynthificationComponent> ent, ref ComponentShutdown args)
     {
         _actions.RemoveAction(ent.Owner, ent.Comp.LawsActionEntity);
+        _ui.CloseUi(ent.Owner, SiliconLawsUiKey.Key);
         if (Terminating(ent) || !ent.Comp.Snapshotted || !TryComp<LanguageComponent>(ent, out var language))
             return;
 
