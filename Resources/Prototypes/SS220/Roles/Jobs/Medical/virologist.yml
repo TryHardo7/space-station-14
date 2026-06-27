@@ -28,6 +28,17 @@
 - type: playTimeTracker
   id: JobVirologist
 
+- type: chameleonOutfit
+  id: VirologistChameleonOutfit
+  job: Virologist
+  equipment:
+    head: ClothingHeadHatBeretMedic
+    mask: ClothingMaskSterile
+    jumpsuit: ClothingUniformJumpsuitVirology
+    outerClothing: ClothingOuterCoatLab
+    gloves: ClothingHandsGlovesLatex
+    shoes: ClothingShoesColorWhite
+
 - type: entity
   parent: MedicalIDCard
   id: VirologistIDCard
