@@ -45,9 +45,8 @@ public sealed partial class DogVitalitySystem : EntitySystem
         if (ent.Comp.Reverting || !TryGetThreshold(ent, out var value))
             return;
 
-        var modifier = new MobThresholdsModifier { Multiplier = 0, Flat = value };
-        args.ApplyModifier(MobState.Critical, modifier);
-        args.ApplyModifier(MobState.Dead, modifier);
+        args.ApplyModifier(MobState.Critical, new MobThresholdsModifier { Multiplier = 0, Flat = value });
+        args.ApplyModifier(MobState.Dead, new MobThresholdsModifier { Multiplier = 0, Flat = value + ent.Comp.DeathThresholdOffset });
     }
 
     private void Refresh(Entity<DogVitalityComponent> ent)

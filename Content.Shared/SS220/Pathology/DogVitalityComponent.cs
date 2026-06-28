@@ -12,9 +12,13 @@ public sealed partial class DogVitalityComponent : Component
     [DataField]
     public ProtoId<PathologyPrototype> Pathology = "DogVitality";
 
-    /// <summary>Crit/death threshold per stage.</summary>
+    /// <summary>Crit threshold per stage.</summary>
     [DataField]
     public List<FixedPoint2> Thresholds = new() { 110, 120, 130 };
+
+    /// <summary>Death threshold so this isnt "bugged".</summary>
+    [DataField]
+    public FixedPoint2 DeathThresholdOffset = 1;
 
     /// <summary>Set while the component is being removed, so the refresh drops our modifier and reverts to base.</summary>
     [ViewVariables]

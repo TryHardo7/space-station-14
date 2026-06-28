@@ -57,6 +57,8 @@
           - FitsInDispenser
   - type: ContainerContainer
     containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
       diagnoserSlot: !type:ContainerSlot
   - type: SolutionContainerManager
     solutions:
