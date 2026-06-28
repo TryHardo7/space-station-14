@@ -1,4 +1,5 @@
 disease-diagnoser-title = Диагност болезней
+disease-diagnoser-header = ДИАГНОСТИКА
 disease-diagnoser-scan-button = Сканировать образец
 disease-diagnoser-eject-button = Извлечь
 disease-diagnoser-no-sample = Нет образца. Вставьте пробирку с кровью.
@@ -21,3 +22,8 @@ disease-diagnoser-no-virus = В образце нет вируса.
 disease-diagnoser-not-enough-mutagen = В буфере недостаточно стабильного мутагена.
 disease-diagnoser-no-mutagen-source = Во вставленной ёмкости нет стабильного мутагена.
 disease-diagnoser-copied = Вирус переписан в новый пузырёк.
+
+# Общие элементы консолей патологии (используются окнами диагнозера и вакцинатора)
+pathology-console-station = СТАНЦИЯ: {$name}
+pathology-console-station-unknown = СТАНЦИЯ: —
+pathology-console-os = nt-os 0.220-c35

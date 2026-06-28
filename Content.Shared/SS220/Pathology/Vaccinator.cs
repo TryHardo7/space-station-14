@@ -61,6 +61,7 @@ public sealed class VaccinatorBoundUserInterfaceState : BoundUserInterfaceState
     public readonly List<VaccinatorVirusResult> Viruses;
 
     public readonly float BufferTricordrazine;
+    public readonly string? StationName;
 
     public VaccinatorBoundUserInterfaceState(
         bool hasSample,
@@ -70,7 +71,8 @@ public sealed class VaccinatorBoundUserInterfaceState : BoundUserInterfaceState
         TimeSpan operationDuration,
         bool hasResult,
         List<VaccinatorVirusResult> viruses,
-        float bufferTricordrazine)
+        float bufferTricordrazine,
+        string? stationName)
     {
         HasSample = hasSample;
         Scanning = scanning;
@@ -80,5 +82,6 @@ public sealed class VaccinatorBoundUserInterfaceState : BoundUserInterfaceState
         HasResult = hasResult;
         Viruses = viruses;
         BufferTricordrazine = bufferTricordrazine;
+        StationName = stationName;
     }
 }

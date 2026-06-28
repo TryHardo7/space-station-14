@@ -22,7 +22,6 @@ public sealed class DiseaseDiagnoserBoundUserInterface : BoundUserInterface
         base.Open();
 
         _window = this.CreateWindow<DiseaseDiagnoserWindow>();
-        _window.Title = EntMan.GetComponent<MetaDataComponent>(Owner).EntityName;
         _window.ScanButton.OnPressed += _ => SendMessage(new DiseaseDiagnoserScanMessage());
         _window.EjectButton.OnPressed += _ => SendMessage(new ItemSlotButtonPressedEvent("diagnoserSlot"));
         _window.TransferButton.OnPressed += _ => SendMessage(new DiseaseDiagnoserTransferMutagenMessage());

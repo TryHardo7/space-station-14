@@ -1,4 +1,5 @@
 vaccinator-title = Вакцинатор
+vaccinator-header = ВАКЦИНАЦИЯ
 vaccinator-scan-button = Сканировать образец
 vaccinator-eject-button = Извлечь
 vaccinator-transfer-button = Слить трикордазин

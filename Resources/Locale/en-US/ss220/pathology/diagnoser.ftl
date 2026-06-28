@@ -1,4 +1,5 @@
 disease-diagnoser-title = Disease Diagnoser
+disease-diagnoser-header = DIAGNOSTICS
 disease-diagnoser-scan-button = Scan sample
 disease-diagnoser-eject-button = Eject
 disease-diagnoser-no-sample = No sample. Insert a blood vial.
@@ -21,3 +22,8 @@ disease-diagnoser-no-virus = No virus in the sample.
 disease-diagnoser-not-enough-mutagen = Not enough stable mutagen in the buffer.
 disease-diagnoser-no-mutagen-source = No stable mutagen in the inserted container.
 disease-diagnoser-copied = The virus is transcribed into a fresh bottle.
+
+# Shared pathology console chrome (used by the diagnoser and vaccinator windows)
+pathology-console-station = STATION: {$name}
+pathology-console-station-unknown = STATION: —
+pathology-console-os = nt-os 0.220-c35

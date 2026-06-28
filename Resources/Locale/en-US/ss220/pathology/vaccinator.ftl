@@ -1,4 +1,5 @@
 vaccinator-title = Vaccinator
+vaccinator-header = VACCINATION
 vaccinator-scan-button = Scan sample
 vaccinator-eject-button = Eject
 vaccinator-transfer-button = Drain tricordrazine

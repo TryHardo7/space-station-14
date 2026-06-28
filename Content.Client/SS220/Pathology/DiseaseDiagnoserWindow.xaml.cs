@@ -18,6 +18,7 @@ public sealed partial class DiseaseDiagnoserWindow : DefaultWindow
     private TimeSpan? _operationEnd;
     private TimeSpan _operationDuration;
     private bool _hasResult;
+    private bool _scanning;
 
     public DiseaseDiagnoserWindow()
     {
@@ -28,12 +29,13 @@ public sealed partial class DiseaseDiagnoserWindow : DefaultWindow
     protected override void FrameUpdate(FrameEventArgs args)
     {
         base.FrameUpdate(args);
-        ScanProgress.Value = ComputeProgress();
+        ScanProgress.Progress = ComputeProgress();
     }
 
     private float ComputeProgress()
     {
-        if (_operationEnd is { } end && _operationDuration > TimeSpan.Zero)
+        // the DNA bar tracks scanning only — printing keeps the helix fully decoded
+        if (_scanning && _operationEnd is { } end && _operationDuration > TimeSpan.Zero)
         {
             var remaining = (end - _timing.CurTime) / _operationDuration;
             return Math.Clamp(1f - (float)remaining, 0f, 1f);
@@ -50,7 +52,12 @@ public sealed partial class DiseaseDiagnoserWindow : DefaultWindow
         _operationEnd = state.OperationEnd;
         _operationDuration = state.OperationDuration;
         _hasResult = state.HasResult;
-        ScanProgress.Value = ComputeProgress();
+        _scanning = state.Scanning;
+        ScanProgress.Progress = ComputeProgress();
+
+        StationLabel.Text = state.StationName is { } station
+            ? Loc.GetString("pathology-console-station", ("name", station))
+            : Loc.GetString("pathology-console-station-unknown");
 
         StatusLabel.Text = !state.HasSample
             ? Loc.GetString("disease-diagnoser-no-sample")

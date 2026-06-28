@@ -66,6 +66,7 @@ public sealed class DiseaseDiagnoserBoundUserInterfaceState : BoundUserInterface
 
     /// <summary>Stable mutagen currently held in buffer.</summary>
     public readonly float BufferMutagen;
+    public readonly string? StationName;
 
     public DiseaseDiagnoserBoundUserInterfaceState(
         bool hasSample,
@@ -75,7 +76,8 @@ public sealed class DiseaseDiagnoserBoundUserInterfaceState : BoundUserInterface
         TimeSpan operationDuration,
         bool hasResult,
         List<DiseaseDiagnoserVirusResult> viruses,
-        float bufferMutagen)
+        float bufferMutagen,
+        string? stationName)
     {
         HasSample = hasSample;
         Scanning = scanning;
@@ -85,5 +87,6 @@ public sealed class DiseaseDiagnoserBoundUserInterfaceState : BoundUserInterface
         HasResult = hasResult;
         Viruses = viruses;
         BufferMutagen = bufferMutagen;
+        StationName = stationName;
     }
 }

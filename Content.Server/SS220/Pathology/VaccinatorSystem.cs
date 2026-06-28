@@ -6,6 +6,7 @@ using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.FixedPoint;
 using Content.Server.Power.EntitySystems;
+using Content.Server.Station.Systems;
 using Content.Shared.Popups;
 using Content.Shared.SS220.Pathology;
 using Robust.Server.GameObjects;
@@ -33,6 +34,7 @@ public sealed partial class VaccinatorSystem : EntitySystem
     [Dependency] private FormManager _formManager = default!;
     [Dependency] private PaperSystem _paper = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private StationSystem _station = default!;
     [Dependency] private MetaDataSystem _metaData = default!;
 
     public override void Initialize()
@@ -321,6 +323,10 @@ public sealed partial class VaccinatorSystem : EntitySystem
         if (_solutionContainer.TryGetSolution(ent.Owner, ent.Comp.BufferSolutionId, out _, out var buffer))
             bufferTricordrazine = (float)buffer.GetTotalPrototypeQuantity(ent.Comp.TricordrazineReagent);
 
+        string? stationName = null;
+        if (_station.GetOwningStation(ent.Owner) is { } station)
+            stationName = Name(station);
+
         var state = new VaccinatorBoundUserInterfaceState(
             hasSample,
             scanning,
@@ -329,7 +335,8 @@ public sealed partial class VaccinatorSystem : EntitySystem
             operationDuration,
             ent.Comp.HasResult,
             new List<VaccinatorVirusResult>(ent.Comp.ResultViruses),
-            bufferTricordrazine);
+            bufferTricordrazine,
+            stationName);
 
         _ui.SetUiState(ent.Owner, VaccinatorUiKey.Key, state);
 

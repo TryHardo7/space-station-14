@@ -18,6 +18,7 @@ public sealed partial class VaccinatorWindow : DefaultWindow
     private TimeSpan? _operationEnd;
     private TimeSpan _operationDuration;
     private bool _hasResult;
+    private bool _scanning;
 
     public VaccinatorWindow()
     {
@@ -28,12 +29,12 @@ public sealed partial class VaccinatorWindow : DefaultWindow
     protected override void FrameUpdate(FrameEventArgs args)
     {
         base.FrameUpdate(args);
-        ScanProgress.Value = ComputeProgress();
+        ScanProgress.Progress = ComputeProgress();
     }
 
     private float ComputeProgress()
     {
-        if (_operationEnd is { } end && _operationDuration > TimeSpan.Zero)
+        if (_scanning && _operationEnd is { } end && _operationDuration > TimeSpan.Zero)
         {
             var remaining = (end - _timing.CurTime) / _operationDuration;
             return Math.Clamp(1f - (float)remaining, 0f, 1f);
@@ -50,7 +51,12 @@ public sealed partial class VaccinatorWindow : DefaultWindow
         _operationEnd = state.OperationEnd;
         _operationDuration = state.OperationDuration;
         _hasResult = state.HasResult;
-        ScanProgress.Value = ComputeProgress();
+        _scanning = state.Scanning;
+        ScanProgress.Progress = ComputeProgress();
+
+        StationLabel.Text = state.StationName is { } station
+            ? Loc.GetString("pathology-console-station", ("name", station))
+            : Loc.GetString("pathology-console-station-unknown");
 
         StatusLabel.Text = !state.HasSample
             ? Loc.GetString("vaccinator-no-sample")

@@ -6,6 +6,7 @@ using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.FixedPoint;
 using Content.Server.Power.EntitySystems;
+using Content.Server.Station.Systems;
 using Content.Server.SS220.Photocopier.Forms;
 using Content.Shared.Paper;
 using Content.Shared.Popups;
@@ -31,6 +32,7 @@ public sealed partial class DiseaseDiagnoserSystem : EntitySystem
     [Dependency] private PaperSystem _paper = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private MetaDataSystem _metaData = default!;
+    [Dependency] private StationSystem _station = default!;
 
     public override void Initialize()
     {
@@ -321,6 +323,10 @@ public sealed partial class DiseaseDiagnoserSystem : EntitySystem
         if (_solutionContainer.TryGetSolution(ent.Owner, ent.Comp.BufferSolutionId, out _, out var buffer))
             bufferMutagen = (float)buffer.GetTotalPrototypeQuantity(ent.Comp.MutagenReagent);
 
+        string? stationName = null;
+        if (_station.GetOwningStation(ent.Owner) is { } station)
+            stationName = Name(station);
+
         var state = new DiseaseDiagnoserBoundUserInterfaceState(
             hasSample,
             scanning,
@@ -329,7 +335,8 @@ public sealed partial class DiseaseDiagnoserSystem : EntitySystem
             operationDuration,
             ent.Comp.HasResult,
             new List<DiseaseDiagnoserVirusResult>(ent.Comp.ResultViruses),
-            bufferMutagen);
+            bufferMutagen,
+            stationName);
 
         _ui.SetUiState(ent.Owner, DiseaseDiagnoserUiKey.Key, state);
 

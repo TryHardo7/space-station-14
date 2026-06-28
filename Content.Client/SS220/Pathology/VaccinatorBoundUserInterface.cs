@@ -22,7 +22,6 @@ public sealed class VaccinatorBoundUserInterface : BoundUserInterface
         base.Open();
 
         _window = this.CreateWindow<VaccinatorWindow>();
-        _window.Title = EntMan.GetComponent<MetaDataComponent>(Owner).EntityName;
         _window.ScanButton.OnPressed += _ => SendMessage(new VaccinatorScanMessage());
         _window.EjectButton.OnPressed += _ => SendMessage(new ItemSlotButtonPressedEvent("vaccinatorSlot"));
         _window.TransferButton.OnPressed += _ => SendMessage(new VaccinatorTransferMessage());
