@@ -6,4 +6,5 @@ pathology-symptom-stage = {$symptom} — стадия {$stage}/{$max}
 virus-test-name = Тестовый вирус
 
 pathology-sneezing-detection = Приступы чихания
+pathology-cough-detection = Приступы кашля
 pathology-slowness-detection = Мышечная слабость

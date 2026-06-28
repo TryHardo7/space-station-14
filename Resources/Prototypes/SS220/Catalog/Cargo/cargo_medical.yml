@@ -1,0 +1,9 @@
+- type: cargoProduct
+  id: VirusSampleKit
+  icon:
+    sprite: Objects/Specific/Chemistry/vial.rsi
+    state: vial
+  product: CrateVirusSamples
+  cost: 5000
+  category: cargoproduct-category-name-medical
+  group: market

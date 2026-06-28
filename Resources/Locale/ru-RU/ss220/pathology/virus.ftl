@@ -1,8 +1,12 @@
 pathology-sneezing-name = Чихание
 pathology-sneezing-description = Носителя одолевают приступы чихания.
 pathology-sneezing-examine = выглядит простуженным и постоянно чихает.
+pathology-cough-name = Кашель
+pathology-cough-description = Носителя одолевают приступы кашля.
+pathology-cough-examine = выглядит простуженным и постоянно кашляет.
 
 virus-cold-name = Простуда
+virus-red-death-name = Красная смерть
 virus-quvot-name = Квот
 virus-hemolacria-name = Гемолакрия
 virus-test-dna-name = Тестовый вирус (ДНК)

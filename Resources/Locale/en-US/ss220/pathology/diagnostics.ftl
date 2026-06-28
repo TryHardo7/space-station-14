@@ -6,4 +6,5 @@ pathology-symptom-stage = {$symptom} — stage {$stage}/{$max}
 virus-test-name = Test Virus
 
 pathology-sneezing-detection = Sneezing fits
+pathology-cough-detection = Coughing fits
 pathology-slowness-detection = Muscular weakness

@@ -159,3 +159,17 @@
   - Stupefaction
   - Clumsiness
   - Sneezing
+
+# Red Death
+- type: virus
+  id: RedDeath
+  name: virus-red-death-name
+  transmission:
+    contactChance: 0.5
+    proximityChance: 0.1
+    proximityRange: 2
+  symptoms:
+  - Cough
+  - ChronicFatigue
+  - Necrosis
+  - EyeBleeding

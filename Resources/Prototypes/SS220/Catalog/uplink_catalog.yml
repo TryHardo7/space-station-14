@@ -788,3 +788,24 @@
       Telecrystal: 1
     HardDynamic:
       Telecrystal: 1
+
+# Chemicals
+- type: listing
+  id: UplinkRedDeathVirusSample
+  name: uplink-red-death-name
+  description: uplink-red-death-desc
+  icon: { sprite: Objects/Specific/Chemistry/vial.rsi, state: vial }
+  productEntity: RedDeathVirusSample
+  discountDownTo:
+    Telecrystal: 4
+  cost:
+    Telecrystal: 6
+  categories:
+  - UplinkChemicals
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 4
+    MediumDynamic:
+      Telecrystal: 5
+    HardDynamic:
+      Telecrystal: 6

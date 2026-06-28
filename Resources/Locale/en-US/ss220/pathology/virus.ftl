@@ -1,8 +1,12 @@
 pathology-sneezing-name = Sneezing
 pathology-sneezing-description = The host is wracked by fits of sneezing.
 pathology-sneezing-examine = looks feverish and keeps sneezing.
+pathology-cough-name = Cough
+pathology-cough-description = The host is wracked by fits of coughing.
+pathology-cough-examine = looks feverish and keeps coughing.
 
 virus-cold-name = Common cold
+virus-red-death-name = Red Death
 virus-quvot-name = Quvot
 virus-hemolacria-name = Hemolacria
 virus-test-dna-name = Test Virus (DNA)

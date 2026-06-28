@@ -22,6 +22,34 @@
         emoteInterval: 8
 
 - type: pathology
+  id: Cough
+  name: pathology-cough-name
+  genome: Dna
+  definition:
+  - description: pathology-cough-description
+    detection:
+      description: pathology-cough-detection
+    manifestation:
+      visible: true
+      examineText: pathology-cough-examine
+      emote: Cough
+      emoteChance: 1
+      emoteInterval: 8
+    speciesManifestations:
+      Reptilian:
+        visible: true
+        examineText: pathology-sneezing-examine
+        emote: Sneeze
+        emoteChance: 1
+        emoteInterval: 8
+      Moth:
+        visible: true
+        examineText: pathology-sneezing-examine
+        emote: Sneeze
+        emoteChance: 1
+        emoteInterval: 8
+
+- type: pathology
   id: Drowsiness
   name: pathology-drowsiness-name
   genome: Rna
