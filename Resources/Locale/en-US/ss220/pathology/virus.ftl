@@ -9,7 +9,6 @@ virus-cold-name = Common cold
 virus-red-death-name = Red Death
 virus-quvot-name = Quvot
 virus-hemolacria-name = Hemolacria
-virus-test-dna-name = Test Virus (DNA)
 virus-mimosa-name = Mimosa
 virus-synthesia-name = Synthesia
 virus-shitsec-name = Shitsec

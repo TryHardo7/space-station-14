@@ -9,7 +9,6 @@ virus-cold-name = Простуда
 virus-red-death-name = Красная смерть
 virus-quvot-name = Квот
 virus-hemolacria-name = Гемолакрия
-virus-test-dna-name = Тестовый вирус (ДНК)
 virus-mimosa-name = Мимоза
 virus-synthesia-name = Синт-езия
 virus-shitsec-name = Щиткур

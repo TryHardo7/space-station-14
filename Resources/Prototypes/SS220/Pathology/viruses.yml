@@ -46,25 +46,6 @@
   symptoms:
   - EyeBleeding
 
-#
-- type: virus
-  id: VirusTest
-  name: virus-test-name
-  transmission:
-    contactChance: 0.5
-  symptoms:
-  - Drowsiness
-  - Sneezing
-
-- type: virus
-  id: VirusTestDna
-  name: virus-test-dna-name
-  transmission:
-    contactChance: 0.5
-  symptoms:
-  - SkinBurst
-  - Necrosis
-
 # Mimosa
 - type: virus
   id: Mimosa
