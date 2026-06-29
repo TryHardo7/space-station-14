@@ -68,7 +68,7 @@ public sealed partial class VaccinatorWindow : DefaultWindow
                         ? Loc.GetString("vaccinator-result")
                         : Loc.GetString("vaccinator-ready");
 
-        ResultsContainer.RemoveAllChildren();
+        ResultsContainer.DisposeAllChildren();
         foreach (var virus in state.Viruses)
             ResultsContainer.AddChild(BuildVirusBlock(virus));
 

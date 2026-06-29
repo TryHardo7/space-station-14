@@ -31,7 +31,19 @@ public abstract partial class SharedPathologySystem
     // Lists of reagents to roll from (cure and accelerants)
     private System.Random GetStrainRng(List<ProtoId<PathologyPrototype>> symptoms, int salt)
     {
-        return new System.Random(_strainSeed ^ GetIdentity(symptoms).GetHashCode() ^ salt);
+        return new System.Random(_strainSeed ^ StableHash(GetIdentity(symptoms)) ^ salt);
+    }
+
+    // FNV-1a
+    private static int StableHash(string value)
+    {
+        unchecked
+        {
+            var hash = -2128831035; // offset
+            foreach (var c in value)
+                hash = (hash ^ c) * 16777619; // prime
+            return hash;
+        }
     }
 
     private string GenerateMutantName(List<ProtoId<PathologyPrototype>> symptoms)

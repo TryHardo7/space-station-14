@@ -69,7 +69,7 @@ public sealed partial class DiseaseDiagnoserWindow : DefaultWindow
                         ? Loc.GetString("disease-diagnoser-result")
                         : Loc.GetString("disease-diagnoser-ready");
 
-        ResultsContainer.RemoveAllChildren();
+        ResultsContainer.DisposeAllChildren();
         foreach (var virus in state.Viruses)
             ResultsContainer.AddChild(BuildVirusBlock(virus));
 
