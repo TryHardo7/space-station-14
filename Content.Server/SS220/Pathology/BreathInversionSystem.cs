@@ -50,8 +50,8 @@ public sealed partial class BreathInversionSystem : EntitySystem
             || metab.MetabolizerTypes is not { } types)
             return;
 
-        // snapshot the original types, then flip oxygen-breather <-> nitrogen-breather
-        inv.Original[lung.Owner] = [.. types];
+        if (!inv.Original.TryAdd(lung.Owner, [.. types]))
+            return;
 
         var invertToOxygen = types.Overlaps(inv.NitrogenBreathers);
         types.Clear();
@@ -70,6 +70,7 @@ public sealed partial class BreathInversionSystem : EntitySystem
         // put the lung's original metabolizer types back when cured
         types.Clear();
         types.UnionWith(original);
+        inv.Original.Remove(lung.Owner); // drop the snapshot so a later re-apply snapshots afresh
         Dirty(lung.Owner, metab);
     }
 }

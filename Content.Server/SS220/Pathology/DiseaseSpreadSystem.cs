@@ -1,5 +1,7 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Content.Server.Atmos.EntitySystems;
+using Content.Shared.Atmos;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
@@ -17,6 +19,7 @@ public sealed partial class DiseaseSpreadSystem : EntitySystem
     [Dependency] private SharedPathologySystem _pathology = default!;
     [Dependency] private DiseaseContaminationSystem _contamination = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private AtmosphereSystem _atmos = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedInteractionSystem _interaction = default!;
     [Dependency] private MobStateSystem _mobState = default!;
@@ -25,6 +28,7 @@ public sealed partial class DiseaseSpreadSystem : EntitySystem
 
     private static readonly TimeSpan ProximityInterval = TimeSpan.FromSeconds(1);
     private TimeSpan _nextScan;
+    private const float MinAirbornePressure = Atmospherics.HazardLowPressure;
 
     public override void Initialize()
     {
@@ -61,6 +65,9 @@ public sealed partial class DiseaseSpreadSystem : EntitySystem
         // mask on host stops all "airborne" spread this tick
         // checked once here rather than once per virus
         if (IsVectorBlocked(source.Owner, VirusTransmissionVector.Proximity))
+            return;
+
+        if (_atmos.GetContainingMixture(source.Owner) is not { } air || air.Pressure < MinAirbornePressure)
             return;
 
         var coords = _transform.GetMapCoordinates(source.Owner);
