@@ -45,7 +45,7 @@ public sealed partial class DiseaseSpreadSystem : EntitySystem
         if (args.Method != ReactionMethod.Touch)
             return;
 
-        _pathology.InfectFromReagent(ent, args.ReagentQuantity.Reagent);
+        _pathology.InfectFromReagent(ent!, args.ReagentQuantity.Reagent);
     }
 
     public override void Update(float frameTime)
@@ -145,7 +145,7 @@ public sealed partial class DiseaseSpreadSystem : EntitySystem
             foreach (var virus in contamination.Viruses)
             {
                 if (virus.Transmission is { ContactChance: > 0f } transmission && _random.Prob(transmission.ContactChance))
-                    _pathology.AddVirus(ent, virus.Clone());
+                    _pathology.AddVirus(ent!, virus.Clone());
             }
         }
     }
