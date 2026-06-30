@@ -62,13 +62,7 @@ public sealed partial class DiseaseCureSystem : EntitySystem
             return;
 
         foreach (var quantity in new List<ReagentQuantity>(blood.Contents))
-        {
-            if (VirusData.From(quantity.Reagent) is not { Viruses.Count: > 0 } virusData)
-                continue;
-
-            foreach (var virus in new List<VirusInstance>(virusData.Viruses))
-                _pathology.AddVirus(ent!, virus.Clone());
-        }
+            _pathology.InfectFromReagent(ent!, quantity.Reagent);
     }
 
     private static bool HasVirus(Solution blood)

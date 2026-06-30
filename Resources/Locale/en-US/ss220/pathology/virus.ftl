@@ -7,6 +7,7 @@ pathology-cough-examine = looks feverish and keeps coughing.
 
 virus-cold-name = Common cold
 virus-red-death-name = Red Death
+virus-dragon-blood-name = Dragon's Blood
 virus-quvot-name = Quvot
 virus-hemolacria-name = Hemolacria
 virus-mimosa-name = Mimosa
@@ -71,8 +72,6 @@ pathology-hyperabsorption-progress-3 = A relentless hunger gnaws at you.
 pathology-autorespiration-name = Autorespiration
 pathology-autorespiration-description = The host's blood oxygenates itself.
 pathology-autorespiration-detection = Blood auto-oxygenation
-pathology-autorespiration-progress-2 = Breathing comes even easier.
-pathology-autorespiration-progress-3 = It's as if you don't need to breathe at all.
 
 pathology-burning-blood-name = Burning blood
 pathology-burning-blood-description = The host's blood runs overheated and threatens to combust.
@@ -105,8 +104,6 @@ pathology-synthification-progress-3 = Human speech slips away. Only binary remai
 pathology-alcosia-name = Alcosia
 pathology-alcosia-description = Ethanol synthesises itself in the host's blood.
 pathology-alcosia-detection = Endogenous ethanol
-pathology-alcosia-progress-2 = Your head buzzes harder.
-pathology-alcosia-progress-3 = You're getting seriously hammered.
 
 pathology-radiophasia-name = Radiophasia
 pathology-radiophasia-description = The host's body is radioactive, and the radiation mends it in turn.
@@ -136,8 +133,6 @@ pathology-narcophasia-name = Narcophasia
 pathology-narcophasia-description = A narcotic synthesises itself in the host's blood.
 pathology-narcophasia-detection = Endogenous psychedelic
 pathology-narcophasia-examine-1 = has a glassy, faraway look.
-pathology-narcophasia-examine-2 = is clearly out of it and drifting far away.
-pathology-narcophasia-progress-2 = The world swims and smears ever harder.
 
 pathology-stuffy-nose-name = Stuffy nose
 pathology-stuffy-nose-description = The host's nose is blocked — under a mask, they can't breathe.

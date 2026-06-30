@@ -241,6 +241,14 @@ public abstract partial class SharedPathologySystem
         AddVirusInstance((entity.Owner, entity.Comp), instance);
         return true;
     }
+    public void InfectFromReagent(Entity<PathologyHolderComponent?> entity, ReagentId reagent)
+    {
+        if (VirusData.From(reagent) is not { Viruses.Count: > 0 } virusData)
+            return;
+
+        foreach (var virus in new List<VirusInstance>(virusData.Viruses))
+            AddVirus(entity, virus.Clone());
+    }
 
     private void AddVirusInstance(Entity<PathologyHolderComponent> entity, VirusInstance instance)
     {

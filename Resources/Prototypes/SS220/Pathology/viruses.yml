@@ -19,6 +19,7 @@
 #
 # todo: write comprehend instruction about pathogenes
 
+# Cold
 - type: virus
   id: Cold
   name: virus-cold-name
@@ -154,3 +155,15 @@
   - ChronicFatigue
   - Necrosis
   - EyeBleeding
+
+# Dragon Blood
+- type: virus
+  id: DragonBlood
+  name: virus-dragon-blood-name
+  transmission:
+    contactChance: 0.5
+  symptoms:
+  - BurningBlood
+  - Paracusia
+  - Hyperabsorption
+  - TricordTolerance

@@ -1,6 +1,7 @@
 - type: entity
   id: Vaccinator
-  parent: BaseMachinePowered
+  # parent: BaseMachinePowered
+  parent: [ BaseMachinePowered, SmallConstructibleMachine ] # SS220
   name: vaccinator
   description: A machine that creates vaccines.
   placement:

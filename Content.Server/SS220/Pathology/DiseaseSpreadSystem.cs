@@ -2,6 +2,7 @@
 
 using Content.Server.Atmos.EntitySystems;
 using Content.Shared.Atmos;
+using Content.Shared.Chemistry;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory;
@@ -35,7 +36,16 @@ public sealed partial class DiseaseSpreadSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<PathologyHolderComponent, ContactInteractionEvent>(OnContact);
+        SubscribeLocalEvent<PathologyHolderComponent, ReactionEntityEvent>(OnReaction);
         SubscribeLocalEvent<DiseaseProtectionComponent, InventoryRelayedEvent<VirusAddedAttempt>>(OnProtection);
+    }
+
+    private void OnReaction(Entity<PathologyHolderComponent> ent, ref ReactionEntityEvent args)
+    {
+        if (args.Method != ReactionMethod.Touch)
+            return;
+
+        _pathology.InfectFromReagent(ent, args.ReagentQuantity.Reagent);
     }
 
     public override void Update(float frameTime)
@@ -135,7 +145,7 @@ public sealed partial class DiseaseSpreadSystem : EntitySystem
             foreach (var virus in contamination.Viruses)
             {
                 if (virus.Transmission is { ContactChance: > 0f } transmission && _random.Prob(transmission.ContactChance))
-                    _pathology.AddVirus(ent.Owner, virus.Clone());
+                    _pathology.AddVirus(ent, virus.Clone());
             }
         }
     }

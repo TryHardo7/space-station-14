@@ -290,6 +290,8 @@
     effects:
     - !type:PathologyNutritionEffect
       hunger: 0.2
+    components:
+    - type: Hyperabsorption
   # Stage 2
   - description: pathology-hyperabsorption-description
     progressMessage: pathology-hyperabsorption-progress-2
@@ -319,50 +321,19 @@
   name: pathology-autorespiration-name
   genome: Rna
   definition:
-  # Stage 1
   - description: pathology-autorespiration-description
-    detection:
-      description: pathology-autorespiration-detection
-    progressConditions:
-    - !type:PathologyAnyProgressCondition
-      conditions:
-      - !type:PathologyTimeProgressCondition
-        delay: 3m
-      - !type:PathologyReagentProgressCondition
-    effects:
-    - !type:PathologyInjectReagentEffect
-      reagent: Dexalin
-      amount: 0.3
-  # Stage 2
-  - description: pathology-autorespiration-description
-    progressMessage: pathology-autorespiration-progress-2
-    detection:
-      description: pathology-autorespiration-detection
-    progressConditions:
-    - !type:PathologyAnyProgressCondition
-      conditions:
-      - !type:PathologyTimeProgressCondition
-        delay: 3m
-      - !type:PathologyReagentProgressCondition
-    effects:
-    - !type:PathologyInjectReagentEffect
-      reagent: Dexalin
-      amount: 0.6
-  # Stage 3
-  - description: pathology-autorespiration-description
-    progressMessage: pathology-autorespiration-progress-3
     detection:
       description: pathology-autorespiration-detection
     effects:
     - !type:PathologyInjectReagentEffect
       reagent: Dexalin
-      amount: 1
+      amount: 0.6
 
 # Burning blood
 - type: pathology
   id: BurningBlood
   name: pathology-burning-blood-name
-  genome: Dna
+  genome: Rna
   definition:
   # Stage 1
   - description: pathology-burning-blood-description
@@ -528,44 +499,13 @@
   name: pathology-alcosia-name
   genome: Rna
   definition:
-  # Stage 1
   - description: pathology-alcosia-description
-    detection:
-      description: pathology-alcosia-detection
-    progressConditions:
-    - !type:PathologyAnyProgressCondition
-      conditions:
-      - !type:PathologyTimeProgressCondition
-        delay: 3m
-      - !type:PathologyReagentProgressCondition
-    effects:
-    - !type:PathologyInjectReagentEffect
-      reagent: Ethanol
-      amount: 0.1
-  # Stage 2
-  - description: pathology-alcosia-description
-    progressMessage: pathology-alcosia-progress-2
-    detection:
-      description: pathology-alcosia-detection
-    progressConditions:
-    - !type:PathologyAnyProgressCondition
-      conditions:
-      - !type:PathologyTimeProgressCondition
-        delay: 3m
-      - !type:PathologyReagentProgressCondition
-    effects:
-    - !type:PathologyInjectReagentEffect
-      reagent: Ethanol
-      amount: 0.2
-  # Stage 3
-  - description: pathology-alcosia-description
-    progressMessage: pathology-alcosia-progress-3
     detection:
       description: pathology-alcosia-detection
     effects:
     - !type:PathologyInjectReagentEffect
       reagent: Ethanol
-      amount: 0.3
+      amount: 0.2
 
 # Radiophasia
 - type: pathology
@@ -590,7 +530,6 @@
     - type: Radiophasia
       healPerRad:
         types:
-        #real ugly and not tested
           Radiation: -1
           Blunt: -1
           Slash: -1
@@ -715,35 +654,16 @@
   name: pathology-narcophasia-name
   genome: Dna
   definition:
-  # Stage 1
   - description: pathology-narcophasia-description
     detection:
       description: pathology-narcophasia-detection
     manifestation:
       visible: true
       examineText: pathology-narcophasia-examine-1
-    progressConditions:
-    - !type:PathologyAnyProgressCondition
-      conditions:
-      - !type:PathologyTimeProgressCondition
-        delay: 3m
-      - !type:PathologyReagentProgressCondition
     effects:
     - !type:PathologyInjectReagentEffect
       reagent: SpaceDrugs
-      amount: 0.5
-  # Stage 2
-  - description: pathology-narcophasia-description
-    progressMessage: pathology-narcophasia-progress-2
-    detection:
-      description: pathology-narcophasia-detection
-    manifestation:
-      visible: true
-      examineText: pathology-narcophasia-examine-2
-    effects:
-    - !type:PathologyInjectReagentEffect
-      reagent: SpaceDrugs
-      amount: 1
+      amount: 0.75
 
 # Stuffy
 - type: pathology

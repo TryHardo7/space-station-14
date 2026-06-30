@@ -1,15 +1,13 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using Robust.Shared.GameStates;
+
 namespace Content.Shared.SS220.Pathology;
 
-/// <summary>
-/// Generic symptom behaviour: hypospray/syringe/medipen can't inject the host, and whoever tries gets
-/// the given message. Compose it onto any "can't be injected" symptom in YAML — no bespoke system.
-/// </summary>
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class PathologyInjectionBlockComponent : Component
 {
-    /// <summary>Localized message shown to whoever tries to inject the host.</summary>
-    [DataField(required: true)]
+    /// <summary>Localized message shown to whoever tries to inject host.</summary>
+    [DataField(required: true), AutoNetworkedField]
     public LocId Message;
 }

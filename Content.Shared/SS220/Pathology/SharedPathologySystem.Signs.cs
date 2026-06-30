@@ -98,11 +98,6 @@ public abstract partial class SharedPathologySystem
         return false;
     }
 
-    /// <summary>
-    /// Formats a symptom line for a scanner readout: appends the strain's current stage. With
-    /// <paramref name="showAccelerant"/> it also names the accelerant reagent (diagnoser only — the
-    /// vaccinator must not reveal accelerants). Single-stage symptoms return the bare description.
-    /// </summary>
     public string FormatSymptom(ProtoId<PathologyPrototype> symptomId, string description, VirusInstance virus, bool showAccelerant = false)
     {
         if (!_prototype.Resolve(symptomId, out var symptom) || symptom.Definition.Length <= 1)
